@@ -43,12 +43,14 @@ namespace DungeonDescent {
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::PictureBox^ pictureBox5;
+	private: System::Windows::Forms::RichTextBox^ redLore;
+	private: System::Windows::Forms::PictureBox^ pbBack;
 
 
 
 
-	private: System::Windows::Forms::RichTextBox^ richTextBox1;
-	private: System::Windows::Forms::PictureBox^ pictureBox6;
+
+
 
 	private:
 		/// <summary>
@@ -70,19 +72,20 @@ namespace DungeonDescent {
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox5 = (gcnew System::Windows::Forms::PictureBox());
-			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
-			this->pictureBox6 = (gcnew System::Windows::Forms::PictureBox());
+			this->redLore = (gcnew System::Windows::Forms::RichTextBox());
+			this->pbBack = (gcnew System::Windows::Forms::PictureBox());
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox5))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox6))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbBack))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->BackColor = System::Drawing::Color::Gold;
 			this->groupBox1->Controls->Add(this->pictureBox4);
 			this->groupBox1->Controls->Add(this->pictureBox3);
 			this->groupBox1->Controls->Add(this->pictureBox2);
@@ -96,33 +99,41 @@ namespace DungeonDescent {
 			// 
 			// pictureBox4
 			// 
+			this->pictureBox4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox4.Image")));
 			this->pictureBox4->Location = System::Drawing::Point(6, 547);
 			this->pictureBox4->Name = L"pictureBox4";
 			this->pictureBox4->Size = System::Drawing::Size(154, 148);
+			this->pictureBox4->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox4->TabIndex = 3;
 			this->pictureBox4->TabStop = false;
 			// 
 			// pictureBox3
 			// 
+			this->pictureBox3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox3.Image")));
 			this->pictureBox3->Location = System::Drawing::Point(6, 192);
 			this->pictureBox3->Name = L"pictureBox3";
 			this->pictureBox3->Size = System::Drawing::Size(154, 148);
+			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox3->TabIndex = 2;
 			this->pictureBox3->TabStop = false;
 			// 
 			// pictureBox2
 			// 
+			this->pictureBox2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.Image")));
 			this->pictureBox2->Location = System::Drawing::Point(6, 376);
 			this->pictureBox2->Name = L"pictureBox2";
 			this->pictureBox2->Size = System::Drawing::Size(154, 148);
+			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox2->TabIndex = 1;
 			this->pictureBox2->TabStop = false;
 			// 
 			// pictureBox1
 			// 
+			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
 			this->pictureBox1->Location = System::Drawing::Point(6, 20);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(154, 148);
+			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
 			// 
@@ -134,33 +145,34 @@ namespace DungeonDescent {
 			this->pictureBox5->TabIndex = 1;
 			this->pictureBox5->TabStop = false;
 			// 
-			// richTextBox1
+			// redLore
 			// 
-			this->richTextBox1->BackColor = System::Drawing::Color::LightYellow;
-			this->richTextBox1->Location = System::Drawing::Point(184, 528);
-			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(782, 204);
-			this->richTextBox1->TabIndex = 2;
-			this->richTextBox1->Text = L"";
+			this->redLore->BackColor = System::Drawing::Color::LightYellow;
+			this->redLore->Location = System::Drawing::Point(184, 528);
+			this->redLore->Name = L"redLore";
+			this->redLore->Size = System::Drawing::Size(782, 204);
+			this->redLore->TabIndex = 2;
+			this->redLore->Text = L"";
 			// 
-			// pictureBox6
+			// pbBack
 			// 
-			this->pictureBox6->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox6.Image")));
-			this->pictureBox6->Location = System::Drawing::Point(883, 32);
-			this->pictureBox6->Name = L"pictureBox6";
-			this->pictureBox6->Size = System::Drawing::Size(83, 78);
-			this->pictureBox6->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
-			this->pictureBox6->TabIndex = 3;
-			this->pictureBox6->TabStop = false;
-			this->pictureBox6->Click += gcnew System::EventHandler(this, &Lore::pictureBox6_Click);
+			this->pbBack->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbBack.Image")));
+			this->pbBack->Location = System::Drawing::Point(883, 32);
+			this->pbBack->Name = L"pbBack";
+			this->pbBack->Size = System::Drawing::Size(83, 78);
+			this->pbBack->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pbBack->TabIndex = 3;
+			this->pbBack->TabStop = false;
+			this->pbBack->Click += gcnew System::EventHandler(this, &Lore::pictureBox6_Click);
 			// 
 			// Lore
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(978, 744);
-			this->Controls->Add(this->pictureBox6);
-			this->Controls->Add(this->richTextBox1);
+			this->Controls->Add(this->pbBack);
+			this->Controls->Add(this->redLore);
 			this->Controls->Add(this->pictureBox5);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"Lore";
@@ -172,7 +184,7 @@ namespace DungeonDescent {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox5))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox6))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbBack))->EndInit();
 			this->ResumeLayout(false);
 
 		}
