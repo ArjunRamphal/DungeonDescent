@@ -139,18 +139,18 @@ namespace DungeonDescent {
 			// 
 			// pictureBox5
 			// 
-			this->pictureBox5->Location = System::Drawing::Point(381, 32);
+			this->pictureBox5->Location = System::Drawing::Point(243, 32);
 			this->pictureBox5->Name = L"pictureBox5";
-			this->pictureBox5->Size = System::Drawing::Size(387, 119);
+			this->pictureBox5->Size = System::Drawing::Size(621, 119);
 			this->pictureBox5->TabIndex = 1;
 			this->pictureBox5->TabStop = false;
 			// 
 			// redLore
 			// 
 			this->redLore->BackColor = System::Drawing::Color::LightYellow;
-			this->redLore->Location = System::Drawing::Point(184, 528);
+			this->redLore->Location = System::Drawing::Point(184, 181);
 			this->redLore->Name = L"redLore";
-			this->redLore->Size = System::Drawing::Size(782, 204);
+			this->redLore->Size = System::Drawing::Size(782, 551);
 			this->redLore->TabIndex = 2;
 			this->redLore->Text = L"";
 			// 
