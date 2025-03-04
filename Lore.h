@@ -1,15 +1,19 @@
 #pragma once
+#include <iostream>
+#include <fstream>
+#include <string>
 //#include "StartScreen.h"
-class StartScreen;
 
 namespace DungeonDescent {
 
+	using namespace std;
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
 
 	/// <summary>
 	/// Summary for Lore
@@ -41,7 +45,8 @@ namespace DungeonDescent {
 	private: System::Windows::Forms::PictureBox^ pictureBox4;
 	private: System::Windows::Forms::PictureBox^ pictureBox3;
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::PictureBox^ pbWarrior;
+
 	private: System::Windows::Forms::PictureBox^ pictureBox5;
 	private: System::Windows::Forms::RichTextBox^ redLore;
 	private: System::Windows::Forms::PictureBox^ pbBack;
@@ -70,7 +75,7 @@ namespace DungeonDescent {
 			this->pictureBox4 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->pbWarrior = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox5 = (gcnew System::Windows::Forms::PictureBox());
 			this->redLore = (gcnew System::Windows::Forms::RichTextBox());
 			this->pbBack = (gcnew System::Windows::Forms::PictureBox());
@@ -78,7 +83,7 @@ namespace DungeonDescent {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbWarrior))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox5))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbBack))->BeginInit();
 			this->SuspendLayout();
@@ -89,7 +94,7 @@ namespace DungeonDescent {
 			this->groupBox1->Controls->Add(this->pictureBox4);
 			this->groupBox1->Controls->Add(this->pictureBox3);
 			this->groupBox1->Controls->Add(this->pictureBox2);
-			this->groupBox1->Controls->Add(this->pictureBox1);
+			this->groupBox1->Controls->Add(this->pbWarrior);
 			this->groupBox1->Location = System::Drawing::Point(12, 12);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(166, 720);
@@ -106,6 +111,7 @@ namespace DungeonDescent {
 			this->pictureBox4->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox4->TabIndex = 3;
 			this->pictureBox4->TabStop = false;
+			this->pictureBox4->Click += gcnew System::EventHandler(this, &Lore::pictureBox4_Click);
 			// 
 			// pictureBox3
 			// 
@@ -116,6 +122,7 @@ namespace DungeonDescent {
 			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox3->TabIndex = 2;
 			this->pictureBox3->TabStop = false;
+			this->pictureBox3->Click += gcnew System::EventHandler(this, &Lore::pictureBox3_Click);
 			// 
 			// pictureBox2
 			// 
@@ -126,16 +133,18 @@ namespace DungeonDescent {
 			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox2->TabIndex = 1;
 			this->pictureBox2->TabStop = false;
+			this->pictureBox2->Click += gcnew System::EventHandler(this, &Lore::pictureBox2_Click);
 			// 
-			// pictureBox1
+			// pbWarrior
 			// 
-			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(6, 20);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(154, 148);
-			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
-			this->pictureBox1->TabIndex = 0;
-			this->pictureBox1->TabStop = false;
+			this->pbWarrior->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbWarrior.Image")));
+			this->pbWarrior->Location = System::Drawing::Point(6, 20);
+			this->pbWarrior->Name = L"pbWarrior";
+			this->pbWarrior->Size = System::Drawing::Size(154, 148);
+			this->pbWarrior->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pbWarrior->TabIndex = 0;
+			this->pbWarrior->TabStop = false;
+			this->pbWarrior->Click += gcnew System::EventHandler(this, &Lore::pictureBox1_Click);
 			// 
 			// pictureBox5
 			// 
@@ -148,6 +157,8 @@ namespace DungeonDescent {
 			// redLore
 			// 
 			this->redLore->BackColor = System::Drawing::Color::LightYellow;
+			this->redLore->Font = (gcnew System::Drawing::Font(L"Engravers MT", 11, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->redLore->Location = System::Drawing::Point(184, 181);
 			this->redLore->Name = L"redLore";
 			this->redLore->Size = System::Drawing::Size(782, 551);
@@ -182,7 +193,7 @@ namespace DungeonDescent {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbWarrior))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox5))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbBack))->EndInit();
 			this->ResumeLayout(false);
@@ -195,6 +206,18 @@ private: System::Void pictureBox6_Click(System::Object^ sender, System::EventArg
 	//StartScreen^ startscreen = gcnew StartScreen;
 	//startscreen->Show();
 	//this->Hide();
+}
+private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
+	redLore->Text = File::ReadAllText("WarriorIntro.txt");
+}
+private: System::Void pictureBox3_Click(System::Object^ sender, System::EventArgs^ e) {
+	redLore->Text = File::ReadAllText("RangerIntro.txt");
+}
+private: System::Void pictureBox2_Click(System::Object^ sender, System::EventArgs^ e) {
+	redLore->Text = File::ReadAllText("MageIntro.txt");
+}
+private: System::Void pictureBox4_Click(System::Object^ sender, System::EventArgs^ e) {
+	redLore->Text = File::ReadAllText("RogueIntro.txt");
 }
 };
 }
