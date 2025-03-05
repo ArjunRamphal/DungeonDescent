@@ -39,7 +39,9 @@ namespace DungeonDescent {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::ProgressBar^ progressBar1;
+	private: System::Windows::Forms::ProgressBar^ progBarGame;
+	protected:
+
 	private: System::Windows::Forms::RichTextBox^ redReader;
 
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
@@ -76,7 +78,7 @@ namespace DungeonDescent {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(GameScreen::typeid));
-			this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
+			this->progBarGame = (gcnew System::Windows::Forms::ProgressBar());
 			this->redReader = (gcnew System::Windows::Forms::RichTextBox());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
@@ -97,12 +99,12 @@ namespace DungeonDescent {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox6))->BeginInit();
 			this->SuspendLayout();
 			// 
-			// progressBar1
+			// progBarGame
 			// 
-			this->progressBar1->Location = System::Drawing::Point(337, 2);
-			this->progressBar1->Name = L"progressBar1";
-			this->progressBar1->Size = System::Drawing::Size(688, 57);
-			this->progressBar1->TabIndex = 0;
+			this->progBarGame->Location = System::Drawing::Point(337, 2);
+			this->progBarGame->Name = L"progBarGame";
+			this->progBarGame->Size = System::Drawing::Size(688, 57);
+			this->progBarGame->TabIndex = 0;
 			// 
 			// redReader
 			// 
@@ -215,9 +217,11 @@ namespace DungeonDescent {
 			// 
 			// pictureBox6
 			// 
+			this->pictureBox6->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox6.Image")));
 			this->pictureBox6->Location = System::Drawing::Point(235, 2);
 			this->pictureBox6->Name = L"pictureBox6";
 			this->pictureBox6->Size = System::Drawing::Size(68, 63);
+			this->pictureBox6->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox6->TabIndex = 9;
 			this->pictureBox6->TabStop = false;
 			// 
@@ -231,7 +235,7 @@ namespace DungeonDescent {
 			this->Controls->Add(this->lbStats);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->groupBox1);
-			this->Controls->Add(this->progressBar1);
+			this->Controls->Add(this->progBarGame);
 			this->Controls->Add(this->pictureBox3);
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->redReader);
