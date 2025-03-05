@@ -45,8 +45,7 @@ namespace DungeonDescent {
 	private: System::Windows::Forms::PictureBox^ pbContinue;
 	private: System::Windows::Forms::PictureBox^ pbQuit;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
-	private: System::Windows::Forms::Panel^ panel1;
-
+	private: System::Windows::Forms::GroupBox^ gbStart;
 
 
 
@@ -83,7 +82,7 @@ namespace DungeonDescent {
 			this->pbContinue = (gcnew System::Windows::Forms::PictureBox());
 			this->pbQuit = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->gbStart = (gcnew System::Windows::Forms::GroupBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbTitle))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbDev))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbFAQ))->BeginInit();
@@ -92,7 +91,7 @@ namespace DungeonDescent {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbContinue))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbQuit))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
-			this->panel1->SuspendLayout();
+			this->gbStart->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// pbTitle
@@ -143,7 +142,7 @@ namespace DungeonDescent {
 			// 
 			this->pbStart->BackColor = System::Drawing::Color::Transparent;
 			this->pbStart->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbStart.Image")));
-			this->pbStart->Location = System::Drawing::Point(29, 24);
+			this->pbStart->Location = System::Drawing::Point(58, 25);
 			this->pbStart->Name = L"pbStart";
 			this->pbStart->Size = System::Drawing::Size(239, 93);
 			this->pbStart->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
@@ -155,7 +154,7 @@ namespace DungeonDescent {
 			// 
 			this->pbContinue->BackColor = System::Drawing::Color::Transparent;
 			this->pbContinue->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbContinue.Image")));
-			this->pbContinue->Location = System::Drawing::Point(29, 140);
+			this->pbContinue->Location = System::Drawing::Point(58, 143);
 			this->pbContinue->Name = L"pbContinue";
 			this->pbContinue->Size = System::Drawing::Size(239, 93);
 			this->pbContinue->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
@@ -166,7 +165,7 @@ namespace DungeonDescent {
 			// 
 			this->pbQuit->BackColor = System::Drawing::Color::Transparent;
 			this->pbQuit->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbQuit.Image")));
-			this->pbQuit->Location = System::Drawing::Point(29, 363);
+			this->pbQuit->Location = System::Drawing::Point(58, 380);
 			this->pbQuit->Name = L"pbQuit";
 			this->pbQuit->Size = System::Drawing::Size(239, 93);
 			this->pbQuit->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
@@ -178,7 +177,7 @@ namespace DungeonDescent {
 			// 
 			this->pictureBox1->BackColor = System::Drawing::Color::Transparent;
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(29, 254);
+			this->pictureBox1->Location = System::Drawing::Point(58, 256);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(239, 93);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
@@ -186,17 +185,20 @@ namespace DungeonDescent {
 			this->pictureBox1->TabStop = false;
 			this->pictureBox1->Click += gcnew System::EventHandler(this, &StartScreen::pictureBox1_Click);
 			// 
-			// panel1
+			// gbStart
 			// 
-			this->panel1->BackColor = System::Drawing::Color::Transparent;
-			this->panel1->Controls->Add(this->pbStart);
-			this->panel1->Controls->Add(this->pbQuit);
-			this->panel1->Controls->Add(this->pbContinue);
-			this->panel1->Controls->Add(this->pictureBox1);
-			this->panel1->Location = System::Drawing::Point(492, 403);
-			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(300, 477);
-			this->panel1->TabIndex = 8;
+			this->gbStart->BackColor = System::Drawing::Color::Transparent;
+			this->gbStart->Controls->Add(this->pbStart);
+			this->gbStart->Controls->Add(this->pbQuit);
+			this->gbStart->Controls->Add(this->pictureBox1);
+			this->gbStart->Controls->Add(this->pbContinue);
+			this->gbStart->Location = System::Drawing::Point(433, 402);
+			this->gbStart->Margin = System::Windows::Forms::Padding(0);
+			this->gbStart->Name = L"gbStart";
+			this->gbStart->Padding = System::Windows::Forms::Padding(0);
+			this->gbStart->Size = System::Drawing::Size(345, 494);
+			this->gbStart->TabIndex = 8;
+			this->gbStart->TabStop = false;
 			// 
 			// StartScreen
 			// 
@@ -206,7 +208,7 @@ namespace DungeonDescent {
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(1278, 944);
-			this->Controls->Add(this->panel1);
+			this->Controls->Add(this->gbStart);
 			this->Controls->Add(this->pbSettings);
 			this->Controls->Add(this->pbFAQ);
 			this->Controls->Add(this->pbTitle);
@@ -222,21 +224,21 @@ namespace DungeonDescent {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbContinue))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbQuit))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
-			this->panel1->ResumeLayout(false);
+			this->gbStart->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
 	private: System::Void pbStart_Click(System::Object^ sender, System::EventArgs^ e) {
-		GameScreen^ gamescreen = gcnew GameScreen;
-		gamescreen->Show();
-		this->Hide();
+		GameScreen^ gamescreen = gcnew GameScreen(this);
+		gamescreen->Visible = true;
+		this->Visible = false;
 	}
 
 	private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
-		Lore^ lore = gcnew Lore;
-		lore->Show();
-		this->Hide();
+		Lore^ lore = gcnew Lore(this);
+		lore->Visible = true;
+		this->Visible = false;
 	}
 
 	private: System::Void pbQuit_Click(System::Object^ sender, System::EventArgs^ e) {

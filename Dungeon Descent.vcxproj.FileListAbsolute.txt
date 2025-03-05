@@ -1,0 +1,8 @@
+C:\Users\rando\Downloads\DungeonDescent-master\DungeonDescent-master\x64\Debug\Interop.WMPLib.1.0.dll
+C:\Users\rando\Downloads\DungeonDescent-master\DungeonDescent-master\x64\Debug\AxInterop.WMPLib.1.0.dll
+C:\Users\rando\Downloads\DungeonDescent-master\DungeonDescent-master\Dungeon Descent\x64\Debug\Dungeon Descent.vcxproj.AssemblyReference.cache
+C:\Users\rando\Downloads\DungeonDescent-master\DungeonDescent-master\Dungeon Descent\x64\Debug\Dungeon Descent.vcxproj.ResolveComReference.cache
+C:\Users\rando\Downloads\DungeonDescent-master\DungeonDescent-master\Dungeon Descent\x64\Debug\DungeonDescent.GameScreen.resources
+C:\Users\rando\Downloads\DungeonDescent-master\DungeonDescent-master\Dungeon Descent\x64\Debug\DungeonDescent.Lore.resources
+C:\Users\rando\Downloads\DungeonDescent-master\DungeonDescent-master\Dungeon Descent\x64\Debug\DungeonDescent.StartScreen.resources
+C:\Users\rando\Downloads\DungeonDescent-master\DungeonDescent-master\Dungeon Descent\x64\Debug\Dungeon Descent.vcxproj.GenerateResource.cache
