@@ -1,0 +1,19 @@
+#pragma once
+#ifndef MAGE_H
+#define MAGE_H
+#include <iostream>
+#include <string>
+#include "Character.h"
+class Mage :
+    public Character
+{
+private:
+public:
+    Mage();
+    int baseHealth;
+    int Stats[6];
+    void Ability();
+    int Lastfpwrupused;
+};
+
+#endif // Mage
