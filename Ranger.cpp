@@ -1,7 +1,7 @@
 #include "Ranger.h"
 #include <iostream>
 
-Ranger::Ranger() : Character("Warrior")
+Ranger::Ranger() : Character("Ranger")
 {
 	Accuracy = 5;
 	baseHealth = 10;
