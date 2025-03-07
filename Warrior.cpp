@@ -16,6 +16,6 @@ Warrior::Warrior() : Character("Warrior")
 
 void Warrior::Ability() {
 	Stats[0] = (2 * Stats[0]) + 3;
-	Stats[3] *= Stats[3];
-	Stats[4] *= Stats[4];
+	Stats[3] *= 2;
+	Stats[4] *= 2;
 }
