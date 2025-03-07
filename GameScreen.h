@@ -2,6 +2,12 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Warrior.h"
+#include "Ranger.h"
+#include "Rogue.h"
+#include "Mage.h"
+#include "Character.h"
+#include "LinkedList.h"
 
 namespace DungeonDescent {
 
@@ -21,8 +27,24 @@ namespace DungeonDescent {
 	{
 	public:
 
-		Form^ obj;
-		bool isEnlarged = false;
+	Form^ obj;
+	private: System::Windows::Forms::PictureBox^ pbSword;
+	private: System::Windows::Forms::PictureBox^ pbThrowing_Knife;
+	private: System::Windows::Forms::PictureBox^ pbWand;
+	private: System::Windows::Forms::PictureBox^ pbLongbow;
+	public:
+
+	public:
+
+
+
+
+	public:
+
+
+
+		   bool isEnlarged = false;
+		   
 
 		GameScreen(void)
 		{
@@ -54,8 +76,9 @@ namespace DungeonDescent {
 		}
 	private: System::Windows::Forms::ProgressBar^ progressBar1;
 	private: System::Windows::Forms::RichTextBox^ redReader;
+	private: System::Windows::Forms::PictureBox^ pbProfile;
 
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
+
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Button^ btnChoice1;
@@ -65,7 +88,8 @@ namespace DungeonDescent {
 	private: System::Windows::Forms::Button^ btnChoice3;
 
 	private: System::Windows::Forms::Button^ btnChoice2;
-	private: System::Windows::Forms::PictureBox^ pictureBox3;
+	private: System::Windows::Forms::PictureBox^ pbBackground;
+
 	private: System::Windows::Forms::ListBox^ lbStats;
 	private: System::Windows::Forms::PictureBox^ pictureBox4;
 	private: System::Windows::Forms::PictureBox^ pictureBox5;
@@ -90,30 +114,38 @@ namespace DungeonDescent {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(GameScreen::typeid));
 			this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
 			this->redReader = (gcnew System::Windows::Forms::RichTextBox());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->pbProfile = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->btnChoice4 = (gcnew System::Windows::Forms::Button());
 			this->btnChoice3 = (gcnew System::Windows::Forms::Button());
 			this->btnChoice2 = (gcnew System::Windows::Forms::Button());
 			this->btnChoice1 = (gcnew System::Windows::Forms::Button());
-			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
+			this->pbBackground = (gcnew System::Windows::Forms::PictureBox());
 			this->lbStats = (gcnew System::Windows::Forms::ListBox());
 			this->pictureBox4 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox5 = (gcnew System::Windows::Forms::PictureBox());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			this->pbSword = (gcnew System::Windows::Forms::PictureBox());
+			this->pbThrowing_Knife = (gcnew System::Windows::Forms::PictureBox());
+			this->pbWand = (gcnew System::Windows::Forms::PictureBox());
+			this->pbLongbow = (gcnew System::Windows::Forms::PictureBox());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbProfile))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			this->groupBox1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbBackground))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox5))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbSword))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbThrowing_Knife))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbWand))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbLongbow))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// progressBar1
 			// 
-			this->progressBar1->Location = System::Drawing::Point(182, 2);
+			this->progressBar1->Location = System::Drawing::Point(186, 2);
 			this->progressBar1->Name = L"progressBar1";
-			this->progressBar1->Size = System::Drawing::Size(906, 52);
+			this->progressBar1->Size = System::Drawing::Size(892, 52);
 			this->progressBar1->TabIndex = 0;
 			// 
 			// redReader
@@ -128,13 +160,14 @@ namespace DungeonDescent {
 			this->redReader->TabIndex = 1;
 			this->redReader->Text = L"";
 			// 
-			// pictureBox1
+			// pbProfile
 			// 
-			this->pictureBox1->Location = System::Drawing::Point(-5, 2);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(181, 174);
-			this->pictureBox1->TabIndex = 2;
-			this->pictureBox1->TabStop = false;
+			this->pbProfile->Location = System::Drawing::Point(-1, 2);
+			this->pbProfile->Name = L"pbProfile";
+			this->pbProfile->Size = System::Drawing::Size(181, 174);
+			this->pbProfile->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pbProfile->TabIndex = 2;
+			this->pbProfile->TabStop = false;
 			// 
 			// pictureBox2
 			// 
@@ -194,13 +227,14 @@ namespace DungeonDescent {
 			this->btnChoice1->UseVisualStyleBackColor = true;
 			this->btnChoice1->Click += gcnew System::EventHandler(this, &GameScreen::btnChoice1_Click);
 			// 
-			// pictureBox3
+			// pbBackground
 			// 
-			this->pictureBox3->Location = System::Drawing::Point(-1, 2);
-			this->pictureBox3->Name = L"pictureBox3";
-			this->pictureBox3->Size = System::Drawing::Size(1276, 654);
-			this->pictureBox3->TabIndex = 5;
-			this->pictureBox3->TabStop = false;
+			this->pbBackground->Location = System::Drawing::Point(-1, 2);
+			this->pbBackground->Name = L"pbBackground";
+			this->pbBackground->Size = System::Drawing::Size(1276, 654);
+			this->pbBackground->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pbBackground->TabIndex = 5;
+			this->pbBackground->TabStop = false;
 			// 
 			// lbStats
 			// 
@@ -239,31 +273,83 @@ namespace DungeonDescent {
 			this->pictureBox5->TabStop = false;
 			this->pictureBox5->Click += gcnew System::EventHandler(this, &GameScreen::pictureBox5_Click);
 			// 
+			// pbSword
+			// 
+			this->pbSword->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbSword.Image")));
+			this->pbSword->Location = System::Drawing::Point(30, 211);
+			this->pbSword->Name = L"pbSword";
+			this->pbSword->Size = System::Drawing::Size(283, 270);
+			this->pbSword->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pbSword->TabIndex = 9;
+			this->pbSword->TabStop = false;
+			this->pbSword->Click += gcnew System::EventHandler(this, &GameScreen::pbSword_Click);
+			// 
+			// pbThrowing_Knife
+			// 
+			this->pbThrowing_Knife->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbThrowing_Knife.Image")));
+			this->pbThrowing_Knife->Location = System::Drawing::Point(348, 211);
+			this->pbThrowing_Knife->Name = L"pbThrowing_Knife";
+			this->pbThrowing_Knife->Size = System::Drawing::Size(283, 270);
+			this->pbThrowing_Knife->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pbThrowing_Knife->TabIndex = 10;
+			this->pbThrowing_Knife->TabStop = false;
+			this->pbThrowing_Knife->Click += gcnew System::EventHandler(this, &GameScreen::pbThrowing_Knife_Click);
+			// 
+			// pbWand
+			// 
+			this->pbWand->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbWand.Image")));
+			this->pbWand->Location = System::Drawing::Point(669, 211);
+			this->pbWand->Name = L"pbWand";
+			this->pbWand->Size = System::Drawing::Size(283, 270);
+			this->pbWand->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pbWand->TabIndex = 11;
+			this->pbWand->TabStop = false;
+			this->pbWand->Click += gcnew System::EventHandler(this, &GameScreen::pbWand_Click);
+			// 
+			// pbLongbow
+			// 
+			this->pbLongbow->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbLongbow.Image")));
+			this->pbLongbow->Location = System::Drawing::Point(983, 211);
+			this->pbLongbow->Name = L"pbLongbow";
+			this->pbLongbow->Size = System::Drawing::Size(283, 270);
+			this->pbLongbow->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pbLongbow->TabIndex = 12;
+			this->pbLongbow->TabStop = false;
+			this->pbLongbow->Click += gcnew System::EventHandler(this, &GameScreen::pbLongbow_Click);
+			// 
 			// GameScreen
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(1278, 945);
+			this->Controls->Add(this->pbLongbow);
+			this->Controls->Add(this->pbWand);
+			this->Controls->Add(this->pbThrowing_Knife);
+			this->Controls->Add(this->pbSword);
 			this->Controls->Add(this->pictureBox5);
 			this->Controls->Add(this->pictureBox4);
 			this->Controls->Add(this->lbStats);
-			this->Controls->Add(this->pictureBox1);
+			this->Controls->Add(this->pbProfile);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->progressBar1);
-			this->Controls->Add(this->pictureBox3);
+			this->Controls->Add(this->pbBackground);
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->redReader);
 			this->Name = L"GameScreen";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Dungeon Descent";
 			this->Shown += gcnew System::EventHandler(this, &GameScreen::GameScreen_Shown);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbProfile))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			this->groupBox1->ResumeLayout(false);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbBackground))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox5))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbSword))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbThrowing_Knife))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbWand))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbLongbow))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -296,10 +382,66 @@ private: System::Void pictureBox4_Click(System::Object^ sender, System::EventArg
 	
 }
 private: System::Void pictureBox5_Click(System::Object^ sender, System::EventArgs^ e) {
-
 	this->Visible = false;
 	obj->Visible = true;
-
 }
+private: System::Void pbSword_Click(System::Object^ sender, System::EventArgs^ e) {
+    pbSword->Hide();
+    pbThrowing_Knife->Hide();
+    pbWand->Hide();
+    pbLongbow->Hide();
+    Warrior* warrior = new Warrior();
+    pbProfile->Image = Image::FromFile("Warrior.jpg");
+    for (int i = 0; i < 6; i++) {
+        lbStats->Items[i] = gcnew String((warrior->statName[i] + " : " + to_string(warrior->Stats[i])).c_str());
+    }
+	gameStart();
+}
+
+private: System::Void pbThrowing_Knife_Click(System::Object^ sender, System::EventArgs^ e) {
+    pbSword->Hide();
+    pbThrowing_Knife->Hide();
+    pbWand->Hide();
+    pbLongbow->Hide();
+    Rogue* rogue = new Rogue();
+    pbProfile->Image = Image::FromFile("Rogue.jpg");
+    for (int i = 0; i < 6; i++) { 
+        lbStats->Items[i] = gcnew String((rogue->statName[i] + " : " + to_string(rogue->Stats[i])).c_str());
+    }
+	gameStart();
+}
+
+private: System::Void pbWand_Click(System::Object^ sender, System::EventArgs^ e) {
+    pbSword->Hide();
+    pbThrowing_Knife->Hide();
+    pbWand->Hide();
+    pbLongbow->Hide();
+    Mage* mage = new Mage();
+    pbProfile->Image = Image::FromFile("Mage.jpeg");
+    for (int i = 0; i < 6; i++) {
+        lbStats->Items[i] = gcnew String((mage->statName[i] + " : " + to_string(mage->Stats[i])).c_str());
+    }
+	gameStart();
+}
+
+private: System::Void pbLongbow_Click(System::Object^ sender, System::EventArgs^ e) {
+    pbSword->Hide();
+    pbThrowing_Knife->Hide();
+    pbWand->Hide();
+    pbLongbow->Hide();
+    Ranger* ranger = new Ranger();
+    pbProfile->Image = Image::FromFile("Ranger.jpeg");
+    for (int i = 0; i < 6; i++) {
+        lbStats->Items[i] = gcnew String((ranger->statName[i] + " : " + to_string(ranger->Stats[i])).c_str());
+    }
+	gameStart();
+}
+
+	   private: void gameStart()
+	   {
+		   LinkedList* list = new LinkedList();
+		   pbBackground->Image = Image::FromFile("twodoor.jpg");
+	   }
+
 };
 }

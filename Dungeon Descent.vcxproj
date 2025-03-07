@@ -127,6 +127,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="Library.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="Lore.cpp" />
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="Ranger.cpp" />
@@ -147,6 +148,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Library.h" />
+    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Lore.h">
       <FileType>CppForm</FileType>
     </ClInclude>
