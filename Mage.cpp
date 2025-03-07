@@ -1,7 +1,7 @@
 #include "Mage.h"
 #include <iostream>
 
-Mage::Mage() : Character("Warrior")
+Mage::Mage() : Character("Mage")
 {
 	baseHealth = 15;
 	Stats[0] = 1;
