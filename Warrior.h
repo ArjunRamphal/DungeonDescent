@@ -15,6 +15,7 @@ public:
     int Stats[6];
     void Ability();
     int Lastfpwrupused;
+    std::string statName[6] = { "Strength", "Wisdom", "Observation", "Agility", "Health", "Accuracy" };
 
 };
 
