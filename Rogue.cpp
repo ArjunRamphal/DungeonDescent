@@ -5,12 +5,12 @@ Rogue::Rogue() : Character("Rogue")
 {
 	Hidden = 5;
 	baseHealth = 10;
-	Stats[0] = 2;
-	Stats[1] = 10;
-	Stats[2] = 4;
-	Stats[3] = 5;
-	Stats[4] = 10;
-	Stats[5] = 4;
+	statValue[0] = 2;
+	statValue[1] = 10;
+	statValue[2] = 4;
+	statValue[3] = 5;
+	statValue[4] = 10;
+	statValue[5] = 4;
 
 	Lastfpwrupused = 0;
 }

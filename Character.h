@@ -12,8 +12,10 @@ private:
     
 
 
+
 public:
     int statValue[6];
+    std::string statName[6] = { "Strength", "Wisdom", "Observation", "Agility", "Health", "Accuracy" };
     int health;
     std::string name;
     int Progress;
@@ -56,5 +58,3 @@ public:
 };
 
 #endif // CHARACTER_H
-
-

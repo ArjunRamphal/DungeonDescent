@@ -5,6 +5,10 @@ RoomBase::RoomBase(const std::string& name) {
 	
 }
 
+RoomBase::RoomBase() {
+
+}
+
 int RoomBase::getBiome() {
 	return Biome;
 }

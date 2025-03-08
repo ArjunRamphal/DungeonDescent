@@ -22,6 +22,7 @@ public:
 	int Floor;
 	int EnemyType;
 	RoomBase(const std::string& name) ;
+	RoomBase();
 
 	int getEnemy();
 	int getBook();

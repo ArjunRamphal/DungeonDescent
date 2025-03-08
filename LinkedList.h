@@ -7,11 +7,11 @@ using namespace std;
 
 // Structure for a node in the linked list
 struct Node {
-    RoomBase data;
+    RoomBase* data;
     Node* next;
 
     // Constructor to initialize a node with data
-    Node(const RoomBase& data) : data(data), next(nullptr) {}
+    Node(RoomBase*& data) : data(data), next(nullptr) {}
 };
 
 // Define the linked list class
@@ -24,14 +24,14 @@ public:
     LinkedList() : head(NULL) {}
 
     // Function to Insert a new node at the beginning of the list
-    void insertAtBeginning(const RoomBase& value) {
+    void insertAtBeginning(RoomBase*& value) {
         Node* newNode = new Node(value);
         newNode->next = head;
         head = newNode;
     }
 
     // Function Insert a new node at the end of the list
-    void insertAtEnd(const RoomBase& value) {
+    void insertAtEnd(RoomBase*& value) {
         Node* newNode = new Node(value);
         newNode->next = NULL;
 
@@ -52,7 +52,7 @@ public:
     }
 
     // Function to Insert a new node at a specific position in the list
-    void insertAtPosition(const RoomBase& value, int position) {
+    void insertAtPosition(RoomBase*& value, int position) {
         if (position < 1) {
             cout << "Position should be >= 1." << endl;
             return;
