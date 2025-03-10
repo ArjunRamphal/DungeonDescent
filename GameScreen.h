@@ -9,6 +9,12 @@
 #include "Character.h"
 #include "LinkedList.h"
 #include "Library.h"
+#include "Battle.h"
+#include "Lore.h"
+#include "Chest.h"
+#include "Shop.h"
+#include "Respite.h"
+#include "Boss.h"
 
 namespace DungeonDescent {
 
@@ -171,6 +177,7 @@ namespace DungeonDescent {
 			this->pbProfile->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbProfile->TabIndex = 2;
 			this->pbProfile->TabStop = false;
+			this->pbProfile->Click += gcnew System::EventHandler(this, &GameScreen::pbProfile_Click);
 			// 
 			// pictureBox2
 			// 
@@ -450,6 +457,10 @@ private: System::Void pbLongbow_Click(System::Object^ sender, System::EventArgs^
 		lbStats->Items[i] = gcnew String((character->statName[i] + " : " + to_string(character->statValue[i])).c_str());
 	}
 }
+private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^ e) {
+	Lore^ lore = gcnew Lore(this);
+	lore->Visible = true;
+}
 
 	   private: void gameStart(Character* character)
 	   {
@@ -474,26 +485,98 @@ private: System::Void pbLongbow_Click(System::Object^ sender, System::EventArgs^
 		private: void mapCreate(int biome) 
 		{
 			string rooms[3] = { "library", "battle", "chest" };
+			int num = 3;
 
-			// Seed the random number generator
-			srand(time(0));
+			for (int i = 0; i < 3; i++ ) {
 
-			// Generate a random number between 1 and 3
-			int randomNum = rand() % 3 + 1;
+				// Seed the random number generator
+				srand(time(0));
 
+				// Generate a random number between 1 and 3
+				int randomNum = rand() % num + 1;
+				rooms[randomNum - 1] = "";
+				num--;
 
-			switch (biome) {
-			case 1:
-				//Ice
-				
-				switch(randomNum) {
+				switch (biome) {
 				case 1:
-					RoomBase * room = new Library();
-					Node * node = new Node(room);
-					list->insertAtEnd(*&room);
-					redReader->Text = File::ReadAllText("library.txt");
+					//Ice
+
+					switch (randomNum) {
+					case 1:
+						if (rooms[randomNum - 1] != "") {
+							RoomBase* library1 = new Library();
+							//Node* node = new Node(library);
+							list->insertAtEnd(*&library1);
+							//redReader->Text = File::ReadAllText("library.txt");
+						}
+						else {
+							i--;
+						}
+					case 2:
+						if (rooms[randomNum - 1] != "") {
+							RoomBase* battle1 = new Battle();
+							//Node* node = new Node(battle);
+							list->insertAtEnd(*&battle1);
+							//redReader->Text = File::ReadAllText("battle.txt");
+						}
+						else {
+							i--;
+						}
+					case 3:
+						if (rooms[randomNum - 1] != "") {
+							RoomBase* chest = new Chest();
+							//Node* node = new Node(chest);
+							list->insertAtEnd(*&chest);
+							//redReader->Text = File::ReadAllText("chest.txt");
+						}
+						else {
+							i--;
+						}
+					}
 				}
 			}
+
+			//encounter
+			RoomBase* library2 = new Library();
+			//Node* nodeLibrary = new Node(library);
+			list->insertAtEnd(*&library2);
+			//redReader->Text = File::ReadAllText("prisonice.txt");
+
+			RoomBase* battle2 = new Battle();
+			//Node* node = new Node(battle);
+			list->insertAtEnd(*&battle2);
+			//redReader->Text = File::ReadAllText("battle.txt");
+
+			RoomBase* respite = new Respite();
+			//Node* node = new Node(respite);
+			list->insertAtEnd(*&respite);
+			//redReader->Text = File::ReadAllText("respite.txt");
+
+			RoomBase* battle3 = new Battle();
+			//Node* node = new Node(battle);
+			list->insertAtEnd(*&battle3);
+			//redReader->Text = File::ReadAllText("battle.txt");
+
+			RoomBase* shop = new Shop();
+			//Node* node = new Node(shop);
+			list->insertAtEnd(*&shop);
+			//redReader->Text = File::ReadAllText("shopkeeper.txt");
+
+			RoomBase* boss = new Boss();
+			//Node* node = new Node(boss);
+			list->insertAtEnd(*&boss);
+			//redReader->Text = File::ReadAllText("boss.txt");
+			
+			//encounter
+			RoomBase* library3 = new Library();
+			//Node* nodeLibrary = new Node(library);
+			list->insertAtEnd(*&library3);
+			//redReader->Text = File::ReadAllText("prisonice.txt");
+
+			RoomBase* library4 = new Library();
+			//Node* nodeLibrary = new Node(library);
+			list->insertAtEnd(*&library4);
+			//redReader->Text = File::ReadAllText("library.txt");
 		}
 
 };

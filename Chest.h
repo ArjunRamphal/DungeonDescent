@@ -1,6 +1,6 @@
 #pragma once
-#ifndef SHOP_H
-#define SHOP_H
+#ifndef CHEST_H
+#define CHEST_H
 #include <iostream>
 #include <string>
 #include "RoomBase.h"
