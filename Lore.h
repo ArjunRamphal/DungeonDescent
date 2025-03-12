@@ -221,8 +221,13 @@ private: System::Void pictureBox6_Click(System::Object^ sender, System::EventArg
 	//startscreen->Show();
 	//this->Hide();
 
-	this->Visible = false;
-	obj->Visible = true;
+	if (MessageBox::Show("Return to Start screen?", "Warning", MessageBoxButtons::YesNo, MessageBoxIcon::Question	) == System::Windows::Forms::DialogResult::Yes) {
+
+		this->Visible = false;
+		obj->Visible = true;
+
+	}
+				
 }
 private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
 	redLore->Text = File::ReadAllText("WarriorIntro.txt");
