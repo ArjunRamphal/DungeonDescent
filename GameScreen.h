@@ -419,8 +419,10 @@ private: System::Void pictureBox4_Click(System::Object^ sender, System::EventArg
 	
 }
 private: System::Void pictureBox5_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Visible = false;
-	obj->Visible = true;
+	if (MessageBox::Show("Return to Start screen?", "Warning", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes) {
+		this->Visible = false;
+		obj->Visible = true;
+  	}
 }
 private: System::Void pbSword_Click(System::Object^ sender, System::EventArgs^ e) {
     Warrior* character = new Warrior();
