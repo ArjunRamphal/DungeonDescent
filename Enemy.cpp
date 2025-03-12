@@ -1,34 +1,31 @@
-#include "Enemy.h"
-#include <iostream>
-
+include "Enemy.h"
 
 // Constructor
-Enemy::Enemy(int floor, bool isBoss) : Character("Enemy"), floor(floor), isBoss(isBoss) {
-    // Calculate base health based on floor level and boss status
-    baseHealth = 20 + (floor * 2); // Base health increases with floor level
+Enemy::Enemy(int floor) : floor(floor) {
+    // Determine if the enemy is a boss (only on floor 3)
+    isBoss = (floor == 3);
 
+    // Calculate base health based on floor level
+    int baseHealth = 20 + (floor * 2);
+
+    // Adjust health for floor level
     if (floor == 2) {
-        baseHealth *= 1.2; // 20% higher health in level 2
+        baseHealth *= 1.2; // 20% more health on floor 2
     } else if (floor == 3) {
-        baseHealth *= 1.3; // 30% higher health in level 3
+        baseHealth *= 1.3; // 30% more health on floor 3
     }
 
+    // Adjust health for bosses
     if (isBoss) {
-        baseHealth *= 1.1; // Bosses have 10% more health per floor
+        baseHealth *= 1.5; // Bosses have 50% more health
     }
 
-    // Seed the random number generator
-    std::srand(std::time(0));
+    health = baseHealth;
 
-    // Generate random stat requirements
-    for (int i = 0; i < 6; ++i) {
-        StatReq[i] = std::rand() % 21; // Random value between 0 and 20
-    }
-
-    // Print stat requirements (for debugging)
-    std::cout << "Generated stat requirements: ";
-    for (int i = 0; i < 6; ++i) {
-        std::cout << StatReq[i] << " ";
+    // Debug output
+    std::cout << "Enemy created on floor " << floor << " with health " << health;
+    if (isBoss) {
+        std::cout << " (BOSS)";
     }
     std::cout << std::endl;
 }
@@ -38,20 +35,20 @@ bool Enemy::isBossBattle() const {
     return isBoss;
 }
 
-// Check if the enemy is defeated
-bool Enemy::isDefeated(int Stats[6]) {
-    int count = 0;
-    for (int i = 0; i < 6; ++i) {
-        if (Stats[i] > StatReq[i]) {
-            count += 1;
-        }
-    }
-
-    // Return true if all stats meet the requirements
-    return (count == 6);
-}
-
 // Get the current health of the enemy
 int Enemy::getHealth() const {
-    return baseHealth;
+    return health;
+}
+
+// Reduce health by damage amount
+void Enemy::takeDamage(int damage) {
+    health -= damage;
+    if (health < 0) {
+        health = 0; // Ensure health doesn't go below 0
+    }
+}
+
+// Check if the enemy is defeated
+bool Enemy::isDefeated() const {
+    return (health <= 0);
 }
