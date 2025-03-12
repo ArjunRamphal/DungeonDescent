@@ -17,3 +17,5 @@ public:
     void takeDamage(int damage); // Reduce health by damage amount
     bool isDefeated() const; // Check if the enemy is defeated
 };
+
+#endif
