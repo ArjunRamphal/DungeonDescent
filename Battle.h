@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include "RoomBase.h"
+#include "Character.h"
+#include "Enemy.h"
 class Battle :
     public RoomBase
 {
@@ -12,9 +14,10 @@ private:
 public:
 
     Battle();
-    bool eDefeated;
-    int StatChange;
-    void Effect(int arr[6]);
+    int Calculate_Extra_Strikes(int agility);
+    bool isCrit_Strike(int accuracy);
+    int Total_Strikes();
+
 };
 
 #endif // Warrior
