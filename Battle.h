@@ -6,7 +6,9 @@
 #include <string>
 #include "RoomBase.h"
 #include "Character.h"
-#include "Enemy.h"  
+#include "Enemy.h" 
+#include "test.h"  
+
 
 class Battle : public RoomBase {
 private:
