@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 // Constructor
-Enemy::Enemy(int floor bool isBoss) : floor(floor) {
+Enemy::Enemy(int floor, bool isBoss) : floor(floor) {
     // Determine if the enemy is a boss (only on floor 3)
     isBoss = (floor == 3);
 
