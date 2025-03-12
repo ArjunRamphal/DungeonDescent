@@ -11,7 +11,7 @@ private:
     bool isBoss; // Whether the enemy is a boss
 
 public:
-    Enemy(int floor bool isBoss); // Constructor
+    Enemy(int floor, bool isBoss); // Constructor
     
     int getHealth() const; // Get the current health of the enemy
     void takeDamage(int damage); // Reduce health by damage amount
