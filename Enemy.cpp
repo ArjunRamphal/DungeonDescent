@@ -1,18 +1,15 @@
 #include "Enemy.h"
 
 // Constructor
-Enemy::Enemy(int floor, bool isBoss) : floor(floor) {
-    // Determine if the enemy is a boss (only on floor 3)
-    isBoss = (floor == 3);
-
+Enemy::Enemy(int floor, bool isBoss) : floor(floor), isBoss(isBoss) {
     // Calculate base health based on floor level
     int baseHealth = 20 + (floor * 2);
 
     // Adjust health for floor level
     if (floor == 2) {
-        baseHealth *= 1.1; // 20% more health on floor 2
+        baseHealth *= 1.1; 
     } else if (floor == 3) {
-        baseHealth *= 1.2; // 30% more health on floor 3
+        baseHealth *= 1.1; 
     }
 
     // Adjust health for bosses
@@ -22,11 +19,8 @@ Enemy::Enemy(int floor, bool isBoss) : floor(floor) {
 
     health = baseHealth;
 
-  
 
-// Check if it's a boss battle
-
-
+}
 // Get the current health of the enemy
 int Enemy::getHealth() const {
     return health;
