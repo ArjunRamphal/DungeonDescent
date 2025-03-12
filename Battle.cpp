@@ -1,12 +1,14 @@
+#pragma 
 #include "Battle.h"
-#include "Enemy.h"
 #include <random>
 #include <iostream>
 
 Battle::Battle(bool isBoss) : RoomBase("Battle") {
     // Create the player and enemy objects
     Character player("Player1");
-    Enemy enemy = new Enemy(player.floor, isBoss);
+
+    test enemy(player.floor, isBoss);
+   
 
     // Start the battle loop
     for (int i = 0; i < Total_Strikes(); i++) {
@@ -26,7 +28,7 @@ Battle::Battle(bool isBoss) : RoomBase("Battle") {
             player.statValue[i] += 2;  // Gain +2 in all attributes for winning
         }
 
-        if (enemy.getIsBoss()) {  // If the enemy is a boss, progress the player to the next floor
+        if (isBoss) {  // If the enemy is a boss, progress the player to the next floor
             player.floor++;
         }
     }
