@@ -1,23 +1,23 @@
 #pragma once
 #ifndef BATTLE_H
 #define BATTLE_H
+
 #include <iostream>
 #include <string>
 #include "RoomBase.h"
 #include "Character.h"
-#include "Enemy.h"
-class Battle :
-    public RoomBase
-{
+#include "Enemy.h"  
 
+class Battle : public RoomBase {
 private:
-public:
+   
 
-    Battle();
+public:
+    Battle(bool isBoss);  // Constructor for Battle
+
     int Calculate_Extra_Strikes(int agility);
     bool isCrit_Strike(int accuracy);
     int Total_Strikes();
-
 };
 
-#endif // Warrior
+#endif // BATTLE_H
