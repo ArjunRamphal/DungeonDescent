@@ -12,7 +12,7 @@ private:
 
 public:
     Enemy(int floor); // Constructor
-    bool isBossBattle() const; // Check if it's a boss battle
+    
     int getHealth() const; // Get the current health of the enemy
     void takeDamage(int damage); // Reduce health by damage amount
     bool isDefeated() const; // Check if the enemy is defeated
