@@ -1,7 +1,7 @@
 include "Enemy.h"
 
 // Constructor
-Enemy::Enemy(int floor) : floor(floor) {
+Enemy::Enemy(int floor bool isBoss) : floor(floor) {
     // Determine if the enemy is a boss (only on floor 3)
     isBoss = (floor == 3);
 
@@ -10,30 +10,22 @@ Enemy::Enemy(int floor) : floor(floor) {
 
     // Adjust health for floor level
     if (floor == 2) {
-        baseHealth *= 1.2; // 20% more health on floor 2
+        baseHealth *= 1.1; // 20% more health on floor 2
     } else if (floor == 3) {
-        baseHealth *= 1.3; // 30% more health on floor 3
+        baseHealth *= 1.2; // 30% more health on floor 3
     }
 
     // Adjust health for bosses
     if (isBoss) {
-        baseHealth *= 1.5; // Bosses have 50% more health
+        baseHealth *= 1.1; // Bosses have 50% more health
     }
 
     health = baseHealth;
 
-    // Debug output
-    std::cout << "Enemy created on floor " << floor << " with health " << health;
-    if (isBoss) {
-        std::cout << " (BOSS)";
-    }
-    std::cout << std::endl;
-}
+  
 
 // Check if it's a boss battle
-bool Enemy::isBossBattle() const {
-    return isBoss;
-}
+
 
 // Get the current health of the enemy
 int Enemy::getHealth() const {
