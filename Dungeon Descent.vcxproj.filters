@@ -63,7 +63,7 @@
     <ClCompile Include="Boss.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LinkedList.cpp">
+    <ClCompile Include="RoomBaseQueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,7 +116,7 @@
     <ClInclude Include="Boss.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList.h">
+    <ClInclude Include="RoomBaseQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,3 +22,21 @@ void Battle::Effect(int arr[6]) {
 		arr[std::rand()] -= Floor;
 	}
 }
+
+string Battle::getimageFileName(int biome) {
+	if (biome == 1) {
+		return "icebattle.png";
+	}
+	else if (biome == 2) {
+		return "jungle";
+	}
+	else if (biome == 3) {
+		return "desert";
+	}
+	else if (biome == 4) {
+		return "ghost";
+	}
+	else if (biome == 5) {
+		return "lava";
+	}
+}

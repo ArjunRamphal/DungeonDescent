@@ -7,7 +7,6 @@
 #include "Rogue.h"
 #include "Mage.h"
 #include "Character.h"
-#include "LinkedList.h"
 #include "Library.h"
 #include "Battle.h"
 #include "Lore.h"
@@ -15,6 +14,7 @@
 #include "Shop.h"
 #include "Respite.h"
 #include "Boss.h"
+#include "RoomBaseQueue.h"
 
 namespace DungeonDescent {
 
@@ -52,8 +52,8 @@ namespace DungeonDescent {
 			
 		   bool isEnlarged = false;
 		   bool pathChoice = true;
-		   LinkedList* list = new LinkedList();
 		   RoomBase* temp = new RoomBase();
+		   RoomBaseQueue* queue = new RoomBaseQueue();
 
 		GameScreen(void)
 		{
@@ -383,6 +383,9 @@ private: System::Void btnChoice1_Click(System::Object^ sender, System::EventArgs
 		pathChoice = false;
 		temp->Biome = 1;
 		//pbBackground->Image = Image::FromFile("ice.jpg");
+
+
+
 	}
 	else {
 	}
@@ -419,10 +422,8 @@ private: System::Void pictureBox4_Click(System::Object^ sender, System::EventArg
 	
 }
 private: System::Void pictureBox5_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (MessageBox::Show("Return to Start screen?", "Warning", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes) {
-		this->Visible = false;
-		obj->Visible = true;
-  	}
+	this->Visible = false;
+	obj->Visible = true;
 }
 private: System::Void pbSword_Click(System::Object^ sender, System::EventArgs^ e) {
     Warrior* character = new Warrior();
@@ -489,95 +490,86 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 			string rooms[3] = { "library", "battle", "chest" };
 			int num = 3;
 
-			for (int i = 0; i < 3; i++ ) {
+			// Seed the random number generator
+			srand(time(0));
 
-				// Seed the random number generator
-				srand(time(0));
+			// Generate a random number between 1 and 3
+			int randomNum = rand() % num + 1;
+			rooms[randomNum - 1] = "";
+			num--;
 
-				// Generate a random number between 1 and 3
-				int randomNum = rand() % num + 1;
-				rooms[randomNum - 1] = "";
-				num--;
-
-				switch (biome) {
+			switch (biome) {
 				case 1:
-					//Ice
+				//Ice
 
 					switch (randomNum) {
 					case 1:
 						if (rooms[randomNum - 1] != "") {
 							RoomBase* library1 = new Library();
 							//Node* node = new Node(library);
-							list->insertAtEnd(*&library1);
-							//redReader->Text = File::ReadAllText("library.txt");
-						}
-						else {
-							i--;
+							queue->enqueue(*library1);
+							redReader->Text = File::ReadAllText("library.txt");
+
+
+
+							library1->Completed = true;
 						}
 					case 2:
 						if (rooms[randomNum - 1] != "") {
 							RoomBase* battle1 = new Battle();
 							//Node* node = new Node(battle);
-							list->insertAtEnd(*&battle1);
-							//redReader->Text = File::ReadAllText("battle.txt");
-						}
-						else {
-							i--;
+							queue->enqueue(*battle1);
+							redReader->Text = File::ReadAllText("battle.txt");
+
+
+
+							battle1->Completed = true;
 						}
 					case 3:
 						if (rooms[randomNum - 1] != "") {
 							RoomBase* chest = new Chest();
 							//Node* node = new Node(chest);
-							list->insertAtEnd(*&chest);
-							//redReader->Text = File::ReadAllText("chest.txt");
-						}
-						else {
-							i--;
+							queue->enqueue(*chest);
+							redReader->Text = File::ReadAllText("chest.txt");
+
+
+
+							chest->Completed = true;
 						}
 					}
 				}
-			}
+			
 
 			//encounter
-			RoomBase* library2 = new Library();
-			//Node* nodeLibrary = new Node(library);
-			list->insertAtEnd(*&library2);
-			//redReader->Text = File::ReadAllText("prisonice.txt");
-
-			RoomBase* battle2 = new Battle();
-			//Node* node = new Node(battle);
-			list->insertAtEnd(*&battle2);
-			//redReader->Text = File::ReadAllText("battle.txt");
-
 			RoomBase* respite = new Respite();
 			//Node* node = new Node(respite);
-			list->insertAtEnd(*&respite);
+			//list->insertAtEnd(*&respite);
 			//redReader->Text = File::ReadAllText("respite.txt");
 
-			RoomBase* battle3 = new Battle();
+			//RoomBase* battle3 = new Battle();
 			//Node* node = new Node(battle);
-			list->insertAtEnd(*&battle3);
+			//list->insertAtEnd(*&battle3);
 			//redReader->Text = File::ReadAllText("battle.txt");
 
-			RoomBase* shop = new Shop();
+			//RoomBase* respite = new Respite();
 			//Node* node = new Node(shop);
-			list->insertAtEnd(*&shop);
+			//list->insertAtEnd(*&shop);
 			//redReader->Text = File::ReadAllText("shopkeeper.txt");
 
-			RoomBase* boss = new Boss();
+			//RoomBase* library = new Library();
 			//Node* node = new Node(boss);
-			list->insertAtEnd(*&boss);
+			//list->insertAtEnd(*&boss);
 			//redReader->Text = File::ReadAllText("boss.txt");
 			
 			//encounter
-			RoomBase* library3 = new Library();
+			//RoomBase* shop = new Shop();
 			//Node* nodeLibrary = new Node(library);
-			list->insertAtEnd(*&library3);
+			//list->insertAtEnd(*&library3);
 			//redReader->Text = File::ReadAllText("prisonice.txt");
 
-			RoomBase* library4 = new Library();
+			//RoomBase* boss = new Boss();
 			//Node* nodeLibrary = new Node(library);
-			list->insertAtEnd(*&library4);
+			//list->insertAtEnd(*&library4);
 			//redReader->Text = File::ReadAllText("library.txt");
 		}
 
