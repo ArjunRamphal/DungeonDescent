@@ -8,6 +8,7 @@
 #include "Mage.h"
 #include "Character.h"
 #include "Library.h"
+#include "Lore.h"
 #include "Battle.h"
 #include "Lore.h"
 #include "Chest.h"
@@ -53,6 +54,13 @@ namespace DungeonDescent {
 			
 		   bool isEnlarged = false;
 		   bool pathChoice = true;
+		   LinkedList* list = new LinkedList();
+	private: System::Windows::Forms::RichTextBox^ richTextBox1;
+	private: System::Windows::Forms::Panel^ panel1;
+	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::Button^ button1;
+	public:
+		RoomBase* temp = new RoomBase();
 		   RoomBase* temp = new RoomBase();
 		   //RoomBase* currRoom;
 		   RoomBaseQueue* queue = new RoomBaseQueue();
@@ -144,6 +152,10 @@ namespace DungeonDescent {
 			this->pbThrowing_Knife = (gcnew System::Windows::Forms::PictureBox());
 			this->pbWand = (gcnew System::Windows::Forms::PictureBox());
 			this->pbLongbow = (gcnew System::Windows::Forms::PictureBox());
+			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbProfile))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			this->groupBox1->SuspendLayout();
@@ -154,10 +166,16 @@ namespace DungeonDescent {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbThrowing_Knife))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbWand))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbLongbow))->BeginInit();
+			this->panel1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// progressBar1
 			// 
+			this->progressBar1->Location = System::Drawing::Point(165, 2);
+			this->progressBar1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->progressBar1->Name = L"progressBar1";
+			this->progressBar1->Size = System::Drawing::Size(793, 42);
 			this->progressBar1->Location = System::Drawing::Point(124, 1);
 			this->progressBar1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->progressBar1->Name = L"progressBar1";
@@ -169,6 +187,11 @@ namespace DungeonDescent {
 			this->redReader->BackColor = System::Drawing::Color::LightYellow;
 			this->redReader->Font = (gcnew System::Drawing::Font(L"Old English Text MT", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->redReader->Location = System::Drawing::Point(158, 530);
+			this->redReader->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->redReader->Name = L"redReader";
+			this->redReader->ReadOnly = true;
+			this->redReader->Size = System::Drawing::Size(976, 226);
 			this->redReader->Location = System::Drawing::Point(119, 430);
 			this->redReader->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->redReader->Name = L"redReader";
@@ -176,9 +199,14 @@ namespace DungeonDescent {
 			this->redReader->Size = System::Drawing::Size(733, 185);
 			this->redReader->TabIndex = 1;
 			this->redReader->Text = L"";
+			this->redReader->TextChanged += gcnew System::EventHandler(this, &GameScreen::redReader_TextChanged);
 			// 
 			// pbProfile
 			// 
+			this->pbProfile->Location = System::Drawing::Point(-1, 2);
+			this->pbProfile->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pbProfile->Name = L"pbProfile";
+			this->pbProfile->Size = System::Drawing::Size(161, 139);
 			this->pbProfile->Location = System::Drawing::Point(-1, 1);
 			this->pbProfile->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->pbProfile->Name = L"pbProfile";
@@ -190,6 +218,10 @@ namespace DungeonDescent {
 			// 
 			// pictureBox2
 			// 
+			this->pictureBox2->Location = System::Drawing::Point(-4, 530);
+			this->pictureBox2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pictureBox2->Name = L"pictureBox2";
+			this->pictureBox2->Size = System::Drawing::Size(157, 130);
 			this->pictureBox2->Location = System::Drawing::Point(-3, 430);
 			this->pictureBox2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->pictureBox2->Name = L"pictureBox2";
@@ -203,6 +235,11 @@ namespace DungeonDescent {
 			this->groupBox1->Controls->Add(this->btnChoice3);
 			this->groupBox1->Controls->Add(this->btnChoice2);
 			this->groupBox1->Controls->Add(this->btnChoice1);
+			this->groupBox1->Location = System::Drawing::Point(162, 451);
+			this->groupBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Padding = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->groupBox1->Size = System::Drawing::Size(975, 74);
 			this->groupBox1->Location = System::Drawing::Point(121, 367);
 			this->groupBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->groupBox1->Name = L"groupBox1";
@@ -214,6 +251,10 @@ namespace DungeonDescent {
 			// 
 			// btnChoice4
 			// 
+			this->btnChoice4->Location = System::Drawing::Point(590, 10);
+			this->btnChoice4->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnChoice4->Name = L"btnChoice4";
+			this->btnChoice4->Size = System::Drawing::Size(130, 59);
 			this->btnChoice4->Location = System::Drawing::Point(443, 8);
 			this->btnChoice4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnChoice4->Name = L"btnChoice4";
@@ -225,6 +266,10 @@ namespace DungeonDescent {
 			// 
 			// btnChoice3
 			// 
+			this->btnChoice3->Location = System::Drawing::Point(390, 10);
+			this->btnChoice3->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnChoice3->Name = L"btnChoice3";
+			this->btnChoice3->Size = System::Drawing::Size(130, 59);
 			this->btnChoice3->Location = System::Drawing::Point(293, 8);
 			this->btnChoice3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnChoice3->Name = L"btnChoice3";
@@ -237,6 +282,10 @@ namespace DungeonDescent {
 			// 
 			// btnChoice2
 			// 
+			this->btnChoice2->Location = System::Drawing::Point(195, 10);
+			this->btnChoice2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnChoice2->Name = L"btnChoice2";
+			this->btnChoice2->Size = System::Drawing::Size(130, 59);
 			this->btnChoice2->Location = System::Drawing::Point(146, 8);
 			this->btnChoice2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnChoice2->Name = L"btnChoice2";
@@ -249,6 +298,10 @@ namespace DungeonDescent {
 			// 
 			// btnChoice1
 			// 
+			this->btnChoice1->Location = System::Drawing::Point(0, 10);
+			this->btnChoice1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnChoice1->Name = L"btnChoice1";
+			this->btnChoice1->Size = System::Drawing::Size(130, 59);
 			this->btnChoice1->Location = System::Drawing::Point(0, 8);
 			this->btnChoice1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnChoice1->Name = L"btnChoice1";
@@ -261,6 +314,10 @@ namespace DungeonDescent {
 			// 
 			// pbBackground
 			// 
+			this->pbBackground->Location = System::Drawing::Point(-1, 2);
+			this->pbBackground->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pbBackground->Name = L"pbBackground";
+			this->pbBackground->Size = System::Drawing::Size(1134, 523);
 			this->pbBackground->Location = System::Drawing::Point(-1, 1);
 			this->pbBackground->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->pbBackground->Name = L"pbBackground";
@@ -274,11 +331,16 @@ namespace DungeonDescent {
 			this->lbStats->Font = (gcnew System::Drawing::Font(L"Copperplate Gothic Light", 8, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lbStats->FormattingEnabled = true;
+			this->lbStats->ItemHeight = 14;
 			this->lbStats->ItemHeight = 12;
 			this->lbStats->Items->AddRange(gcnew cli::array< System::Object^  >(6) {
 				L"Strength : 0", L"Wisdom : 0", L"Observation : 0",
 					L"Agility : 0", L"Accuracy : 0", L"Health : 5"
 			});
+			this->lbStats->Location = System::Drawing::Point(-1, 399);
+			this->lbStats->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->lbStats->Name = L"lbStats";
+			this->lbStats->Size = System::Drawing::Size(158, 116);
 			this->lbStats->Location = System::Drawing::Point(-1, 324);
 			this->lbStats->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->lbStats->Name = L"lbStats";
@@ -288,6 +350,10 @@ namespace DungeonDescent {
 			// pictureBox4
 			// 
 			this->pictureBox4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox4.Image")));
+			this->pictureBox4->Location = System::Drawing::Point(972, 2);
+			this->pictureBox4->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pictureBox4->Name = L"pictureBox4";
+			this->pictureBox4->Size = System::Drawing::Size(161, 139);
 			this->pictureBox4->Location = System::Drawing::Point(729, 1);
 			this->pictureBox4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->pictureBox4->Name = L"pictureBox4";
@@ -300,6 +366,10 @@ namespace DungeonDescent {
 			// pictureBox5
 			// 
 			this->pictureBox5->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox5.Image")));
+			this->pictureBox5->Location = System::Drawing::Point(-1, 687);
+			this->pictureBox5->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pictureBox5->Name = L"pictureBox5";
+			this->pictureBox5->Size = System::Drawing::Size(78, 68);
 			this->pictureBox5->Location = System::Drawing::Point(-1, 558);
 			this->pictureBox5->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->pictureBox5->Name = L"pictureBox5";
@@ -312,6 +382,10 @@ namespace DungeonDescent {
 			// pbSword
 			// 
 			this->pbSword->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbSword.Image")));
+			this->pbSword->Location = System::Drawing::Point(27, 169);
+			this->pbSword->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pbSword->Name = L"pbSword";
+			this->pbSword->Size = System::Drawing::Size(252, 216);
 			this->pbSword->Location = System::Drawing::Point(20, 137);
 			this->pbSword->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->pbSword->Name = L"pbSword";
@@ -324,6 +398,10 @@ namespace DungeonDescent {
 			// pbThrowing_Knife
 			// 
 			this->pbThrowing_Knife->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbThrowing_Knife.Image")));
+			this->pbThrowing_Knife->Location = System::Drawing::Point(309, 169);
+			this->pbThrowing_Knife->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pbThrowing_Knife->Name = L"pbThrowing_Knife";
+			this->pbThrowing_Knife->Size = System::Drawing::Size(252, 216);
 			this->pbThrowing_Knife->Location = System::Drawing::Point(232, 137);
 			this->pbThrowing_Knife->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->pbThrowing_Knife->Name = L"pbThrowing_Knife";
@@ -336,6 +414,10 @@ namespace DungeonDescent {
 			// pbWand
 			// 
 			this->pbWand->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbWand.Image")));
+			this->pbWand->Location = System::Drawing::Point(595, 169);
+			this->pbWand->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pbWand->Name = L"pbWand";
+			this->pbWand->Size = System::Drawing::Size(252, 216);
 			this->pbWand->Location = System::Drawing::Point(446, 137);
 			this->pbWand->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->pbWand->Name = L"pbWand";
@@ -348,6 +430,10 @@ namespace DungeonDescent {
 			// pbLongbow
 			// 
 			this->pbLongbow->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbLongbow.Image")));
+			this->pbLongbow->Location = System::Drawing::Point(874, 169);
+			this->pbLongbow->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pbLongbow->Name = L"pbLongbow";
+			this->pbLongbow->Size = System::Drawing::Size(252, 216);
 			this->pbLongbow->Location = System::Drawing::Point(655, 137);
 			this->pbLongbow->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->pbLongbow->Name = L"pbLongbow";
@@ -357,8 +443,59 @@ namespace DungeonDescent {
 			this->pbLongbow->TabStop = false;
 			this->pbLongbow->Click += gcnew System::EventHandler(this, &GameScreen::pbLongbow_Click);
 			// 
+			// richTextBox1
+			// 
+			this->richTextBox1->BackColor = System::Drawing::Color::LightYellow;
+			this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Engravers MT", 11, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->richTextBox1->Location = System::Drawing::Point(41, 32);
+			this->richTextBox1->Name = L"richTextBox1";
+			this->richTextBox1->Size = System::Drawing::Size(126, 120);
+			this->richTextBox1->TabIndex = 13;
+			this->richTextBox1->Text = L"";
+			this->richTextBox1->TextChanged += gcnew System::EventHandler(this, &GameScreen::richTextBox1_TextChanged);
+			// 
+			// panel1
+			// 
+			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->panel1->Controls->Add(this->button1);
+			this->panel1->Controls->Add(this->pictureBox1);
+			this->panel1->Controls->Add(this->richTextBox1);
+			this->panel1->Location = System::Drawing::Point(394, 12);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(224, 161);
+			this->panel1->TabIndex = 14;
+			this->panel1->Visible = false;
+			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->Location = System::Drawing::Point(41, 3);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(126, 29);
+			this->pictureBox1->TabIndex = 14;
+			this->pictureBox1->TabStop = false;
+			// 
+			// button1
+			// 
+			this->button1->BackColor = System::Drawing::Color::Red;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button1->ForeColor = System::Drawing::Color::White;
+			this->button1->Location = System::Drawing::Point(184, -2);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(38, 22);
+			this->button1->TabIndex = 15;
+			this->button1->Text = L"X";
+			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &GameScreen::button1_Click);
+			// 
 			// GameScreen
 			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::Black;
+			this->ClientSize = System::Drawing::Size(1136, 756);
+			this->Controls->Add(this->panel1);
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Black;
@@ -376,6 +513,7 @@ namespace DungeonDescent {
 			this->Controls->Add(this->pbBackground);
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->redReader);
+			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"GameScreen";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -391,6 +529,8 @@ namespace DungeonDescent {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbThrowing_Knife))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbWand))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbLongbow))->EndInit();
+			this->panel1->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -677,6 +817,8 @@ private: System::Void pbSword_Click(System::Object^ sender, System::EventArgs^ e
 	for (int i = 0; i < 6; i++) {
 		lbStats->Items[i] = gcnew String((character->statName[i] + " : " + to_string(character->statValue[i])).c_str());
 	}
+	richTextBox1->Text = File::ReadAllText("WarriorIntro.txt");
+	pictureBox1->Image = Image::FromFile("Warrior_Name_Label.png");
 }
 
 private: System::Void pbThrowing_Knife_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -686,6 +828,8 @@ private: System::Void pbThrowing_Knife_Click(System::Object^ sender, System::Eve
 	for (int i = 0; i < 6; i++) {
 		lbStats->Items[i] = gcnew String((character->statName[i] + " : " + to_string(character->statValue[i])).c_str());
 	}
+	richTextBox1->Text = File::ReadAllText("RogueIntro.txt");
+	pictureBox1->Image = Image::FromFile("Rogue_Name_Label.png");
 }
 
 private: System::Void pbWand_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -695,6 +839,8 @@ private: System::Void pbWand_Click(System::Object^ sender, System::EventArgs^ e)
 	for (int i = 0; i < 6; i++) {
 		lbStats->Items[i] = gcnew String((character->statName[i] + " : " + to_string(character->statValue[i])).c_str());
 	}
+	richTextBox1->Text = File::ReadAllText("MageIntro.txt");
+	pictureBox1->Image = Image::FromFile("Mage_Name_Label.png");
 }
 
 private: System::Void pbLongbow_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -704,6 +850,8 @@ private: System::Void pbLongbow_Click(System::Object^ sender, System::EventArgs^
 	for (int i = 0; i < 6; i++) {
 		lbStats->Items[i] = gcnew String((character->statName[i] + " : " + to_string(character->statValue[i])).c_str());
 	}
+	richTextBox1->Text = File::ReadAllText("RangerIntro.txt");
+	pictureBox1->Image = Image::FromFile("Ranger_Name_Label.png");
 }
 private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^ e) {
 	Lore^ lore = gcnew Lore(this);
@@ -818,6 +966,37 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 			//redReader->Text = File::ReadAllText("library.txt");
 		}
 
+private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	if (!isEnlarged) {
+
+		pictureBox1->Size = System::Drawing::Size(400, 110);
+		richTextBox1->Size = System::Drawing::Size(480, 300);
+		pictureBox1->Location = System::Drawing::Point(38, -10);
+		richTextBox1->Location = System::Drawing::Point(5, 100);
+		panel1->Size = System::Drawing::Size(490, 400);
+		panel1->Location = System::Drawing::Point(200, 30);
+		button1->Location = System::Drawing::Point(460, 0);
+		isEnlarged = true;
+		panel1->Visible = true;
+	}
+	else {
+
+		isEnlarged = false;
+		panel1->Visible = false;
+
+	}
+	
+
+
+}
+private: System::Void redReader_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void richTextBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	isEnlarged = false;
+	panel1->Visible = false;
 private: System::Void btnChoice3_Click(System::Object^ sender, System::EventArgs^ e) {
 	int SelfIndex = 3;
 	ContState = true;
