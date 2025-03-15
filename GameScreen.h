@@ -54,13 +54,12 @@ namespace DungeonDescent {
 			
 		   bool isEnlarged = false;
 		   bool pathChoice = true;
-		   LinkedList* list = new LinkedList();
+		   //LinkedList* list = new LinkedList();
 	private: System::Windows::Forms::RichTextBox^ richTextBox1;
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Button^ button1;
 	public:
-		RoomBase* temp = new RoomBase();
 		   RoomBase* temp = new RoomBase();
 		   //RoomBase* currRoom;
 		   RoomBaseQueue* queue = new RoomBaseQueue();
@@ -853,10 +852,10 @@ private: System::Void pbLongbow_Click(System::Object^ sender, System::EventArgs^
 	richTextBox1->Text = File::ReadAllText("RangerIntro.txt");
 	pictureBox1->Image = Image::FromFile("Ranger_Name_Label.png");
 }
-private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^ e) {
-	Lore^ lore = gcnew Lore(this);
-	lore->Visible = true;
-}
+//private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^ e) {
+//	Lore^ lore = gcnew Lore(this);
+//	lore->Visible = true;
+//}
 
 	   private: void gameStart(Character* character)
 	   {
@@ -994,9 +993,10 @@ private: System::Void redReader_TextChanged(System::Object^ sender, System::Even
 }
 private: System::Void richTextBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
-private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	isEnlarged = false;
-	panel1->Visible = false;
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		isEnlarged = false;
+		panel1->Visible = false;
+	}
 private: System::Void btnChoice3_Click(System::Object^ sender, System::EventArgs^ e) {
 	int SelfIndex = 3;
 	ContState = true;
