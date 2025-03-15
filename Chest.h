@@ -14,6 +14,8 @@ public:
     int Reward;
     void Open();
     bool Locked;
+    string imageFileName;
+    string getImageFileName(int biome);
 };
 
 #endif // Warrior

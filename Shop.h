@@ -16,7 +16,8 @@ public:
     Shop();
     bool QAvail;
     bool QComp;
-
+	string imageFileName;
+    string getImageFileName(int biome);
 };
 
 #endif // Warrior

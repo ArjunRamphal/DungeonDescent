@@ -31,7 +31,12 @@ public:
 	int getFloor();
 	int getNPC();
 
-
+	void setEnemyType(int enemyType);
+	void setBook(int book);
+	void setKey(bool key);
+	void setBiome(int biome);
+	void setFloor(int floor);
+	void setNPC(int npc);
 };
 
 #endif // ROOMBASE_H

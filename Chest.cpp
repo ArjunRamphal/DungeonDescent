@@ -35,3 +35,19 @@ Chest::Chest() : RoomBase("Chest") {
 void Chest::Open() {
 	//to code effects and gain
 }
+
+string Chest::getImageFileName(int biome)
+{
+	switch (biome) {
+	case 1:
+		return "icechest.png";
+	case 2:
+		return "junglechest.png";
+	case 3:
+		return "desertchest.png";
+	case 4:
+		return "ghostchest.png";
+	case 5:
+		return "lavachest.png";
+	}
+}

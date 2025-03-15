@@ -16,7 +16,7 @@ public:
     int StatChange;
     void Effect(int arr[6]);
     string imageFileName;
-    string getimageFileName(int biome);
+    string getImageFileName(int biome);
 };
 
 #endif // Warrior

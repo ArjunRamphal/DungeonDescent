@@ -42,3 +42,19 @@ int Library::BookEff(int Type, int arr[6]) {
 
 	return arr[6];
 }
+
+string Library::getImageFileName(int biome)
+{
+	switch (biome) {
+	case 1:
+		return "icelibrary.png";
+	case 2:
+		return "junglelibrary.png";
+	case 3:
+		return "desertlibrary.png";
+	case 4:
+		return "ghostlibrary.png";
+	case 5:
+		return "lavalibrary.png";
+	}
+}

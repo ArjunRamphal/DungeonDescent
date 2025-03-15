@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include "Warrior.h"
 #include "Ranger.h"
 #include "Rogue.h"
@@ -49,16 +50,16 @@ namespace DungeonDescent {
 
 	public:
 
-
-			
 		   bool isEnlarged = false;
 		   bool pathChoice = true;
+		   bool completed = false;
 		   RoomBase* temp = new RoomBase();
 		   //RoomBase* currRoom;
 		   RoomBaseQueue* queue = new RoomBaseQueue();
 		   int globalCorrect = 1;
 		   bool ContState;
 		   int Biome;
+		   int roomCounter = 1;
 		   
 
 		GameScreen(void)
@@ -403,6 +404,16 @@ namespace DungeonDescent {
 
 	}
 	private: System::Void btnChoice1_Click(System::Object^ sender, System::EventArgs^ e) {
+
+        //RoomBase* tempRoom = new RoomBase();
+        //tempRoom->setBiome(1);
+        //delete tempRoom;
+
+		if (!completed)
+			roomCreate(1);
+
+
+		/*
 		//Choice 1
 		RoomBase currRoom;
 
@@ -411,8 +422,8 @@ namespace DungeonDescent {
 			pathChoice = false;
 			ContState = false;
 			Biome = 0;
-			pbBackground->Image = Image::FromFile("ice.jpeg");
-			mapCreate(1);
+			pbBackground->Image = Image::FromFile("icekeeper.jpg");
+			roomCreate(1);
 			currRoom = queue->dequeue();
 			redReader->Clear();
 			redReader->Text = File::ReadAllText("riddleice.txt");
@@ -517,13 +528,13 @@ namespace DungeonDescent {
 						std::getline(file, line);
 						btnChoice3->Visible = true;
 						btnChoice3->Text = gcnew String(line.c_str());
-
+						
 					}
 				}
 			}
 
 
-		}
+		}*/
 	}
 
 private: System::Void btnChoice2_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -535,8 +546,8 @@ private: System::Void btnChoice2_Click(System::Object^ sender, System::EventArgs
 		pathChoice = false;
 		ContState = false;
 		Biome = 0;
-		pbBackground->Image = Image::FromFile("ice.jpeg");
-		mapCreate(1);
+		pbBackground->Image = Image::FromFile("icekeeper.jpg");
+		roomCreate(1);
 		currRoom = queue->dequeue();
 		redReader->Clear();
 		redReader->Text = File::ReadAllText("riddleice.txt");
@@ -711,7 +722,7 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 }
 
 	   private: void gameStart(Character* character)
-	   {
+	   {	
 		   pbSword->Hide();
 		   pbThrowing_Knife->Hide();
 		   pbWand->Hide();
@@ -727,22 +738,217 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 		   btnChoice2->Text = "Go right";
 		   pathChoice = true;
 		   //temp->Biome = 0;
-		   //mapCreate(temp->Biome);
+		   //roomCreate(temp->Biome);
 	   }
 
-		private: void mapCreate(int biome) 
-		{
-			string rooms[3] = { "library", "battle", "chest" };
+		private: void roomCreate(int biome) 
+		{	
+			//this function will use the same variable room for all rooms in the game
+			//only one room will be generated at a time
+
+			//have a global counter varibale to store what room the player is in.
+			//eg. int i = 0..30;
+
+			//have a case statement for the counter i, to see which room the player is in. If the player is in a room that
+			//needs to be randomly generated, then generate it.
+			//if the player is in a definite room, then just generate that room
+			
+			//there will be a boolen completed to check whether the player has completed the room or not
+			//the room will count as completed once the player has answered the riddle
+
+			//each room class will have a questions bank and an answers bank to randomly generate questions
+			// and a function to get those questions and answers.
+			//once completed = true and player decides to go to next room, the room will be generated
+
+			//to check whether the player has completed a floor, do a mod calculation, eg. 20 % 10 = 0, therefore 
+			//you will know that the player is proceeding to the next floor. if i = 30, then the player has completed the game
+
+			roomCounter++;
+			completed = false;
+
+			RoomBase* room;
+
+			vector<string> rooms = { "library", "battle", "chest" };
 			int num = 3;
 
 			// Seed the random number generator
-			srand(time(0));
+			//srand(time(0));
 
 			// Generate a random number between 1 and 3
-			int randomNum = rand() % num + 1;
-			rooms[randomNum - 1] = "";
-			num--;
+			int randomNum;
+			randomNum = (rand() % num) + 1;
+			//rooms[randomNum - 1] = "";
+			//num--;
 
+
+			if (roomCounter == 2)
+			{
+				srand(time(0));
+
+				// Generate a random number between 1 and 3
+				randomNum = (rand() % num) + 1;
+
+				if (randomNum == 1) {
+					room = new Library();
+					redReader->Text = File::ReadAllText("library.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+				}
+				else if (randomNum == 2) {
+					room = new Battle();
+					redReader->Text = File::ReadAllText("battle.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+				}
+				else if (randomNum == 3) {
+					room = new Chest();
+					redReader->Text = File::ReadAllText("chest.txt");
+					pbBackground->Image = Image::FromFile("longbow.jpg");
+				}
+
+			} 
+			else if (roomCounter == 3)
+			{
+				srand(time(0));
+
+				// Generate a random number between 1 and 3
+				randomNum = (rand() % num) + 1;
+
+				switch (randomNum) {
+				case 1:
+					room = new Library();
+					redReader->Text = File::ReadAllText("library.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+				case 2:
+					room = new Battle();
+					redReader->Text = File::ReadAllText("battle.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+				case 3:
+					room = new Chest();
+					redReader->Text = File::ReadAllText("chest.txt");
+					pbBackground->Image = Image::FromFile("longbow.jpg");
+				}
+			} 
+			else if (roomCounter == 4)
+			{
+				srand(time(0));
+
+				// Generate a random number between 1 and 3
+				randomNum = (rand() % num) + 1;
+
+				switch (randomNum) {
+				case 1:
+					room = new Library();
+
+					redReader->Text = File::ReadAllText("library.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+				case 2:
+					room = new Battle();
+					redReader->Text = File::ReadAllText("battle.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+				case 3:
+					room = new Chest();
+					redReader->Text = File::ReadAllText("chest.txt");
+					pbBackground->Image = Image::FromFile("longbow.jpg");
+				}
+			}
+
+			/*
+			switch (roomCounter) {
+			case 2:
+				srand(time(0));
+
+				// Generate a random number between 1 and 3
+				randomNum = (rand() % num) + 1;
+
+				switch (randomNum) {
+				case 1:
+					room = new Library();
+					redReader->Text = gcnew String(to_string(roomCounter).c_str());
+                    //redReader->Text = gcnew String(to_string(randomNum).c_str());
+					//redReader->Text = File::ReadAllText("library.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+				case 2:
+					room = new Battle();
+					redReader->Text = gcnew String(to_string(roomCounter).c_str());
+					//redReader->Text = gcnew String(to_string(randomNum).c_str());
+					//redReader->Text = File::ReadAllText("battle.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+				case 3:
+					room = new Chest();
+					redReader->Text = gcnew String(to_string(roomCounter).c_str());
+					//redReader->Text = gcnew String(to_string(randomNum).c_str());
+					//redReader->Text = File::ReadAllText("chest.txt");
+					pbBackground->Image = Image::FromFile("longbow.jpg");
+				}
+
+
+			case 3:
+				srand(time(0));
+
+				// Generate a random number between 1 and 3
+				randomNum = (rand() % num) + 1;
+
+				switch (randomNum) {
+				case 1:
+					room = new Library();
+					redReader->Text = File::ReadAllText("library.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+				case 2:
+					room = new Battle();
+					redReader->Text = File::ReadAllText("battle.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+				case 3:
+					room = new Chest();
+					//redReader->Text = File::ReadAllText("chest.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+				}
+
+
+			case 4:
+				srand(time(0));
+
+				// Generate a random number between 1 and 3
+				randomNum = (rand() % num) + 1;
+
+				switch (randomNum) {
+				case 1:
+					room = new Library();
+					redReader->Text = File::ReadAllText("library.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+				case 2:
+					room = new Battle();
+					redReader->Text = File::ReadAllText("battle.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+				case 3:
+					room = new Chest();
+					//redReader->Text = File::ReadAllText("chest.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+				}
+
+
+			case 5:
+				//encounter
+				room = new Respite();
+				redReader->Text = "5";
+
+			case 6:
+				room = new Battle();
+				redReader->Text = "6";
+
+			case 7:
+				room = new Respite();
+				redReader->Text = "7";
+
+			case 8:
+				room = new Library();
+
+			case 9:
+				room = new Shop();
+			
+			case 10:
+				room = new Boss();
+				redReader->Text = "10";
+			}*/
+			/*
 			switch (biome) {
 				case 1:
 				//Ice
@@ -750,43 +956,43 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 					switch (randomNum) {
 					case 1:
 						if (rooms[randomNum - 1] != "") {
-							RoomBase* library1 = new Library();
+							RoomBase* room = new Library();
 							//Node* node = new Node(library);
-							queue->enqueue(*library1);
+							queue->enqueue(*room);
 							redReader->Text = File::ReadAllText("library.txt");
 
 
 
-							library1->Completed = true;
+							room->Completed = true;
 						}
 					case 2:
 						if (rooms[randomNum - 1] != "") {
-							RoomBase* battle1 = new Battle();
+							RoomBase* room = new Battle();
 							//Node* node = new Node(battle);
-							queue->enqueue(*battle1);
+							queue->enqueue(*room);
 							redReader->Text = File::ReadAllText("battle.txt");
 
 
 
-							battle1->Completed = true;
+							room->Completed = true;
 						}
 					case 3:
 						if (rooms[randomNum - 1] != "") {
-							RoomBase* chest = new Chest();
+							RoomBase* room = new Chest();
 							//Node* node = new Node(chest);
-							queue->enqueue(*chest);
+							queue->enqueue(*room);
 							redReader->Text = File::ReadAllText("chest.txt");
 
 
 
-							chest->Completed = true;
+							room->Completed = true;
 						}
 					}
 				}
 			
 
 			//encounter
-			RoomBase* respite = new Respite();
+			//RoomBase* room = new Respite();
 			//Node* node = new Node(respite);
 			//list->insertAtEnd(*&respite);
 			//redReader->Text = File::ReadAllText("respite.txt");
@@ -815,7 +1021,7 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 			//RoomBase* boss = new Boss();
 			//Node* nodeLibrary = new Node(library);
 			//list->insertAtEnd(*&library4);
-			//redReader->Text = File::ReadAllText("library.txt");
+			//redReader->Text = File::ReadAllText("library.txt");*/
 		}
 
 private: System::Void btnChoice3_Click(System::Object^ sender, System::EventArgs^ e) {

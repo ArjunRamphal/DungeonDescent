@@ -36,6 +36,10 @@ Boss::Boss() : RoomBase("Boss") {
 	}
 }
 
+void Boss::Cleared()
+{
+}
+
 int Boss::defeat(int Stats[6]) {
 	int count = 0;
 	for (int i = 0; i < 6; ++i) {

@@ -13,6 +13,8 @@ public:
     Respite();
     int Regen;
     int Accept(bool acc, int arr[6]);
+	string imageFileName;
+	string getImageFileName(int biome);
 };
 
 #endif // Warrior

@@ -26,3 +26,19 @@ int Respite::Accept(bool acc, int arr[6]) {
 	 
 	return arr[6];
 }
+
+string Respite::getImageFileName(int biome)
+{
+	switch (biome) {
+	case 1:
+		return "icerespite.png";
+	case 2:
+		return "junglerespite.png";
+	case 3:
+		return "desertrespite.png";
+	case 4:
+		return "ghostrespite.png";
+	case 5:
+		return "lavarespite.png";
+	}
+}

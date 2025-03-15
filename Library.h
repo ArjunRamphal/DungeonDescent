@@ -14,5 +14,7 @@ public:
     bool QAvail;
     bool QComp;
     int BookEff(int Type, int arr[6]);
+    string imageFileName;
+    string getImageFileName(int biome);
 };
 #endif // Warrior
