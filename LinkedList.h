@@ -1,8 +1,7 @@
 #pragma once
 #include "RoomBase.h"
-
-// C++ Program for Implementation of linked list
 #include <iostream>
+
 using namespace std;
 
 // Structure for a node in the linked list
@@ -30,7 +29,6 @@ public:
         head = newNode;
     }
 
-    // Function Insert a new node at the end of the list
     void insertAtEnd(RoomBase*& value) {
         Node* newNode = new Node(value);
         newNode->next = NULL;

@@ -127,13 +127,13 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="Library.cpp" />
-    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="Lore.cpp" />
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="Ranger.cpp" />
     <ClCompile Include="Respite.cpp" />
     <ClCompile Include="Rogue.cpp" />
     <ClCompile Include="RoomBase.cpp" />
+    <ClCompile Include="RoomBaseQueue.cpp" />
     <ClCompile Include="Shop.cpp" />
     <ClCompile Include="StartScreen.cpp" />
     <ClCompile Include="Warrior.cpp" />
@@ -148,7 +148,6 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Library.h" />
-    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Lore.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -157,6 +156,7 @@
     <ClInclude Include="Respite.h" />
     <ClInclude Include="Rogue.h" />
     <ClInclude Include="RoomBase.h" />
+    <ClInclude Include="RoomBaseQueue.h" />
     <ClInclude Include="Shop.h" />
     <ClInclude Include="StartScreen.h">
       <FileType>CppForm</FileType>
