@@ -4,7 +4,7 @@
 // Constructor
 Character::Character(const std::string& name)
     : name(name) {
-    Character::name = this->name;
+    this->name = name;
     std::string statName[6] = { "Strength", "Wisdom", "Observation", "Agility", "Health", "Accuracy" };
     int statValue[6] = { 0,0,0,0,0,0 };
     std::string inventoryItemName[3] = { "Gold","Keys","Quest Item" };

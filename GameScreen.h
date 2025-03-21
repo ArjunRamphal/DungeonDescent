@@ -53,7 +53,9 @@ namespace DungeonDescent {
 		   bool isEnlarged = false;
 		   bool pathChoice = true;
 		   bool completed = false;
+		   bool LibState = false;
 		   RoomBase* temp = new RoomBase();
+		   RoomBase* room;
 		   //RoomBase* currRoom;
 		   RoomBaseQueue* queue = new RoomBaseQueue();
 		   int globalCorrect = 1;
@@ -159,10 +161,9 @@ namespace DungeonDescent {
 			// 
 			// progressBar1
 			// 
-			this->progressBar1->Location = System::Drawing::Point(124, 1);
-			this->progressBar1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->progressBar1->Location = System::Drawing::Point(186, 2);
 			this->progressBar1->Name = L"progressBar1";
-			this->progressBar1->Size = System::Drawing::Size(595, 34);
+			this->progressBar1->Size = System::Drawing::Size(892, 52);
 			this->progressBar1->TabIndex = 0;
 			// 
 			// redReader
@@ -170,20 +171,18 @@ namespace DungeonDescent {
 			this->redReader->BackColor = System::Drawing::Color::LightYellow;
 			this->redReader->Font = (gcnew System::Drawing::Font(L"Old English Text MT", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->redReader->Location = System::Drawing::Point(119, 430);
-			this->redReader->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->redReader->Location = System::Drawing::Point(178, 662);
 			this->redReader->Name = L"redReader";
 			this->redReader->ReadOnly = true;
-			this->redReader->Size = System::Drawing::Size(733, 185);
+			this->redReader->Size = System::Drawing::Size(1098, 282);
 			this->redReader->TabIndex = 1;
 			this->redReader->Text = L"";
 			// 
 			// pbProfile
 			// 
-			this->pbProfile->Location = System::Drawing::Point(-1, 1);
-			this->pbProfile->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->pbProfile->Location = System::Drawing::Point(-2, 2);
 			this->pbProfile->Name = L"pbProfile";
-			this->pbProfile->Size = System::Drawing::Size(121, 113);
+			this->pbProfile->Size = System::Drawing::Size(182, 174);
 			this->pbProfile->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbProfile->TabIndex = 2;
 			this->pbProfile->TabStop = false;
@@ -191,10 +190,9 @@ namespace DungeonDescent {
 			// 
 			// pictureBox2
 			// 
-			this->pictureBox2->Location = System::Drawing::Point(-3, 430);
-			this->pictureBox2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->pictureBox2->Location = System::Drawing::Point(-4, 662);
 			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(118, 106);
+			this->pictureBox2->Size = System::Drawing::Size(177, 163);
 			this->pictureBox2->TabIndex = 3;
 			this->pictureBox2->TabStop = false;
 			// 
@@ -204,21 +202,18 @@ namespace DungeonDescent {
 			this->groupBox1->Controls->Add(this->btnChoice3);
 			this->groupBox1->Controls->Add(this->btnChoice2);
 			this->groupBox1->Controls->Add(this->btnChoice1);
-			this->groupBox1->Location = System::Drawing::Point(121, 367);
-			this->groupBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->groupBox1->Location = System::Drawing::Point(182, 565);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Padding = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->groupBox1->Size = System::Drawing::Size(731, 60);
+			this->groupBox1->Size = System::Drawing::Size(1096, 92);
 			this->groupBox1->TabIndex = 4;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Enter += gcnew System::EventHandler(this, &GameScreen::groupBox1_Enter);
 			// 
 			// btnChoice4
 			// 
-			this->btnChoice4->Location = System::Drawing::Point(443, 8);
-			this->btnChoice4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnChoice4->Location = System::Drawing::Point(664, 12);
 			this->btnChoice4->Name = L"btnChoice4";
-			this->btnChoice4->Size = System::Drawing::Size(97, 48);
+			this->btnChoice4->Size = System::Drawing::Size(146, 74);
 			this->btnChoice4->TabIndex = 3;
 			this->btnChoice4->Text = L"Choice 4";
 			this->btnChoice4->UseVisualStyleBackColor = true;
@@ -226,10 +221,9 @@ namespace DungeonDescent {
 			// 
 			// btnChoice3
 			// 
-			this->btnChoice3->Location = System::Drawing::Point(293, 8);
-			this->btnChoice3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnChoice3->Location = System::Drawing::Point(440, 12);
 			this->btnChoice3->Name = L"btnChoice3";
-			this->btnChoice3->Size = System::Drawing::Size(97, 48);
+			this->btnChoice3->Size = System::Drawing::Size(146, 74);
 			this->btnChoice3->TabIndex = 2;
 			this->btnChoice3->Text = L"Choice 3";
 			this->btnChoice3->UseVisualStyleBackColor = true;
@@ -238,10 +232,9 @@ namespace DungeonDescent {
 			// 
 			// btnChoice2
 			// 
-			this->btnChoice2->Location = System::Drawing::Point(146, 8);
-			this->btnChoice2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnChoice2->Location = System::Drawing::Point(219, 12);
 			this->btnChoice2->Name = L"btnChoice2";
-			this->btnChoice2->Size = System::Drawing::Size(97, 48);
+			this->btnChoice2->Size = System::Drawing::Size(146, 74);
 			this->btnChoice2->TabIndex = 1;
 			this->btnChoice2->Text = L"Choice 2";
 			this->btnChoice2->UseVisualStyleBackColor = true;
@@ -250,10 +243,9 @@ namespace DungeonDescent {
 			// 
 			// btnChoice1
 			// 
-			this->btnChoice1->Location = System::Drawing::Point(0, 8);
-			this->btnChoice1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnChoice1->Location = System::Drawing::Point(6, 12);
 			this->btnChoice1->Name = L"btnChoice1";
-			this->btnChoice1->Size = System::Drawing::Size(97, 48);
+			this->btnChoice1->Size = System::Drawing::Size(146, 74);
 			this->btnChoice1->TabIndex = 0;
 			this->btnChoice1->Text = L"Choice 1";
 			this->btnChoice1->UseVisualStyleBackColor = true;
@@ -262,10 +254,9 @@ namespace DungeonDescent {
 			// 
 			// pbBackground
 			// 
-			this->pbBackground->Location = System::Drawing::Point(-1, 1);
-			this->pbBackground->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->pbBackground->Location = System::Drawing::Point(-2, 2);
 			this->pbBackground->Name = L"pbBackground";
-			this->pbBackground->Size = System::Drawing::Size(851, 425);
+			this->pbBackground->Size = System::Drawing::Size(1276, 654);
 			this->pbBackground->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbBackground->TabIndex = 5;
 			this->pbBackground->TabStop = false;
@@ -275,24 +266,22 @@ namespace DungeonDescent {
 			this->lbStats->Font = (gcnew System::Drawing::Font(L"Copperplate Gothic Light", 8, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lbStats->FormattingEnabled = true;
-			this->lbStats->ItemHeight = 12;
+			this->lbStats->ItemHeight = 17;
 			this->lbStats->Items->AddRange(gcnew cli::array< System::Object^  >(6) {
 				L"Strength : 0", L"Wisdom : 0", L"Observation : 0",
 					L"Agility : 0", L"Accuracy : 0", L"Health : 5"
 			});
-			this->lbStats->Location = System::Drawing::Point(-1, 324);
-			this->lbStats->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->lbStats->Location = System::Drawing::Point(-2, 498);
 			this->lbStats->Name = L"lbStats";
-			this->lbStats->Size = System::Drawing::Size(119, 100);
+			this->lbStats->Size = System::Drawing::Size(176, 140);
 			this->lbStats->TabIndex = 6;
 			// 
 			// pictureBox4
 			// 
 			this->pictureBox4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox4.Image")));
-			this->pictureBox4->Location = System::Drawing::Point(729, 1);
-			this->pictureBox4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->pictureBox4->Location = System::Drawing::Point(1094, 2);
 			this->pictureBox4->Name = L"pictureBox4";
-			this->pictureBox4->Size = System::Drawing::Size(121, 113);
+			this->pictureBox4->Size = System::Drawing::Size(182, 174);
 			this->pictureBox4->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox4->TabIndex = 7;
 			this->pictureBox4->TabStop = false;
@@ -301,10 +290,9 @@ namespace DungeonDescent {
 			// pictureBox5
 			// 
 			this->pictureBox5->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox5.Image")));
-			this->pictureBox5->Location = System::Drawing::Point(-1, 558);
-			this->pictureBox5->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->pictureBox5->Location = System::Drawing::Point(-2, 858);
 			this->pictureBox5->Name = L"pictureBox5";
-			this->pictureBox5->Size = System::Drawing::Size(59, 55);
+			this->pictureBox5->Size = System::Drawing::Size(88, 85);
 			this->pictureBox5->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox5->TabIndex = 8;
 			this->pictureBox5->TabStop = false;
@@ -313,10 +301,9 @@ namespace DungeonDescent {
 			// pbSword
 			// 
 			this->pbSword->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbSword.Image")));
-			this->pbSword->Location = System::Drawing::Point(20, 137);
-			this->pbSword->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->pbSword->Location = System::Drawing::Point(30, 211);
 			this->pbSword->Name = L"pbSword";
-			this->pbSword->Size = System::Drawing::Size(189, 176);
+			this->pbSword->Size = System::Drawing::Size(284, 271);
 			this->pbSword->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbSword->TabIndex = 9;
 			this->pbSword->TabStop = false;
@@ -325,10 +312,9 @@ namespace DungeonDescent {
 			// pbThrowing_Knife
 			// 
 			this->pbThrowing_Knife->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbThrowing_Knife.Image")));
-			this->pbThrowing_Knife->Location = System::Drawing::Point(232, 137);
-			this->pbThrowing_Knife->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->pbThrowing_Knife->Location = System::Drawing::Point(348, 211);
 			this->pbThrowing_Knife->Name = L"pbThrowing_Knife";
-			this->pbThrowing_Knife->Size = System::Drawing::Size(189, 176);
+			this->pbThrowing_Knife->Size = System::Drawing::Size(284, 271);
 			this->pbThrowing_Knife->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbThrowing_Knife->TabIndex = 10;
 			this->pbThrowing_Knife->TabStop = false;
@@ -337,10 +323,9 @@ namespace DungeonDescent {
 			// pbWand
 			// 
 			this->pbWand->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbWand.Image")));
-			this->pbWand->Location = System::Drawing::Point(446, 137);
-			this->pbWand->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->pbWand->Location = System::Drawing::Point(669, 211);
 			this->pbWand->Name = L"pbWand";
-			this->pbWand->Size = System::Drawing::Size(189, 176);
+			this->pbWand->Size = System::Drawing::Size(284, 271);
 			this->pbWand->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbWand->TabIndex = 11;
 			this->pbWand->TabStop = false;
@@ -349,10 +334,9 @@ namespace DungeonDescent {
 			// pbLongbow
 			// 
 			this->pbLongbow->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbLongbow.Image")));
-			this->pbLongbow->Location = System::Drawing::Point(655, 137);
-			this->pbLongbow->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->pbLongbow->Location = System::Drawing::Point(982, 211);
 			this->pbLongbow->Name = L"pbLongbow";
-			this->pbLongbow->Size = System::Drawing::Size(189, 176);
+			this->pbLongbow->Size = System::Drawing::Size(284, 271);
 			this->pbLongbow->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbLongbow->TabIndex = 12;
 			this->pbLongbow->TabStop = false;
@@ -360,10 +344,10 @@ namespace DungeonDescent {
 			// 
 			// GameScreen
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Black;
-			this->ClientSize = System::Drawing::Size(852, 614);
+			this->ClientSize = System::Drawing::Size(1278, 945);
 			this->Controls->Add(this->pbLongbow);
 			this->Controls->Add(this->pbWand);
 			this->Controls->Add(this->pbThrowing_Knife);
@@ -377,7 +361,6 @@ namespace DungeonDescent {
 			this->Controls->Add(this->pbBackground);
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->redReader);
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"GameScreen";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Dungeon Descent";
@@ -409,11 +392,11 @@ namespace DungeonDescent {
         //tempRoom->setBiome(1);
         //delete tempRoom;
 
-		if (!completed)
-			roomCreate(1);
+		//if (!completed)
+			//roomCreate(1);
 
 
-		/*
+		
 		//Choice 1
 		RoomBase currRoom;
 
@@ -424,8 +407,45 @@ namespace DungeonDescent {
 			Biome = 0;
 			pbBackground->Image = Image::FromFile("icekeeper.jpg");
 			roomCreate(1);
-			currRoom = queue->dequeue();
-			redReader->Clear();
+
+			if (room->getType() == "Library") {
+				redReader->Clear();
+				redReader->LoadFile("library.txt");
+				btnChoice1->Visible = true;
+				btnChoice1->Enabled = true;
+				btnChoice1->Text = "The Art of Warfare";
+				btnChoice2->Visible = true;
+				btnChoice2->Enabled = true;
+				btnChoice2->Text = "The Whispering Winds";
+				btnChoice3->Visible = true;
+				btnChoice3->Enabled = true;
+				btnChoice3->Text = "The Ancient Lore";
+				btnChoice4->Visible = true;
+				btnChoice4->Enabled = true;
+				btnChoice4->Text = "The Heart of the Forest";
+				LibState = true;
+			}
+			else if (room->getType() == "Chest") {
+
+			}
+			else if (room->getType() == "Battle") {
+
+			}
+			else if (room->getType() == "Respite") {
+
+			}
+			else if (room->getType() == "Shop") {
+
+			}
+			else if (room->getType() == "Encounter") {
+
+			}
+			else if (room->getType() == "Boss") {
+
+			}
+			//ContState = true;
+			//currRoom = queue->dequeue();
+			/*redReader->Clear();
 			redReader->Text = File::ReadAllText("riddleice.txt");
 
 			std::srand(std::time(0)); // Seed random number generator
@@ -456,12 +476,12 @@ namespace DungeonDescent {
 					btnChoice3->Visible = true;
 					btnChoice3->Text = gcnew String(line.c_str());
 				}
-			}
+			}*/
 
 		} else { //split pathchoice
 
 			if (ContState == false) {
-				int SelfIndex = 1;
+				/*int SelfIndex = 1;
 				ContState = true;
 				btnChoice2->Visible = false;
 				btnChoice3->Visible = false;
@@ -482,13 +502,22 @@ namespace DungeonDescent {
 						redReader->Text = "Incorrect! Penalty! Press any button to proceed";
 						btnChoice1->Text = gcnew String("Continue...");
 						//stat decreases
-					}
+					}*/
+
+				if (LibState == true) {
+					//effects
+					ContState = true;
+					btnChoice1->Text = "Continue";
+					btnChoice2->Text = "Continue";
+					btnChoice3->Text = "Continue";
+					btnChoice4->Visible = false;
+				}
 
 
 				
 
 			} else {
-				currRoom = queue->dequeue();
+				/*currRoom = queue->dequeue();
 				redReader->Clear();
 				ContState = false;
 				btnChoice2->Visible = true;
@@ -530,11 +559,17 @@ namespace DungeonDescent {
 						btnChoice3->Text = gcnew String(line.c_str());
 						
 					}
-				}
+				}*/
+
+				
+
+
 			}
 
 
-		}*/
+		}
+
+		
 	}
 
 private: System::Void btnChoice2_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -544,11 +579,11 @@ private: System::Void btnChoice2_Click(System::Object^ sender, System::EventArgs
 	if (pathChoice == true) {
 		//redReader->Text = File::ReadAllText("left.txt");
 		pathChoice = false;
-		ContState = false;
+		ContState = true;
 		Biome = 0;
 		pbBackground->Image = Image::FromFile("icekeeper.jpg");
 		roomCreate(1);
-		currRoom = queue->dequeue();
+		/*currRoom = queue->dequeue();
 		redReader->Clear();
 		redReader->Text = File::ReadAllText("riddleice.txt");
 
@@ -580,10 +615,9 @@ private: System::Void btnChoice2_Click(System::Object^ sender, System::EventArgs
 				btnChoice3->Visible = true;
 				btnChoice3->Text = gcnew String(line.c_str());
 			}
-		}
+		}*/
 
-	}
-	else { //split pathchoice
+	} else { //split pathchoice
 
 		if (ContState == false) {
 			int SelfIndex = 2;
@@ -760,13 +794,13 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 			// and a function to get those questions and answers.
 			//once completed = true and player decides to go to next room, the room will be generated
 
-			//to check whether the player has completed a floor, do a mod calculation, eg. 20 % 10 = 0, therefore 
+			//to check whether the player has completed a floor, do a mod calculation, eg. 20 % 11 = 0, therefore 
 			//you will know that the player is proceeding to the next floor. if i = 30, then the player has completed the game
 
-			roomCounter++;
+			//roomCounter++;
 			completed = false;
 
-			RoomBase* room;
+			//RoomBase* room;
 
 			vector<string> rooms = { "library", "battle", "chest" };
 			int num = 3;
@@ -781,7 +815,7 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 			//num--;
 
 
-			if (roomCounter == 2)
+			if (roomCounter == 1)
 			{
 				srand(time(0));
 
@@ -792,18 +826,47 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 					room = new Library();
 					redReader->Text = File::ReadAllText("library.txt");
 					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+					room->type = "Library";
 				}
 				else if (randomNum == 2) {
 					room = new Battle();
 					redReader->Text = File::ReadAllText("battle.txt");
 					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+					room->type = "Battle";
 				}
 				else if (randomNum == 3) {
 					room = new Chest();
 					redReader->Text = File::ReadAllText("chest.txt");
 					pbBackground->Image = Image::FromFile("longbow.jpg");
+					room->type = "Chest";
 				}
 
+			} 
+			else if (roomCounter == 2)
+			{
+				srand(time(0));
+
+				// Generate a random number between 1 and 3
+				randomNum = (rand() % num) + 1;
+
+				if (randomNum == 1) {
+					room = new Library();
+					redReader->Text = File::ReadAllText("library.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+					room->type = "Library";
+				}
+				else if (randomNum == 2) {
+					room = new Battle();
+					redReader->Text = File::ReadAllText("battle.txt");
+					pbBackground->Image = Image::FromFile("icekeeper.jpg");
+					room->type = "Battle";
+				}
+				else if (randomNum == 3) {
+					room = new Chest();
+					redReader->Text = File::ReadAllText("chest.txt");
+					pbBackground->Image = Image::FromFile("longbow.jpg");
+					room->type = "Chest";
+				}
 			} 
 			else if (roomCounter == 3)
 			{
@@ -812,43 +875,73 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 				// Generate a random number between 1 and 3
 				randomNum = (rand() % num) + 1;
 
-				switch (randomNum) {
-				case 1:
+				if (randomNum == 1) {
 					room = new Library();
 					redReader->Text = File::ReadAllText("library.txt");
 					pbBackground->Image = Image::FromFile("icekeeper.jpg");
-				case 2:
+					room->type = "Library";
+				}
+				else if (randomNum == 2) {
 					room = new Battle();
 					redReader->Text = File::ReadAllText("battle.txt");
 					pbBackground->Image = Image::FromFile("icekeeper.jpg");
-				case 3:
+					room->type = "Battle";
+				}
+				else if (randomNum == 3) {
 					room = new Chest();
 					redReader->Text = File::ReadAllText("chest.txt");
 					pbBackground->Image = Image::FromFile("longbow.jpg");
+					room->type = "Chest";
 				}
-			} 
-			else if (roomCounter == 4)
-			{
-				srand(time(0));
+			}
+			else if (roomCounter == ((roomCounter % 11) == 4)) {
+				room = new Respite();
+				redReader->Text = File::ReadAllText("respite.txt");
+				pbBackground->Image = Image::FromFile("longbow.jpg");
+				room->type = "Encounter";
 
-				// Generate a random number between 1 and 3
-				randomNum = (rand() % num) + 1;
+			}
+			else if (roomCounter == ((roomCounter % 11) == 5)) {
+				room = new Battle();
+				redReader->Text = File::ReadAllText("respite.txt");
+				pbBackground->Image = Image::FromFile("longbow.jpg");
+				room->type = "Battle";
 
-				switch (randomNum) {
-				case 1:
-					room = new Library();
+			}
+			else if (roomCounter == ((roomCounter % 11) == 6)) {
+				room = new Respite();
+				redReader->Text = File::ReadAllText("respite.txt");
+				pbBackground->Image = Image::FromFile("longbow.jpg");
+				room->type = "Respite";
 
-					redReader->Text = File::ReadAllText("library.txt");
-					pbBackground->Image = Image::FromFile("icekeeper.jpg");
-				case 2:
-					room = new Battle();
-					redReader->Text = File::ReadAllText("battle.txt");
-					pbBackground->Image = Image::FromFile("icekeeper.jpg");
-				case 3:
-					room = new Chest();
-					redReader->Text = File::ReadAllText("chest.txt");
-					pbBackground->Image = Image::FromFile("longbow.jpg");
-				}
+			}
+			else if (roomCounter == ((roomCounter % 11) == 7)) {
+				room = new Library();
+				redReader->Text = File::ReadAllText("respite.txt");
+				pbBackground->Image = Image::FromFile("longbow.jpg");
+				room->type = "Library";
+
+			}
+			else if (roomCounter == ((roomCounter % 11) == 8)) {
+				room = new Shop();
+				redReader->Text = File::ReadAllText("respite.txt");
+				pbBackground->Image = Image::FromFile("longbow.jpg");
+				room->type = "Shop";
+
+			}
+			else if (roomCounter == ((roomCounter % 11) == 9)) {
+				room = new Library();
+				redReader->Text = File::ReadAllText("respite.txt");
+				pbBackground->Image = Image::FromFile("longbow.jpg");
+				room->type = "Library";
+
+			}
+			else if (roomCounter == ((roomCounter % 11) == 10)) {
+				room = new Boss();
+				redReader->Text = File::ReadAllText("respite.txt");
+				pbBackground->Image = Image::FromFile("longbow.jpg");
+				room->type = "Boss";
+
 			}
 
 			/*

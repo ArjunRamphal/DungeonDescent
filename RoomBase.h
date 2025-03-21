@@ -15,6 +15,7 @@ public:
 	bool Completed;
 	bool KeyExists;
 	int NPC;
+	string type;
 	int Book;
 	bool BookExists;
 	bool Enemy;
@@ -30,6 +31,7 @@ public:
 	int getBiome();
 	int getFloor();
 	int getNPC();
+	string getType();
 
 	void setEnemyType(int enemyType);
 	void setBook(int book);

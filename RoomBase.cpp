@@ -5,6 +5,10 @@ RoomBase::RoomBase(const std::string& name) {
 	
 }
 
+string RoomBase::getType () {
+	return type;
+}
+
 RoomBase::RoomBase() {
 
 }
