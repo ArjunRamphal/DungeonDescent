@@ -5,6 +5,20 @@ RoomBase::RoomBase(const std::string& name) {
 	
 }
 
+string RoomBase::getType () {
+	return type;
+}
+
+string RoomBase::getImageFileName(int biome)
+{
+	return imageFileName;
+}
+
+string RoomBase::getTextFileName(int biome)
+{
+	return textFileName;
+}
+
 RoomBase::RoomBase() {
 
 }
@@ -41,4 +55,34 @@ int RoomBase::getFloor() {
 
 int RoomBase::getNPC() {
 	return NPC;
+}
+
+void RoomBase::setEnemyType(int enemyType)
+{
+	EnemyType = enemyType;
+}
+
+void RoomBase::setBook(int book)
+{
+	Book = book;
+}
+
+void RoomBase::setKey(bool key)
+{
+	KeyExists = key;
+}
+
+void RoomBase::setBiome(int biome)
+{
+	Biome = biome;
+}
+
+void RoomBase::setFloor(int floor)
+{
+	Floor = floor;
+}
+
+void RoomBase::setNPC(int npc)
+{
+	NPC = npc;
 }

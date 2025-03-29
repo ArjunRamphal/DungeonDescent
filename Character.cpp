@@ -4,13 +4,17 @@
 // Constructor
 Character::Character(const std::string& name)
     : name(name) {
-    Character::name = this->name;
+    this->name = name;
     std::string statName[6] = { "Strength", "Wisdom", "Observation", "Agility", "Health", "Accuracy" };
     int statValue[6] = { 0,0,0,0,0,0 };
     std::string inventoryItemName[3] = { "Gold","Keys","Quest Item" };
     int inventoryItemAmount[3] = { 0,0,0 };
     floor = 0;
     Reputation = 0;
+}
+
+Character::Character()
+{
 }
 
 //Character::Character();
@@ -95,5 +99,15 @@ void Character::negEvent(int amountrep)
 int Character::getFloor()
 {
     return floor;
+}
+
+string Character::getStatName(int index)
+{
+	return statName[index];
+}
+
+int Character::getStatValue(int index)
+{
+	return statValue[index];
 }
 

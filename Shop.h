@@ -16,7 +16,10 @@ public:
     Shop();
     bool QAvail;
     bool QComp;
-
+	string imageFileName;
+	string textFileName;
+    string getImageFileName(int biome);
+	string getTextFileName(int biome);
 };
 
 #endif // Warrior

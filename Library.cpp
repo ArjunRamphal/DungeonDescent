@@ -42,3 +42,41 @@ int Library::BookEff(int Type, int arr[6]) {
 
 	return arr[6];
 }
+
+string Library::getImageFileName(int biome)
+{
+	if (biome == 0) {
+		return "icelibrary.png";
+	}
+	else if (biome == 1) {
+		return "junglelibrary.png";
+	}
+	else if (biome == 2) {
+		return "desertlibrary.png";
+	}
+	else if (biome == 3) {
+		return "ghostlibrary.png";
+	}
+	else if (biome == 4) {
+		return "lavalibrary.png";
+	}
+}
+
+string Library::getTextFileName(int biome)
+{
+	if (biome == 0) {
+		return "icelibrary.txt";
+	}
+	else if (biome == 1) {
+		return "junglelibrary.txt";
+	}
+	else if (biome == 2) {
+		return "desertlibrary.txt";
+	}
+	else if (biome == 3) {
+		return "ghostlibrary.txt";
+	}
+	else if (biome == 4) {
+		return "lavalibrary.txt";
+	}
+}

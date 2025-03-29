@@ -23,20 +23,40 @@ void Battle::Effect(int arr[6]) {
 	}
 }
 
-string Battle::getimageFileName(int biome) {
-	if (biome == 1) {
+string Battle::getImageFileName(int biome) 
+{
+	if (biome == 0) {
 		return "icebattle.png";
 	}
+	else if (biome == 1) {
+		return "junglebattle.png";
+	}
 	else if (biome == 2) {
-		return "jungle";
+		return "desertbattle.png";
 	}
 	else if (biome == 3) {
-		return "desert";
+		return "ghostbattle.png";
 	}
 	else if (biome == 4) {
-		return "ghost";
+		return "lavabattle.png";
 	}
-	else if (biome == 5) {
-		return "lava";
+}
+
+string Battle::getTextFileName(int biome)
+{
+	if (biome == 0) {
+		return "icebattle.txt";
+	}
+	else if (biome == 1) {
+		return "junglebattle.txt";
+	}
+	else if (biome == 2) {
+		return "desertbattle.txt";
+	}
+	else if (biome == 3) {
+		return "ghostbattle.txt";
+	}
+	else if (biome == 4) {
+		return "lavabattle.txt";
 	}
 }

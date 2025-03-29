@@ -2,20 +2,21 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
+#include <array>
 #include "Warrior.h"
 #include "Ranger.h"
 #include "Rogue.h"
 #include "Mage.h"
 #include "Character.h"
 #include "Library.h"
-#include "Lore.h"
 #include "Battle.h"
 #include "Lore.h"
 #include "Chest.h"
 #include "Shop.h"
 #include "Respite.h"
 #include "Boss.h"
-#include "RoomBaseQueue.h"
+#include "RoomBase.h"
 
 
 namespace DungeonDescent {
@@ -49,23 +50,24 @@ namespace DungeonDescent {
 
 
 	public:
+		Character* character;
 
-
-			
-		   bool isEnlarged = false;
-		   bool pathChoice = true;
-		   //LinkedList* list = new LinkedList();
-	private: System::Windows::Forms::RichTextBox^ richTextBox1;
-	private: System::Windows::Forms::Panel^ panel1;
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
-	private: System::Windows::Forms::Button^ button1;
+		bool isEnlarged = false;
+		bool pathChoice = true;
+		bool completed = false;
+		bool LibState = false;
+		bool roomState = false;
+		bool biomeSelect = true;
+		RoomBase* temp = new RoomBase();
+		RoomBase* room;
+		//RoomBase* currRoom;
+		int globalCorrect = 1;
+		bool ContState;
+		int biome;
+		int floor = 0;
+	private: System::Windows::Forms::Button^ btnContinue;
 	public:
-		   RoomBase* temp = new RoomBase();
-		   //RoomBase* currRoom;
-		   RoomBaseQueue* queue = new RoomBaseQueue();
-		   int globalCorrect = 1;
-		   bool ContState;
-		   int Biome;
+		int roomCounter = 0;
 		   
 
 		GameScreen(void)
@@ -96,7 +98,7 @@ namespace DungeonDescent {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::ProgressBar^ progressBar1;
+
 	private: System::Windows::Forms::RichTextBox^ redReader;
 	private: System::Windows::Forms::PictureBox^ pbProfile;
 
@@ -134,11 +136,11 @@ namespace DungeonDescent {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(GameScreen::typeid));
-			this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
 			this->redReader = (gcnew System::Windows::Forms::RichTextBox());
 			this->pbProfile = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->btnContinue = (gcnew System::Windows::Forms::Button());
 			this->btnChoice4 = (gcnew System::Windows::Forms::Button());
 			this->btnChoice3 = (gcnew System::Windows::Forms::Button());
 			this->btnChoice2 = (gcnew System::Windows::Forms::Button());
@@ -151,10 +153,6 @@ namespace DungeonDescent {
 			this->pbThrowing_Knife = (gcnew System::Windows::Forms::PictureBox());
 			this->pbWand = (gcnew System::Windows::Forms::PictureBox());
 			this->pbLongbow = (gcnew System::Windows::Forms::PictureBox());
-			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbProfile))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			this->groupBox1->SuspendLayout();
@@ -165,51 +163,25 @@ namespace DungeonDescent {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbThrowing_Knife))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbWand))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbLongbow))->BeginInit();
-			this->panel1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
-			// 
-			// progressBar1
-			// 
-			this->progressBar1->Location = System::Drawing::Point(165, 2);
-			this->progressBar1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->progressBar1->Name = L"progressBar1";
-			this->progressBar1->Size = System::Drawing::Size(793, 42);
-			this->progressBar1->Location = System::Drawing::Point(124, 1);
-			this->progressBar1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->progressBar1->Name = L"progressBar1";
-			this->progressBar1->Size = System::Drawing::Size(595, 34);
-			this->progressBar1->TabIndex = 0;
 			// 
 			// redReader
 			// 
 			this->redReader->BackColor = System::Drawing::Color::LightYellow;
 			this->redReader->Font = (gcnew System::Drawing::Font(L"Old English Text MT", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->redReader->Location = System::Drawing::Point(158, 530);
-			this->redReader->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->redReader->Location = System::Drawing::Point(178, 662);
 			this->redReader->Name = L"redReader";
 			this->redReader->ReadOnly = true;
-			this->redReader->Size = System::Drawing::Size(976, 226);
-			this->redReader->Location = System::Drawing::Point(119, 430);
-			this->redReader->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->redReader->Name = L"redReader";
-			this->redReader->ReadOnly = true;
-			this->redReader->Size = System::Drawing::Size(733, 185);
+			this->redReader->Size = System::Drawing::Size(1098, 282);
 			this->redReader->TabIndex = 1;
 			this->redReader->Text = L"";
-			this->redReader->TextChanged += gcnew System::EventHandler(this, &GameScreen::redReader_TextChanged);
 			// 
 			// pbProfile
 			// 
-			this->pbProfile->Location = System::Drawing::Point(-1, 2);
-			this->pbProfile->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pbProfile->Location = System::Drawing::Point(-2, 2);
 			this->pbProfile->Name = L"pbProfile";
-			this->pbProfile->Size = System::Drawing::Size(161, 139);
-			this->pbProfile->Location = System::Drawing::Point(-1, 1);
-			this->pbProfile->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->pbProfile->Name = L"pbProfile";
-			this->pbProfile->Size = System::Drawing::Size(121, 113);
+			this->pbProfile->Size = System::Drawing::Size(182, 174);
 			this->pbProfile->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbProfile->TabIndex = 2;
 			this->pbProfile->TabStop = false;
@@ -217,47 +189,41 @@ namespace DungeonDescent {
 			// 
 			// pictureBox2
 			// 
-			this->pictureBox2->Location = System::Drawing::Point(-4, 530);
-			this->pictureBox2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pictureBox2->Location = System::Drawing::Point(3, 488);
 			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(157, 130);
-			this->pictureBox2->Location = System::Drawing::Point(-3, 430);
-			this->pictureBox2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(118, 106);
+			this->pictureBox2->Size = System::Drawing::Size(177, 163);
 			this->pictureBox2->TabIndex = 3;
 			this->pictureBox2->TabStop = false;
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->btnContinue);
 			this->groupBox1->Controls->Add(this->btnChoice4);
 			this->groupBox1->Controls->Add(this->btnChoice3);
 			this->groupBox1->Controls->Add(this->btnChoice2);
 			this->groupBox1->Controls->Add(this->btnChoice1);
-			this->groupBox1->Location = System::Drawing::Point(162, 451);
-			this->groupBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->groupBox1->Location = System::Drawing::Point(182, 565);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Padding = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->groupBox1->Size = System::Drawing::Size(975, 74);
-			this->groupBox1->Location = System::Drawing::Point(121, 367);
-			this->groupBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Padding = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->groupBox1->Size = System::Drawing::Size(731, 60);
+			this->groupBox1->Size = System::Drawing::Size(1096, 92);
 			this->groupBox1->TabIndex = 4;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Enter += gcnew System::EventHandler(this, &GameScreen::groupBox1_Enter);
 			// 
+			// btnContinue
+			// 
+			this->btnContinue->Location = System::Drawing::Point(938, 12);
+			this->btnContinue->Name = L"btnContinue";
+			this->btnContinue->Size = System::Drawing::Size(146, 74);
+			this->btnContinue->TabIndex = 4;
+			this->btnContinue->Text = L"Continue";
+			this->btnContinue->UseVisualStyleBackColor = true;
+			this->btnContinue->Click += gcnew System::EventHandler(this, &GameScreen::btnContinue_Click);
+			// 
 			// btnChoice4
 			// 
-			this->btnChoice4->Location = System::Drawing::Point(590, 10);
-			this->btnChoice4->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnChoice4->Location = System::Drawing::Point(664, 12);
 			this->btnChoice4->Name = L"btnChoice4";
-			this->btnChoice4->Size = System::Drawing::Size(130, 59);
-			this->btnChoice4->Location = System::Drawing::Point(443, 8);
-			this->btnChoice4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->btnChoice4->Name = L"btnChoice4";
-			this->btnChoice4->Size = System::Drawing::Size(97, 48);
+			this->btnChoice4->Size = System::Drawing::Size(146, 74);
 			this->btnChoice4->TabIndex = 3;
 			this->btnChoice4->Text = L"Choice 4";
 			this->btnChoice4->UseVisualStyleBackColor = true;
@@ -265,14 +231,9 @@ namespace DungeonDescent {
 			// 
 			// btnChoice3
 			// 
-			this->btnChoice3->Location = System::Drawing::Point(390, 10);
-			this->btnChoice3->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnChoice3->Location = System::Drawing::Point(440, 12);
 			this->btnChoice3->Name = L"btnChoice3";
-			this->btnChoice3->Size = System::Drawing::Size(130, 59);
-			this->btnChoice3->Location = System::Drawing::Point(293, 8);
-			this->btnChoice3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->btnChoice3->Name = L"btnChoice3";
-			this->btnChoice3->Size = System::Drawing::Size(97, 48);
+			this->btnChoice3->Size = System::Drawing::Size(146, 74);
 			this->btnChoice3->TabIndex = 2;
 			this->btnChoice3->Text = L"Choice 3";
 			this->btnChoice3->UseVisualStyleBackColor = true;
@@ -281,14 +242,9 @@ namespace DungeonDescent {
 			// 
 			// btnChoice2
 			// 
-			this->btnChoice2->Location = System::Drawing::Point(195, 10);
-			this->btnChoice2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnChoice2->Location = System::Drawing::Point(219, 12);
 			this->btnChoice2->Name = L"btnChoice2";
-			this->btnChoice2->Size = System::Drawing::Size(130, 59);
-			this->btnChoice2->Location = System::Drawing::Point(146, 8);
-			this->btnChoice2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->btnChoice2->Name = L"btnChoice2";
-			this->btnChoice2->Size = System::Drawing::Size(97, 48);
+			this->btnChoice2->Size = System::Drawing::Size(146, 74);
 			this->btnChoice2->TabIndex = 1;
 			this->btnChoice2->Text = L"Choice 2";
 			this->btnChoice2->UseVisualStyleBackColor = true;
@@ -297,14 +253,9 @@ namespace DungeonDescent {
 			// 
 			// btnChoice1
 			// 
-			this->btnChoice1->Location = System::Drawing::Point(0, 10);
-			this->btnChoice1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnChoice1->Location = System::Drawing::Point(6, 12);
 			this->btnChoice1->Name = L"btnChoice1";
-			this->btnChoice1->Size = System::Drawing::Size(130, 59);
-			this->btnChoice1->Location = System::Drawing::Point(0, 8);
-			this->btnChoice1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->btnChoice1->Name = L"btnChoice1";
-			this->btnChoice1->Size = System::Drawing::Size(97, 48);
+			this->btnChoice1->Size = System::Drawing::Size(146, 74);
 			this->btnChoice1->TabIndex = 0;
 			this->btnChoice1->Text = L"Choice 1";
 			this->btnChoice1->UseVisualStyleBackColor = true;
@@ -313,14 +264,9 @@ namespace DungeonDescent {
 			// 
 			// pbBackground
 			// 
-			this->pbBackground->Location = System::Drawing::Point(-1, 2);
-			this->pbBackground->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pbBackground->Location = System::Drawing::Point(0, 0);
 			this->pbBackground->Name = L"pbBackground";
-			this->pbBackground->Size = System::Drawing::Size(1134, 523);
-			this->pbBackground->Location = System::Drawing::Point(-1, 1);
-			this->pbBackground->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->pbBackground->Name = L"pbBackground";
-			this->pbBackground->Size = System::Drawing::Size(851, 425);
+			this->pbBackground->Size = System::Drawing::Size(1276, 654);
 			this->pbBackground->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbBackground->TabIndex = 5;
 			this->pbBackground->TabStop = false;
@@ -330,33 +276,22 @@ namespace DungeonDescent {
 			this->lbStats->Font = (gcnew System::Drawing::Font(L"Copperplate Gothic Light", 8, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lbStats->FormattingEnabled = true;
-			this->lbStats->ItemHeight = 14;
-			this->lbStats->ItemHeight = 12;
+			this->lbStats->ItemHeight = 17;
 			this->lbStats->Items->AddRange(gcnew cli::array< System::Object^  >(6) {
 				L"Strength : 0", L"Wisdom : 0", L"Observation : 0",
 					L"Agility : 0", L"Accuracy : 0", L"Health : 5"
 			});
-			this->lbStats->Location = System::Drawing::Point(-1, 399);
-			this->lbStats->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->lbStats->Location = System::Drawing::Point(0, 662);
 			this->lbStats->Name = L"lbStats";
-			this->lbStats->Size = System::Drawing::Size(158, 116);
-			this->lbStats->Location = System::Drawing::Point(-1, 324);
-			this->lbStats->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->lbStats->Name = L"lbStats";
-			this->lbStats->Size = System::Drawing::Size(119, 100);
+			this->lbStats->Size = System::Drawing::Size(176, 140);
 			this->lbStats->TabIndex = 6;
 			// 
 			// pictureBox4
 			// 
 			this->pictureBox4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox4.Image")));
-			this->pictureBox4->Location = System::Drawing::Point(972, 2);
-			this->pictureBox4->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pictureBox4->Location = System::Drawing::Point(1096, 0);
 			this->pictureBox4->Name = L"pictureBox4";
-			this->pictureBox4->Size = System::Drawing::Size(161, 139);
-			this->pictureBox4->Location = System::Drawing::Point(729, 1);
-			this->pictureBox4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->pictureBox4->Name = L"pictureBox4";
-			this->pictureBox4->Size = System::Drawing::Size(121, 113);
+			this->pictureBox4->Size = System::Drawing::Size(182, 174);
 			this->pictureBox4->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox4->TabIndex = 7;
 			this->pictureBox4->TabStop = false;
@@ -365,14 +300,9 @@ namespace DungeonDescent {
 			// pictureBox5
 			// 
 			this->pictureBox5->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox5.Image")));
-			this->pictureBox5->Location = System::Drawing::Point(-1, 687);
-			this->pictureBox5->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pictureBox5->Location = System::Drawing::Point(-2, 858);
 			this->pictureBox5->Name = L"pictureBox5";
-			this->pictureBox5->Size = System::Drawing::Size(78, 68);
-			this->pictureBox5->Location = System::Drawing::Point(-1, 558);
-			this->pictureBox5->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->pictureBox5->Name = L"pictureBox5";
-			this->pictureBox5->Size = System::Drawing::Size(59, 55);
+			this->pictureBox5->Size = System::Drawing::Size(88, 85);
 			this->pictureBox5->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox5->TabIndex = 8;
 			this->pictureBox5->TabStop = false;
@@ -381,14 +311,9 @@ namespace DungeonDescent {
 			// pbSword
 			// 
 			this->pbSword->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbSword.Image")));
-			this->pbSword->Location = System::Drawing::Point(27, 169);
-			this->pbSword->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pbSword->Location = System::Drawing::Point(30, 211);
 			this->pbSword->Name = L"pbSword";
-			this->pbSword->Size = System::Drawing::Size(252, 216);
-			this->pbSword->Location = System::Drawing::Point(20, 137);
-			this->pbSword->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->pbSword->Name = L"pbSword";
-			this->pbSword->Size = System::Drawing::Size(189, 176);
+			this->pbSword->Size = System::Drawing::Size(284, 271);
 			this->pbSword->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbSword->TabIndex = 9;
 			this->pbSword->TabStop = false;
@@ -397,14 +322,9 @@ namespace DungeonDescent {
 			// pbThrowing_Knife
 			// 
 			this->pbThrowing_Knife->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbThrowing_Knife.Image")));
-			this->pbThrowing_Knife->Location = System::Drawing::Point(309, 169);
-			this->pbThrowing_Knife->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pbThrowing_Knife->Location = System::Drawing::Point(348, 211);
 			this->pbThrowing_Knife->Name = L"pbThrowing_Knife";
-			this->pbThrowing_Knife->Size = System::Drawing::Size(252, 216);
-			this->pbThrowing_Knife->Location = System::Drawing::Point(232, 137);
-			this->pbThrowing_Knife->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->pbThrowing_Knife->Name = L"pbThrowing_Knife";
-			this->pbThrowing_Knife->Size = System::Drawing::Size(189, 176);
+			this->pbThrowing_Knife->Size = System::Drawing::Size(284, 271);
 			this->pbThrowing_Knife->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbThrowing_Knife->TabIndex = 10;
 			this->pbThrowing_Knife->TabStop = false;
@@ -413,14 +333,9 @@ namespace DungeonDescent {
 			// pbWand
 			// 
 			this->pbWand->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbWand.Image")));
-			this->pbWand->Location = System::Drawing::Point(595, 169);
-			this->pbWand->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pbWand->Location = System::Drawing::Point(669, 211);
 			this->pbWand->Name = L"pbWand";
-			this->pbWand->Size = System::Drawing::Size(252, 216);
-			this->pbWand->Location = System::Drawing::Point(446, 137);
-			this->pbWand->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->pbWand->Name = L"pbWand";
-			this->pbWand->Size = System::Drawing::Size(189, 176);
+			this->pbWand->Size = System::Drawing::Size(284, 271);
 			this->pbWand->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbWand->TabIndex = 11;
 			this->pbWand->TabStop = false;
@@ -429,91 +344,32 @@ namespace DungeonDescent {
 			// pbLongbow
 			// 
 			this->pbLongbow->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbLongbow.Image")));
-			this->pbLongbow->Location = System::Drawing::Point(874, 169);
-			this->pbLongbow->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->pbLongbow->Location = System::Drawing::Point(982, 211);
 			this->pbLongbow->Name = L"pbLongbow";
-			this->pbLongbow->Size = System::Drawing::Size(252, 216);
-			this->pbLongbow->Location = System::Drawing::Point(655, 137);
-			this->pbLongbow->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->pbLongbow->Name = L"pbLongbow";
-			this->pbLongbow->Size = System::Drawing::Size(189, 176);
+			this->pbLongbow->Size = System::Drawing::Size(284, 271);
 			this->pbLongbow->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbLongbow->TabIndex = 12;
 			this->pbLongbow->TabStop = false;
 			this->pbLongbow->Click += gcnew System::EventHandler(this, &GameScreen::pbLongbow_Click);
 			// 
-			// richTextBox1
-			// 
-			this->richTextBox1->BackColor = System::Drawing::Color::LightYellow;
-			this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Engravers MT", 11, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->richTextBox1->Location = System::Drawing::Point(41, 32);
-			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(126, 120);
-			this->richTextBox1->TabIndex = 13;
-			this->richTextBox1->Text = L"";
-			this->richTextBox1->TextChanged += gcnew System::EventHandler(this, &GameScreen::richTextBox1_TextChanged);
-			// 
-			// panel1
-			// 
-			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
-			this->panel1->Controls->Add(this->button1);
-			this->panel1->Controls->Add(this->pictureBox1);
-			this->panel1->Controls->Add(this->richTextBox1);
-			this->panel1->Location = System::Drawing::Point(394, 12);
-			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(224, 161);
-			this->panel1->TabIndex = 14;
-			this->panel1->Visible = false;
-			// 
-			// pictureBox1
-			// 
-			this->pictureBox1->Location = System::Drawing::Point(41, 3);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(126, 29);
-			this->pictureBox1->TabIndex = 14;
-			this->pictureBox1->TabStop = false;
-			// 
-			// button1
-			// 
-			this->button1->BackColor = System::Drawing::Color::Red;
-			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->button1->ForeColor = System::Drawing::Color::White;
-			this->button1->Location = System::Drawing::Point(184, -2);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(38, 22);
-			this->button1->TabIndex = 15;
-			this->button1->Text = L"X";
-			this->button1->UseVisualStyleBackColor = false;
-			this->button1->Click += gcnew System::EventHandler(this, &GameScreen::button1_Click);
-			// 
 			// GameScreen
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Black;
-			this->ClientSize = System::Drawing::Size(1136, 756);
-			this->Controls->Add(this->panel1);
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::Black;
-			this->ClientSize = System::Drawing::Size(852, 614);
+			this->ClientSize = System::Drawing::Size(1278, 945);
 			this->Controls->Add(this->pbLongbow);
 			this->Controls->Add(this->pbWand);
 			this->Controls->Add(this->pbThrowing_Knife);
 			this->Controls->Add(this->pbSword);
+			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->pictureBox5);
 			this->Controls->Add(this->pictureBox4);
 			this->Controls->Add(this->lbStats);
 			this->Controls->Add(this->pbProfile);
 			this->Controls->Add(this->groupBox1);
-			this->Controls->Add(this->progressBar1);
 			this->Controls->Add(this->pbBackground);
-			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->redReader);
-			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"GameScreen";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Dungeon Descent";
@@ -528,8 +384,6 @@ namespace DungeonDescent {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbThrowing_Knife))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbWand))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbLongbow))->EndInit();
-			this->panel1->ResumeLayout(false);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -542,18 +396,41 @@ namespace DungeonDescent {
 
 	}
 	private: System::Void btnChoice1_Click(System::Object^ sender, System::EventArgs^ e) {
+
+        //RoomBase* tempRoom = new RoomBase();
+        //tempRoom->setBiome(1);
+        //delete tempRoom;
+
+		//if (!completed)
+			//roomCreate(1);
+
+		if (biomeSelect) {
+			biomeSelect = false;
+			floor++;
+			btnChoiceVisible();
+			roomCreate();
+
+			if (floor == 1) {
+				biome = 0;
+			}
+			else if (floor == 2) {
+				biome = 2;
+			}
+			else {
+				biome = 4;
+			}
+		}
+		
 		//Choice 1
-		RoomBase currRoom;
 
 		if (pathChoice == true) {
 			//redReader->Text = File::ReadAllText("left.txt");
 			pathChoice = false;
 			ContState = false;
-			Biome = 0;
-			pbBackground->Image = Image::FromFile("ice.jpeg");
-			mapCreate(1);
-			currRoom = queue->dequeue();
-			redReader->Clear();
+			//roomCreate();
+
+			//ContState = true;
+			/*redReader->Clear();
 			redReader->Text = File::ReadAllText("riddleice.txt");
 
 			std::srand(std::time(0)); // Seed random number generator
@@ -584,12 +461,12 @@ namespace DungeonDescent {
 					btnChoice3->Visible = true;
 					btnChoice3->Text = gcnew String(line.c_str());
 				}
-			}
+			}*/
 
 		} else { //split pathchoice
 
 			if (ContState == false) {
-				int SelfIndex = 1;
+				/*int SelfIndex = 1;
 				ContState = true;
 				btnChoice2->Visible = false;
 				btnChoice3->Visible = false;
@@ -610,13 +487,22 @@ namespace DungeonDescent {
 						redReader->Text = "Incorrect! Penalty! Press any button to proceed";
 						btnChoice1->Text = gcnew String("Continue...");
 						//stat decreases
-					}
+					}*/
+
+				if (LibState == true) {
+					//effects
+					ContState = true;
+					btnChoice1->Text = "Continue";
+					btnChoice2->Text = "Continue";
+					btnChoice3->Text = "Continue";
+					btnChoice4->Visible = false;
+				}
 
 
 				
 
 			} else {
-				currRoom = queue->dequeue();
+				/*currRoom = queue->dequeue();
 				redReader->Clear();
 				ContState = false;
 				btnChoice2->Visible = true;
@@ -656,28 +542,47 @@ namespace DungeonDescent {
 						std::getline(file, line);
 						btnChoice3->Visible = true;
 						btnChoice3->Text = gcnew String(line.c_str());
-
+						
 					}
-				}
+				}*/
+
+				
+
+
 			}
 
 
 		}
+
+		
 	}
 
 private: System::Void btnChoice2_Click(System::Object^ sender, System::EventArgs^ e) {
 	//Choice 2
-	RoomBase currRoom;
+
+	if (biomeSelect) {
+		biomeSelect = false;
+		floor++;
+		btnChoiceVisible();
+		roomCreate();
+
+		if (floor == 1) {
+			biome = 1;
+		}
+		else if (floor == 2) {
+			biome = 3;
+		}
+		else {
+			biome = 4;
+		}
+	}
 
 	if (pathChoice == true) {
 		//redReader->Text = File::ReadAllText("left.txt");
 		pathChoice = false;
-		ContState = false;
-		Biome = 0;
-		pbBackground->Image = Image::FromFile("ice.jpeg");
-		mapCreate(1);
-		currRoom = queue->dequeue();
-		redReader->Clear();
+		ContState = true;
+
+		/*redReader->Clear();
 		redReader->Text = File::ReadAllText("riddleice.txt");
 
 		std::srand(std::time(0)); // Seed random number generator
@@ -708,10 +613,9 @@ private: System::Void btnChoice2_Click(System::Object^ sender, System::EventArgs
 				btnChoice3->Visible = true;
 				btnChoice3->Text = gcnew String(line.c_str());
 			}
-		}
+		}*/
 
-	}
-	else { //split pathchoice
+	} else { //split pathchoice
 
 		if (ContState == false) {
 			int SelfIndex = 2;
@@ -741,11 +645,10 @@ private: System::Void btnChoice2_Click(System::Object^ sender, System::EventArgs
 
 		}
 		else {
-			currRoom = queue->dequeue();
 			redReader->Clear();
 			ContState = false;
-			std::srand(std::time(0)); // Seed random number generator
-			int randomNumber = (std::rand() % 20) + 0; // Range [1, 20]
+			srand(time(0)); // Seed random number generator
+			int randomNumber = (rand() % 20) + 0; // Range [1, 20]
 
 
 			std::ifstream file("random_riddles_floor_1.txt");
@@ -762,7 +665,7 @@ private: System::Void btnChoice2_Click(System::Object^ sender, System::EventArgs
 				if (lineNumber == (randomNumber * 4) + 1) {
 					redReader->Text = gcnew String(line.c_str());
 
-					if (Biome == 0) {
+					if (biome == 0) {
 						redReader->Text = File::ReadAllText("riddleice.txt") + "\n" + gcnew String(line.c_str());
 					}
 					else {
@@ -790,213 +693,364 @@ private: System::Void btnChoice2_Click(System::Object^ sender, System::EventArgs
 }
 
 private: System::Void pictureBox4_Click(System::Object^ sender, System::EventArgs^ e) {
-	//Expand minimap
-
+	//Expand and shrink minimap
 	if (!isEnlarged) {
 		pictureBox4->Size = System::Drawing::Size(400, 400);
 		pictureBox4->Location = System::Drawing::Point(250, 50);
 		isEnlarged = true;
 	}
 	else {
-		pictureBox4->Size = System::Drawing::Size(181, 174);
-		pictureBox4->Location = System::Drawing::Point(675, 0);
+		pictureBox4->Size = System::Drawing::Size(121, 113);
+		pictureBox4->Location = System::Drawing::Point(735, 0);
 		isEnlarged = false;
 	}
-	
-	
 }
 private: System::Void pictureBox5_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Visible = false;
-	obj->Visible = true;
+	System::Windows::Forms::DialogResult result = MessageBox::Show(
+		"Are you sure you want to exit? All progress will be lost.",
+		"Exit",
+		MessageBoxButtons::YesNo,
+		MessageBoxIcon::Warning,
+		MessageBoxDefaultButton::Button2
+	);
+
+	if (result == System::Windows::Forms::DialogResult::Yes) {
+		this->Visible = false;
+		obj->Visible = true;
+	}
 }
 private: System::Void pbSword_Click(System::Object^ sender, System::EventArgs^ e) {
-    Warrior* character = new Warrior();
+	Warrior* warrior = new Warrior();
+    character = warrior;
 	pbProfile->Image = Image::FromFile("Warrior.jpg");
-	gameStart(character);
+
+	pbSword->Hide();
+	pbThrowing_Knife->Hide();
+	pbWand->Hide();
+	pbLongbow->Hide();
+
+	roomCreate();
+
+	pbBackground->Image = Image::FromFile("twodoor.jpg");
+	redReader->Text = File::ReadAllText("entrance.txt");
+
 	for (int i = 0; i < 6; i++) {
-		lbStats->Items[i] = gcnew String((character->statName[i] + " : " + to_string(character->statValue[i])).c_str());
+		lbStats->Items[i] = gcnew String((character->getStatName(i) + " : " + to_string(character->getStatValue(i))).c_str());
 	}
-	richTextBox1->Text = File::ReadAllText("WarriorIntro.txt");
-	pictureBox1->Image = Image::FromFile("Warrior_Name_Label.png");
 }
 
 private: System::Void pbThrowing_Knife_Click(System::Object^ sender, System::EventArgs^ e) {
-    Rogue* character = new Rogue();
+	Rogue* rogue = new Rogue();
+	character = rogue;
 	pbProfile->Image = Image::FromFile("Rogue.jpg");
-	gameStart(character);
+
+	pbSword->Hide();
+	pbThrowing_Knife->Hide();
+	pbWand->Hide();
+	pbLongbow->Hide();
+
+	roomCreate();
+
+	pbBackground->Image = Image::FromFile("twodoor.jpg");
+	redReader->Text = File::ReadAllText("entrance.txt");
+
 	for (int i = 0; i < 6; i++) {
-		lbStats->Items[i] = gcnew String((character->statName[i] + " : " + to_string(character->statValue[i])).c_str());
+		lbStats->Items[i] = gcnew String((character->getStatName(i) + " : " + to_string(character->getStatValue(i))).c_str());
 	}
-	richTextBox1->Text = File::ReadAllText("RogueIntro.txt");
-	pictureBox1->Image = Image::FromFile("Rogue_Name_Label.png");
 }
 
 private: System::Void pbWand_Click(System::Object^ sender, System::EventArgs^ e) {
-    Mage* character = new Mage();
+	Mage* mage = new Mage();
+    character = mage;
 	pbProfile->Image = Image::FromFile("Mage.jpeg");
-	gameStart(character);
+
+	pbSword->Hide();
+	pbThrowing_Knife->Hide();
+	pbWand->Hide();
+	pbLongbow->Hide();
+
+	roomCreate();
+
+	pbBackground->Image = Image::FromFile("twodoor.jpg");
+	redReader->Text = File::ReadAllText("entrance.txt");
+
 	for (int i = 0; i < 6; i++) {
-		lbStats->Items[i] = gcnew String((character->statName[i] + " : " + to_string(character->statValue[i])).c_str());
+		lbStats->Items[i] = gcnew String((character->getStatName(i) + " : " + to_string(character->getStatValue(i))).c_str());
 	}
-	richTextBox1->Text = File::ReadAllText("MageIntro.txt");
-	pictureBox1->Image = Image::FromFile("Mage_Name_Label.png");
 }
 
 private: System::Void pbLongbow_Click(System::Object^ sender, System::EventArgs^ e) {
-    Ranger* character = new Ranger();
+	Ranger* ranger = new Ranger();
+    character = ranger;
 	pbProfile->Image = Image::FromFile("Ranger.jpeg");
-	gameStart(character);
-	for (int i = 0; i < 6; i++) {
-		lbStats->Items[i] = gcnew String((character->statName[i] + " : " + to_string(character->statValue[i])).c_str());
-	}
-	richTextBox1->Text = File::ReadAllText("RangerIntro.txt");
-	pictureBox1->Image = Image::FromFile("Ranger_Name_Label.png");
-}
-//private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^ e) {
-//	Lore^ lore = gcnew Lore(this);
-//	lore->Visible = true;
-//}
 
-	   private: void gameStart(Character* character)
-	   {
-		   pbSword->Hide();
-		   pbThrowing_Knife->Hide();
-		   pbWand->Hide();
-		   pbLongbow->Hide();
+	pbSword->Hide();
+	pbThrowing_Knife->Hide();
+	pbWand->Hide();
+	pbLongbow->Hide();
+
+	roomCreate();
+
+	pbBackground->Image = Image::FromFile("twodoor.jpg");
+	redReader->Text = File::ReadAllText("entrance.txt");
+
+	for (int i = 0; i < 6; i++) {
+		lbStats->Items[i] = gcnew String((character->getStatName(i) + " : " + to_string(character->getStatValue(i))).c_str());
+	}
+}
+private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^ e) {
+	Lore^ lore = gcnew Lore(this);
+	lore->Visible = true;
+}
+
+	   private: void gameStart()
+	   {	
 		   
-		   
-		   
-		   pbBackground->Image = Image::FromFile("twodoor.jpg");
-		   redReader->Text = File::ReadAllText("entrance.txt");
-		   btnChoice1->Visible = true;
+		   /*btnChoice1->Visible = true;
 		   btnChoice2->Visible = true;
 		   btnChoice1->Text = "Go left";
-		   btnChoice2->Text = "Go right";
-		   pathChoice = true;
-		   //temp->Biome = 0;
-		   //mapCreate(temp->Biome);
+		   btnChoice2->Text = "Go right";*/
+		   //pathChoice = true;
 	   }
 
-		private: void mapCreate(int biome) 
-		{
-			string rooms[3] = { "library", "battle", "chest" };
+		private: void roomCreate() 
+		{	
+			//this function will use the same variable room for all rooms in the game
+			//only one room will be generated at a time
+
+			//have a global counter varibale to store what room the player is in.
+			//eg. int i = 0..30;
+
+			//have a case statement for the counter i, to see which room the player is in. If the player is in a room that
+			//needs to be randomly generated, then generate it.
+			//if the player is in a definite room, then just generate that room
+			
+			//there will be a boolen completed to check whether the player has completed the room or not
+			//the room will count as completed once the player has answered the riddle
+
+			//each room class will have a questions bank and an answers bank to randomly generate questions
+			// and a function to get those questions and answers.
+			//once completed = true and player decides to go to next room, the room will be generated
+
+			//to check whether the player has completed a floor, do a mod calculation, eg. 20 % 11 = 0, therefore 
+			//you will know that the player is proceeding to the next floor. if i = 30, then the player has completed the game
+
+			
+			completed = false;
+			roomState = true;
+
+			//RoomBase* room;
+
+			//vector<string> rooms = { "library", "battle", "chest" };
 			int num = 3;
 
 			// Seed the random number generator
 			srand(time(0));
 
 			// Generate a random number between 1 and 3
-			int randomNum = rand() % num + 1;
-			rooms[randomNum - 1] = "";
-			num--;
+			int randomNum;
+			//randomNum = (rand() % num) + 1;
+			//rooms[randomNum - 1] = "";
+			//num--;
 
-			switch (biome) {
-				case 1:
-				//Ice
+			if (roomCounter == 1)
+			{
+				srand(time(0));
 
-					switch (randomNum) {
-					case 1:
-						if (rooms[randomNum - 1] != "") {
-							RoomBase* library1 = new Library();
-							//Node* node = new Node(library);
-							queue->enqueue(*library1);
-							redReader->Text = File::ReadAllText("library.txt");
+				// Generate a random number between 1 and 3
+				randomNum = (rand() % num) + 1;
 
-
-
-							library1->Completed = true;
-						}
-					case 2:
-						if (rooms[randomNum - 1] != "") {
-							RoomBase* battle1 = new Battle();
-							//Node* node = new Node(battle);
-							queue->enqueue(*battle1);
-							redReader->Text = File::ReadAllText("battle.txt");
-
-
-
-							battle1->Completed = true;
-						}
-					case 3:
-						if (rooms[randomNum - 1] != "") {
-							RoomBase* chest = new Chest();
-							//Node* node = new Node(chest);
-							queue->enqueue(*chest);
-							redReader->Text = File::ReadAllText("chest.txt");
-
-
-
-							chest->Completed = true;
-						}
-					}
+				if (randomNum == 1) {
+					Library* library = new Library();
+					room = library;
+					redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+					pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+					redReader->Text = File::ReadAllText("library.txt");
+					btnChoice1->Visible = true;
+					btnChoice1->Enabled = true;
+					btnChoice1->Text = "The Art of Warfare";
+					btnChoice2->Visible = true;
+					btnChoice2->Enabled = true;
+					btnChoice2->Text = "The Whispering Winds";
+					btnChoice3->Visible = true;
+					btnChoice3->Enabled = true;
+					btnChoice3->Text = "The Ancient Lore";
+					btnChoice4->Visible = true;
+					btnChoice4->Enabled = true;
+					btnChoice4->Text = "The Heart of the Forest";
+					room->type = "Library";
 				}
-			
+				else if (randomNum == 2) {
+					Battle* battle = new Battle();
+					room = battle;
+					redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+					pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+					room->type = "Battle";
+				}
+				else if (randomNum == 3) {
+					Chest* chest = new Chest();
+					room = chest;
+					redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+					pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+					room->type = "Chest";
+				}
 
-			//encounter
-			RoomBase* respite = new Respite();
-			//Node* node = new Node(respite);
-			//list->insertAtEnd(*&respite);
-			//redReader->Text = File::ReadAllText("respite.txt");
+			} 
+			else if (roomCounter == 2)
+			{
+				srand(time(0));
 
-			//RoomBase* battle3 = new Battle();
-			//Node* node = new Node(battle);
-			//list->insertAtEnd(*&battle3);
-			//redReader->Text = File::ReadAllText("battle.txt");
+				// Generate a random number between 1 and 3
+				randomNum = (rand() % num) + 1;
 
-			//RoomBase* respite = new Respite();
-			//Node* node = new Node(shop);
-			//list->insertAtEnd(*&shop);
-			//redReader->Text = File::ReadAllText("shopkeeper.txt");
+				if (randomNum == 1) {
+					Library* library = new Library();
+					room = library;
+					redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+					pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+					redReader->Text = File::ReadAllText("library.txt");
+					btnChoice1->Visible = true;
+					btnChoice1->Enabled = true;
+					btnChoice1->Text = "The Art of Warfare";
+					btnChoice2->Visible = true;
+					btnChoice2->Enabled = true;
+					btnChoice2->Text = "The Whispering Winds";
+					btnChoice3->Visible = true;
+					btnChoice3->Enabled = true;
+					btnChoice3->Text = "The Ancient Lore";
+					btnChoice4->Visible = true;
+					btnChoice4->Enabled = true;
+					btnChoice4->Text = "The Heart of the Forest";
+					room->type = "Library";
+				}
+				else if (randomNum == 2) {
+					Battle* battle = new Battle();
+					room = battle;
+					redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+					pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+					room->type = "Battle";
+				}
+				else if (randomNum == 3) {
+					Chest* chest = new Chest();
+					room = chest;
+					redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+					pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+					room->type = "Chest";
+				}
+			} 
+			else if (roomCounter == 3)
+			{
+				srand(time(0));
 
-			//RoomBase* library = new Library();
-			//Node* node = new Node(boss);
-			//list->insertAtEnd(*&boss);
-			//redReader->Text = File::ReadAllText("boss.txt");
-			
-			//encounter
-			//RoomBase* shop = new Shop();
-			//Node* nodeLibrary = new Node(library);
-			//list->insertAtEnd(*&library3);
-			//redReader->Text = File::ReadAllText("prisonice.txt");
+				// Generate a random number between 1 and 3
+				randomNum = (rand() % num) + 1;
 
-			//RoomBase* boss = new Boss();
-			//Node* nodeLibrary = new Node(library);
-			//list->insertAtEnd(*&library4);
-			//redReader->Text = File::ReadAllText("library.txt");
+				if (randomNum == 1) {
+					Library* library = new Library();
+					room = library;
+					redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+					pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+					redReader->Text = File::ReadAllText("library.txt");
+					btnChoice1->Visible = true;
+					btnChoice1->Enabled = true;
+					btnChoice1->Text = "The Art of Warfare";
+					btnChoice2->Visible = true;
+					btnChoice2->Enabled = true;
+					btnChoice2->Text = "The Whispering Winds";
+					btnChoice3->Visible = true;
+					btnChoice3->Enabled = true;
+					btnChoice3->Text = "The Ancient Lore";
+					btnChoice4->Visible = true;
+					btnChoice4->Enabled = true;
+					btnChoice4->Text = "The Heart of the Forest";
+					room->type = "Library";
+				}
+				else if (randomNum == 2) {
+					Battle* battle = new Battle();
+					room = battle;
+					redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+					pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+					room->type = "Battle";
+				}
+				else if (randomNum == 3) {
+					Chest* chest = new Chest();
+					room = chest;
+					redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+					pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+					room->type = "Chest";
+				}
+			}
+			else if (roomCounter == 4) {
+				Respite* respite = new Respite();
+				room = respite;
+				redReader->Text = File::ReadAllText("respite.txt");
+				pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+				room->type = "Encounter";
+			}
+			else if (roomCounter == 5) {
+				Battle* battle = new Battle();
+				room = battle;
+				redReader->Text = File::ReadAllText("battle.txt");
+				pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+				room->type = "Battle";
+			}
+			else if (roomCounter == 6) {
+				Respite* respite = new Respite();
+				room = respite;
+				redReader->Text = File::ReadAllText("respite.txt");
+				pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+				room->type = "Respite";
+			}
+			else if ((roomCounter % 10) == 7) {
+				Library* library = new Library();
+				room = library;
+				redReader->Text = File::ReadAllText("respite.txt");
+				pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+				room->type = "Library";
+			}
+			else if ((roomCounter % 10) == 8) {
+				Shop* shop = new Shop();
+				room = shop;
+				redReader->Text = File::ReadAllText("respite.txt");
+				pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+				room->type = "Shop";
+			}
+			else if ((roomCounter % 10) == 9) {
+				Boss* boss = new Boss();
+				room = boss;
+				redReader->Text = File::ReadAllText("respite.txt");
+				//pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+				room->type = "Boss";
+			}
+
+			if (roomCounter != 30) {
+				if ((roomCounter % 10) == 0) {
+					biomeSelect = true;
+					roomState = false;
+
+					btnChoice1->Text = "Go left";
+					btnChoice2->Text = "Go right";
+
+					btnChoice1->Visible = true;
+					btnChoice2->Visible = true;
+					btnChoice3->Visible = false;
+					btnChoice4->Visible = false;
+				}
+			}
+			else {
+				//determine what ending the player gets depending on true ending counter
+				redReader->Text = "Congratulations! You have completed the game!";
+				btnChoice1->Visible = false;
+				btnChoice2->Visible = false;
+				btnChoice3->Visible = false;
+				btnChoice4->Visible = false;
+			}
+
+
+			roomCounter++;
+
 		}
 
-private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^ e) {
-
-	if (!isEnlarged) {
-
-		pictureBox1->Size = System::Drawing::Size(400, 110);
-		richTextBox1->Size = System::Drawing::Size(480, 300);
-		pictureBox1->Location = System::Drawing::Point(38, -10);
-		richTextBox1->Location = System::Drawing::Point(5, 100);
-		panel1->Size = System::Drawing::Size(490, 400);
-		panel1->Location = System::Drawing::Point(200, 30);
-		button1->Location = System::Drawing::Point(460, 0);
-		isEnlarged = true;
-		panel1->Visible = true;
-	}
-	else {
-
-		isEnlarged = false;
-		panel1->Visible = false;
-
-	}
-	
-
-
-}
-private: System::Void redReader_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void richTextBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-}
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		isEnlarged = false;
-		panel1->Visible = false;
-	}
 private: System::Void btnChoice3_Click(System::Object^ sender, System::EventArgs^ e) {
 	int SelfIndex = 3;
 	ContState = true;
@@ -1015,5 +1069,43 @@ private: System::Void btnChoice3_Click(System::Object^ sender, System::EventArgs
 		//stat decreases
 	}
 }
+private: System::Void btnContinue_Click(System::Object^ sender, System::EventArgs^ e) {
+	roomCreate();
+}
+
+private: void randomRiddle() {
+	ifstream file("random_riddles_floor_1.txt");
+	if (!file) {
+		cerr << "Error opening file!\n";
+	}
+
+	string line;
+	int lineNumber = 0;
+
+	while (getline(file, line)) {
+		lineNumber++;
+
+		//riddles.push_back(line);
+
+			lineNumber++;
+			std::getline(file, line);
+			btnChoice1->Text = gcnew String(line.c_str());
+			lineNumber++;
+			std::getline(file, line);
+			btnChoice2->Text = gcnew String(line.c_str());
+			lineNumber++;
+			std::getline(file, line);
+			btnChoice3->Visible = true;
+			btnChoice3->Text = gcnew String(line.c_str());
+		}
+
+}
+	   private: void btnChoiceVisible() {
+		   btnChoice1->Visible = true;
+		   btnChoice2->Visible = true;
+		   btnChoice3->Visible = true;
+		   btnChoice4->Visible = true;
+	   }
 };
 }
+
