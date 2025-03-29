@@ -27,18 +27,40 @@ int Respite::Accept(bool acc, int arr[6]) {
 	return arr[6];
 }
 
+string Respite::getTextFileName(int biome)
+{
+	if (biome == 0) {
+		return "icerespite.txt";
+	}
+	else if (biome == 1) {
+		return "junglerespite.txt";
+	}
+	else if (biome == 2) {
+		return "desertrespite.txt";
+	}
+	else if (biome == 3) {
+		return "ghostrespite.txt";
+	}
+	else if (biome == 4) {
+		return "lavarespite.txt";
+	}
+}
+
 string Respite::getImageFileName(int biome)
 {
-	switch (biome) {
-	case 1:
+	if (biome == 0) {
 		return "icerespite.png";
-	case 2:
+	}
+	else if (biome == 1) {
 		return "junglerespite.png";
-	case 3:
+	}
+	else if (biome == 2) {
 		return "desertrespite.png";
-	case 4:
+	}
+	else if (biome == 3) {
 		return "ghostrespite.png";
-	case 5:
+	}
+	else if (biome == 4) {
 		return "lavarespite.png";
 	}
 }

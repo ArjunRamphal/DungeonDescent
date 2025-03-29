@@ -16,6 +16,8 @@ public:
 	bool KeyExists;
 	int NPC;
 	string type;
+	string imageFileName;
+	string textFileName;
 	int Book;
 	bool BookExists;
 	bool Enemy;
@@ -32,6 +34,8 @@ public:
 	int getFloor();
 	int getNPC();
 	string getType();
+	virtual string getImageFileName(int biome);
+	virtual string getTextFileName(int biome);
 
 	void setEnemyType(int enemyType);
 	void setBook(int book);

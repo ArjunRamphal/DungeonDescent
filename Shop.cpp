@@ -40,16 +40,38 @@ Shop::Shop() : RoomBase("Shop") {
 
 string Shop::getImageFileName(int biome)
 {
-	switch (biome) {
-	case 1:
+	if (biome == 0) {
 		return "iceshop.png";
-	case 2:
+	}
+	else if (biome == 1) {
 		return "jungleshop.png";
-	case 3:
+	}
+	else if (biome == 2) {
 		return "desertshop.png";
-	case 4:
+	}
+	else if (biome == 3) {
 		return "ghostshop.png";
-	case 5:
+	}
+	else if (biome == 4) {
 		return "lavashop.png";
+	}
+}
+
+string Shop::getTextFileName(int biome)
+{
+	if (biome == 0) {
+		return "iceshop.txt";
+	}
+	else if (biome == 1) {
+		return "jungleshop.txt";
+	}
+	else if (biome == 2) {
+		return "desertshop.txt";
+	}
+	else if (biome == 3) {
+		return "ghostshop.txt";
+	}
+	else if (biome == 4) {
+		return "lavashop.txt";
 	}
 }

@@ -38,16 +38,38 @@ void Chest::Open() {
 
 string Chest::getImageFileName(int biome)
 {
-	switch (biome) {
-	case 1:
+	if (biome == 0) {
 		return "icechest.png";
-	case 2:
+	}
+	else if (biome == 1) {
 		return "junglechest.png";
-	case 3:
+	}
+	else if (biome == 2) {
 		return "desertchest.png";
-	case 4:
+	}
+	else if (biome == 3) {
 		return "ghostchest.png";
-	case 5:
+	}
+	else if (biome == 4) {
 		return "lavachest.png";
+	}
+}
+
+string Chest::getTextFileName(int biome)
+{
+	if (biome == 0) {
+		return "icechest.txt";
+	}
+	else if (biome == 1) {
+		return "junglechest.txt";
+	}
+	else if (biome == 2) {
+		return "desertchest.txt";
+	}
+	else if (biome == 3) {
+		return "ghostchest.txt";
+	}
+	else if (biome == 4) {
+		return "lavachest.txt";
 	}
 }

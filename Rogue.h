@@ -13,10 +13,10 @@ public:
     int Hidden;
     Rogue();
     int baseHealth;
-    int statValue[6];
+    //int statValue[6];
     void Ability();
     int Lastfpwrupused;
-    std::string statName[6] = { "Strength", "Wisdom", "Observation", "Agility", "Health", "Accuracy" };
+    //std::string statName[6] = { "Strength", "Wisdom", "Observation", "Agility", "Health", "Accuracy" };
 
 };
 

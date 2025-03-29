@@ -9,6 +9,16 @@ string RoomBase::getType () {
 	return type;
 }
 
+string RoomBase::getImageFileName(int biome)
+{
+	return imageFileName;
+}
+
+string RoomBase::getTextFileName(int biome)
+{
+	return textFileName;
+}
+
 RoomBase::RoomBase() {
 
 }

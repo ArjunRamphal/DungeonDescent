@@ -15,22 +15,23 @@ private:
 
 public:
     int statValue[6];
-    std::string statName[6] = { "Strength", "Wisdom", "Observation", "Agility", "Health", "Accuracy" };
+    string statName[6] = { "Strength", "Wisdom", "Observation", "Agility", "Health", "Accuracy" };
     int health;
-    std::string name;
+    string name;
     int Progress;
     int Reputation;
     int QuestionTime = 12;
-    std::string inventoryItemName[3];
+    string inventoryItemName[3];
     int inventoryItemAmount[3];
-    int floor;
-    // Constructor
-    Character(const std::string& name);
-    //Character();
-    // Getters
-    std::string getName() const;
-    int getHealth() const;
+    int floor = 0;
 
+    // Constructor
+    Character(const string& name);
+    Character();
+
+    // Getters
+    string getName() const;
+    int getHealth() const;
 
     int* getStats();
     int* getInv();
@@ -53,7 +54,8 @@ public:
 
     int getFloor();
 
-
+	string getStatName(int index);
+	int getStatValue(int index);
 
 };
 

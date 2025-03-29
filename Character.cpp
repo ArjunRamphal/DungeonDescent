@@ -13,6 +13,10 @@ Character::Character(const std::string& name)
     Reputation = 0;
 }
 
+Character::Character()
+{
+}
+
 //Character::Character();
 
 // Getters
@@ -95,5 +99,15 @@ void Character::negEvent(int amountrep)
 int Character::getFloor()
 {
     return floor;
+}
+
+string Character::getStatName(int index)
+{
+	return statName[index];
+}
+
+int Character::getStatValue(int index)
+{
+	return statValue[index];
 }
 

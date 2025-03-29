@@ -133,7 +133,6 @@
     <ClCompile Include="Respite.cpp" />
     <ClCompile Include="Rogue.cpp" />
     <ClCompile Include="RoomBase.cpp" />
-    <ClCompile Include="RoomBaseQueue.cpp" />
     <ClCompile Include="Shop.cpp" />
     <ClCompile Include="StartScreen.cpp" />
     <ClCompile Include="Warrior.cpp" />
@@ -156,7 +155,6 @@
     <ClInclude Include="Respite.h" />
     <ClInclude Include="Rogue.h" />
     <ClInclude Include="RoomBase.h" />
-    <ClInclude Include="RoomBaseQueue.h" />
     <ClInclude Include="Shop.h" />
     <ClInclude Include="StartScreen.h">
       <FileType>CppForm</FileType>
