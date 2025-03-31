@@ -17,6 +17,6 @@ int main(cli::array<String^>^ args)
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	StartScreen^ form = gcnew StartScreen();
-	PlaySound(TEXT("scifi.wav"), NULL, SND_ASYNC | SND_LOOP);
+	PlaySound(TEXT("DD.wav"), NULL, SND_ASYNC | SND_LOOP);
 	Application::Run(form);
 }
