@@ -59,6 +59,7 @@ public:
 	string getStatName(int index);
 	int getStatValue(int index);
 
+
 };
 
 #endif // CHARACTER_H
