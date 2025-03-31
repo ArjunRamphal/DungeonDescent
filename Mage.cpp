@@ -12,6 +12,8 @@ Mage::Mage() : Character("Mage")
 	statValue[5] = 1;
 
 	Lastfpwrupused = 0;
+
+	pfpImageName = "Mage.jpeg";
 }
 
 void Mage::Ability() {

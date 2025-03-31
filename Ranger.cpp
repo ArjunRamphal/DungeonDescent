@@ -13,6 +13,8 @@ Ranger::Ranger() : Character("Ranger")
 	statValue[5] = 5;
 
 	Lastfpwrupused = 0;
+
+	pfpImageName = "Ranger.jpeg";
 }
 bool Ranger::Ability() {
 	Accuracy += 3;

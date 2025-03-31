@@ -24,6 +24,7 @@ public:
     string inventoryItemName[3];
     int inventoryItemAmount[3];
     int floor = 0;
+    string pfpImageName;
 
     // Constructor
     Character(const string& name);
@@ -31,6 +32,7 @@ public:
 
     // Getters
     string getName() const;
+	string getpfpImageName() const;
     int getHealth() const;
 
     int* getStats();

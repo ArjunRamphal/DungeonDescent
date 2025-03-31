@@ -15,6 +15,8 @@ public:
     int StatReq[6];
     int defeat(int Stats[6]);
     int baseHealth;
+    string getImageFileName(int biome);
+    string getTextFileName(int biome);
 };
 
 #endif // Warrior

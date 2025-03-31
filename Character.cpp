@@ -24,6 +24,11 @@ std::string Character::getName() const {
     return name;
 }
 
+string Character::getpfpImageName() const
+{
+    return pfpImageName;
+}
+
 int Character::getHealth() const {
     return health;
 }

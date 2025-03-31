@@ -58,3 +58,41 @@ int Boss::defeat(int Stats[6]) {
 		return -1;
 	}
 }
+
+string Boss::getImageFileName(int biome)
+{
+	if (biome == 0) {
+		return "iceboss.jpg";
+	}
+	else if (biome == 1) {
+		return "jungleboss.jpg";
+	}
+	else if (biome == 2) {
+		return "desertboss.jpg";
+	}
+	else if (biome == 3) {
+		return "ghostboss.jpg";
+	}
+	else if (biome == 4) {
+		return "lavaboss.jpg";
+	}
+}
+
+string Boss::getTextFileName(int biome)
+{
+	if (biome == 0) {
+		return "iceboss.txt";
+	}
+	else if (biome == 1) {
+		return "jungleboss.txt";
+	}
+	else if (biome == 2) {
+		return "desertboss.txt";
+	}
+	else if (biome == 3) {
+		return "ghostboss.txt";
+	}
+	else if (biome == 4) {
+		return "lavaboss.txt";
+	}
+}
