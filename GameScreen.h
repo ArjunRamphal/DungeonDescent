@@ -66,6 +66,8 @@ namespace DungeonDescent {
 		int biome;
 		int floor = 0;
 	private: System::Windows::Forms::Button^ btnContinue;
+	private: System::Windows::Forms::Button^ btnRight;
+	private: System::Windows::Forms::Button^ btnLeft;
 	public:
 		int roomCounter = 0;
 		   
@@ -101,9 +103,10 @@ namespace DungeonDescent {
 
 	private: System::Windows::Forms::RichTextBox^ redReader;
 	private: System::Windows::Forms::PictureBox^ pbProfile;
+	private: System::Windows::Forms::PictureBox^ pbAbility;
 
 
-	private: System::Windows::Forms::PictureBox^ pictureBox2;
+
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Button^ btnChoice1;
 	private: System::Windows::Forms::Button^ btnChoice4;
@@ -138,8 +141,10 @@ namespace DungeonDescent {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(GameScreen::typeid));
 			this->redReader = (gcnew System::Windows::Forms::RichTextBox());
 			this->pbProfile = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
+			this->pbAbility = (gcnew System::Windows::Forms::PictureBox());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->btnRight = (gcnew System::Windows::Forms::Button());
+			this->btnLeft = (gcnew System::Windows::Forms::Button());
 			this->btnContinue = (gcnew System::Windows::Forms::Button());
 			this->btnChoice4 = (gcnew System::Windows::Forms::Button());
 			this->btnChoice3 = (gcnew System::Windows::Forms::Button());
@@ -154,7 +159,7 @@ namespace DungeonDescent {
 			this->pbWand = (gcnew System::Windows::Forms::PictureBox());
 			this->pbLongbow = (gcnew System::Windows::Forms::PictureBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbProfile))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbAbility))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbBackground))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->BeginInit();
@@ -187,16 +192,19 @@ namespace DungeonDescent {
 			this->pbProfile->TabStop = false;
 			this->pbProfile->Click += gcnew System::EventHandler(this, &GameScreen::pbProfile_Click);
 			// 
-			// pictureBox2
+			// pbAbility
 			// 
-			this->pictureBox2->Location = System::Drawing::Point(3, 488);
-			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(177, 163);
-			this->pictureBox2->TabIndex = 3;
-			this->pictureBox2->TabStop = false;
+			this->pbAbility->Location = System::Drawing::Point(3, 488);
+			this->pbAbility->Name = L"pbAbility";
+			this->pbAbility->Size = System::Drawing::Size(177, 163);
+			this->pbAbility->TabIndex = 3;
+			this->pbAbility->TabStop = false;
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->BackColor = System::Drawing::Color::Transparent;
+			this->groupBox1->Controls->Add(this->btnRight);
+			this->groupBox1->Controls->Add(this->btnLeft);
 			this->groupBox1->Controls->Add(this->btnContinue);
 			this->groupBox1->Controls->Add(this->btnChoice4);
 			this->groupBox1->Controls->Add(this->btnChoice3);
@@ -208,6 +216,28 @@ namespace DungeonDescent {
 			this->groupBox1->TabIndex = 4;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Enter += gcnew System::EventHandler(this, &GameScreen::groupBox1_Enter);
+			// 
+			// btnRight
+			// 
+			this->btnRight->Location = System::Drawing::Point(219, 12);
+			this->btnRight->Name = L"btnRight";
+			this->btnRight->Size = System::Drawing::Size(146, 74);
+			this->btnRight->TabIndex = 6;
+			this->btnRight->Text = L"Go right";
+			this->btnRight->UseVisualStyleBackColor = true;
+			this->btnRight->Visible = false;
+			this->btnRight->Click += gcnew System::EventHandler(this, &GameScreen::btnRight_Click);
+			// 
+			// btnLeft
+			// 
+			this->btnLeft->Location = System::Drawing::Point(6, 12);
+			this->btnLeft->Name = L"btnLeft";
+			this->btnLeft->Size = System::Drawing::Size(144, 74);
+			this->btnLeft->TabIndex = 5;
+			this->btnLeft->Text = L"Go left";
+			this->btnLeft->UseVisualStyleBackColor = true;
+			this->btnLeft->Visible = false;
+			this->btnLeft->Click += gcnew System::EventHandler(this, &GameScreen::btnLeft_Click);
 			// 
 			// btnContinue
 			// 
@@ -228,6 +258,7 @@ namespace DungeonDescent {
 			this->btnChoice4->Text = L"Choice 4";
 			this->btnChoice4->UseVisualStyleBackColor = true;
 			this->btnChoice4->Visible = false;
+			this->btnChoice4->Click += gcnew System::EventHandler(this, &GameScreen::btnChoice4_Click);
 			// 
 			// btnChoice3
 			// 
@@ -362,7 +393,7 @@ namespace DungeonDescent {
 			this->Controls->Add(this->pbWand);
 			this->Controls->Add(this->pbThrowing_Knife);
 			this->Controls->Add(this->pbSword);
-			this->Controls->Add(this->pictureBox2);
+			this->Controls->Add(this->pbAbility);
 			this->Controls->Add(this->pictureBox5);
 			this->Controls->Add(this->pictureBox4);
 			this->Controls->Add(this->lbStats);
@@ -375,7 +406,7 @@ namespace DungeonDescent {
 			this->Text = L"Dungeon Descent";
 			this->Shown += gcnew System::EventHandler(this, &GameScreen::GameScreen_Shown);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbProfile))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbAbility))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbBackground))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->EndInit();
@@ -397,33 +428,35 @@ namespace DungeonDescent {
 	}
 	private: System::Void btnChoice1_Click(System::Object^ sender, System::EventArgs^ e) {
 
-        //RoomBase* tempRoom = new RoomBase();
-        //tempRoom->setBiome(1);
-        //delete tempRoom;
-
 		//if (!completed)
 			//roomCreate(1);
 
-		if (biomeSelect) {
-			biomeSelect = false;
-			floor++;
-			btnChoiceVisible();
 
-			if (floor == 1) {
-				biome = 0;
-			}
-			else if (floor == 2) {
-				biome = 2;
-			}
-			else {
-				biome = 4;
-			}
-			roomCreate();
-		}
-		
+
 		//Choice 1
 
-        //redReader->Text = gcnew String(to_string(roomCounter).c_str());
+		//redReader->Text = gcnew String(to_string(roomCounter).c_str());
+
+		
+		if (roomCounter == 2) {
+			if (room->type == "Library") {
+				character->incStats(0, 1);
+				for (int i = 0; i < 6; i++) {
+					lbStats->Items[i] = gcnew String((character->getStatName(i) + " : " + to_string(character->getStatValue(i))).c_str());
+				}
+			}
+			else if (room->type == "Battle") {
+
+			}
+			else if (room->type == "Chest") {
+
+			}
+		}
+
+		if (roomState) {
+			roomState = false;
+			btnChoiceInvisible();
+		}
 
 		if (roomCounter == 5) {
 			redReader->Text = File::ReadAllText("iceprisonfree.txt");
@@ -566,21 +599,15 @@ namespace DungeonDescent {
 private: System::Void btnChoice2_Click(System::Object^ sender, System::EventArgs^ e) {
 	//Choice 2
 
-	if (biomeSelect) {
-		biomeSelect = false;
-		floor++;
-		btnChoiceVisible();
 
-		if (floor == 1) {
-			biome = 1;
+	if (roomCounter == 2) {
+		character->incStats(3, 1);
+		for (int i = 0; i < 6; i++) {
+			lbStats->Items[i] = gcnew String((character->getStatName(i) + " : " + to_string(character->getStatValue(i))).c_str());
 		}
-		else if (floor == 2) {
-			biome = 3;
-		}
-		else {
-			biome = 4;
-		}
-		roomCreate();
+
+		btnChoiceInvisible();
+
 	}
 
 	if (pathChoice == true) {
@@ -623,7 +650,7 @@ private: System::Void btnChoice2_Click(System::Object^ sender, System::EventArgs
 
 	} else { //split pathchoice
 
-		if (ContState == false) {
+		/*if (ContState == false) {
 			int SelfIndex = 2;
 			ContState = true;
 
@@ -691,7 +718,7 @@ private: System::Void btnChoice2_Click(System::Object^ sender, System::EventArgs
 
 				}
 			}
-		}
+		}*/
 
 
 	}
@@ -859,7 +886,7 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 			//rooms[randomNum - 1] = "";
 			//num--;
 
-			if (roomCounter == 1)
+			if ((roomCounter % 10) == 1)
 			{
 				srand(time(0));
 
@@ -900,6 +927,7 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 					btnChoice2->Text = "Sneak past";
 					btnChoice3->Visible = false;
 					btnChoice4->Visible = false;
+					pbAbility->Visible = true;
 				}
 				else if (randomNum == 3) {
 					Chest* chest = new Chest();
@@ -949,7 +977,7 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 				}
 
 			} 
-			else if (roomCounter == 2)
+			else if ((roomCounter % 10) == 2)
 			{
 				srand(time(0));
 
@@ -990,6 +1018,7 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 					btnChoice2->Text = "Sneak past";
 					btnChoice3->Visible = false;
 					btnChoice4->Visible = false;
+					pbAbility->Visible = true;
 				}
 				else if (randomNum == 3) {
 					Chest* chest = new Chest();
@@ -1037,7 +1066,7 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 					}
 				}
 			} 
-			else if (roomCounter == 3)
+			else if ((roomCounter % 10) == 3)
 			{
 				srand(time(0));
 
@@ -1078,6 +1107,7 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 					btnChoice2->Text = "Sneak past";
 					btnChoice3->Visible = false;
 					btnChoice4->Visible = false;
+					pbAbility->Visible = true;
 				}
 				else if (randomNum == 3) {
 					Chest* chest = new Chest();
@@ -1085,6 +1115,7 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 					redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
 					pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
 					room->type = "Chest";
+
 					std::srand(std::time(0)); // Seed random number generator
 					int randomNumber = (std::rand() % 20) + 0; // Range [1, 20]
 
@@ -1159,6 +1190,7 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 				btnChoice2->Text = "Sneak past";
 				btnChoice3->Visible = false;
 				btnChoice4->Visible = false;
+				pbAbility->Visible = true;
 			}
 			else if (roomCounter == 6) {
 				Respite* respite = new Respite();
@@ -1212,12 +1244,13 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 				btnChoice4->Visible = false;
 
 			}
-			else if (roomCounter == 9) {
+			else if ((roomCounter % 10) == 9) {
 				Boss* boss = new Boss();
 				room = boss;
-				redReader->Text = File::ReadAllText("respite.txt");
-				//pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+				redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+				pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
 				room->type = "Boss";
+				pbAbility->Visible = true;
 			}
 			else if (roomCounter == 14) {
 				Shop* shop = new Shop();
@@ -1254,44 +1287,52 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 				pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
 				room->type = "Battle";
 			}
-			else if (roomCounter == 19) {
-				Boss* boss = new Boss();
-				room = boss;
-				redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
-				//pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
-				room->type = "Boss";
-			}
 			else if (roomCounter == 24) {
-
+				Chest* chest = new Chest();
+				room = chest;
+				redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+				pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+				room->type = "Chest";
 			}
 			else if (roomCounter == 25) {
-
+				Battle* battle = new Battle();
+				room = battle;
+				redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+				pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+				room->type = "Battle";
 			}
 			else if (roomCounter == 26) {
-
+				Shop* shop = new Shop();
+				room = shop;
+				redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+				pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+				room->type = "Shop";
 			}
 			else if (roomCounter == 27) {
-
+				Respite* respite = new Respite();
+				room = respite;
+				redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+				pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+				room->type = "Encounter";
 			}
 			else if (roomCounter == 28) {
-
+				Respite* respite = new Respite();
+				room = respite;
+				redReader->Text = File::ReadAllText(gcnew String(room->getTextFileName(biome).c_str()));
+				pbBackground->Image = Image::FromFile(gcnew String(room->getImageFileName(biome).c_str()));
+				room->type = "Respite";
 			}
-			else if (roomCounter == 29) {
 
-			}
-			else if (roomCounter == 30) {
-
-			}
 			if (roomCounter != 30) {
 				if ((roomCounter % 10) == 0) {
 					biomeSelect = true;
 					roomState = false;
 
-					btnChoice1->Text = "Go left";
-					btnChoice2->Text = "Go right";
+					btnLeft->Visible = true;
+					btnRight->Visible = true;
 
-					btnChoice1->Visible = true;
-					btnChoice2->Visible = true;
+					btnChoice1->Visible = false;
+					btnChoice2->Visible = false;
 					btnChoice3->Visible = false;
 					btnChoice4->Visible = false;
 				}
@@ -1305,26 +1346,20 @@ private: System::Void pbProfile_Click(System::Object^ sender, System::EventArgs^
 				btnChoice4->Visible = false;
 			}
 
-
 			roomCounter++;
 
 		}
 
 private: System::Void btnChoice3_Click(System::Object^ sender, System::EventArgs^ e) {
-	int SelfIndex = 3;
-	ContState = true;
-	btnChoice2->Visible = false;
-	btnChoice3->Visible = false;
-	btnChoice1->Text = "Continue..";
-	if (SelfIndex == globalCorrect) {
-		redReader->Text = "Correct! You may now proceed to the next room. Press any button to proceed";
-		//Stat Increases
+	if (roomCounter == 2) {
+		character->incStats(1, 1);
+		for (int i = 0; i < 6; i++) {
+			lbStats->Items[i] = gcnew String((character->getStatName(i) + " : " + to_string(character->getStatValue(i))).c_str());
+		}
 
+		btnChoiceInvisible();
 	}
-	else {
-		redReader->Text = "Incorrect! Penalty! Press any button to proceed";
-		//stat decreases
-	}
+
 }
 private: System::Void btnContinue_Click(System::Object^ sender, System::EventArgs^ e) {
 	roomCreate();
@@ -1363,6 +1398,69 @@ private: void randomRiddle() {
 		   btnChoice3->Visible = true;
 		   btnChoice4->Visible = true;
 	   }
+
+		private: void btnChoiceInvisible() {
+			btnChoice1->Visible = false;
+			btnChoice2->Visible = false;
+			btnChoice3->Visible = false;
+			btnChoice4->Visible = false;
+		}
+
+private: System::Void btnChoice4_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (roomCounter == 2) {
+		character->incStats(2, 1);
+		for (int i = 0; i < 6; i++) {
+			lbStats->Items[i] = gcnew String((character->getStatName(i) + " : " + to_string(character->getStatValue(i))).c_str());
+		}
+
+		btnChoiceInvisible();
+
+	}
+}
+private: System::Void btnLeft_Click(System::Object^ sender, System::EventArgs^ e) {
+	
+	btnLeft->Visible = false;
+	btnRight->Visible = false;
+
+	if (biomeSelect) {
+		biomeSelect = false;
+		floor++;
+		btnChoiceVisible();
+
+		if (floor == 1) {
+			biome = 0;
+		}
+		else if (floor == 2) {
+			biome = 2;
+		}
+		else {
+			biome = 4;
+		}
+		roomCreate();
+	}
+}
+private: System::Void btnRight_Click(System::Object^ sender, System::EventArgs^ e) {
+	
+	btnLeft->Visible = false;
+	btnRight->Visible = false;
+	
+	if (biomeSelect) {
+		biomeSelect = false;
+		floor++;
+		btnChoiceVisible();
+
+		if (floor == 1) {
+			biome = 1;
+		}
+		else if (floor == 2) {
+			biome = 3;
+		}
+		else {
+			biome = 4;
+		}
+		roomCreate();
+	}
+}
 };
 }
 
