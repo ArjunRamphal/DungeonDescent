@@ -131,6 +131,7 @@
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="Ranger.cpp" />
     <ClCompile Include="Respite.cpp" />
+    <ClCompile Include="Riddles.cpp" />
     <ClCompile Include="Rogue.cpp" />
     <ClCompile Include="RoomBase.cpp" />
     <ClCompile Include="Shop.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Mage.h" />
     <ClInclude Include="Ranger.h" />
     <ClInclude Include="Respite.h" />
+    <ClInclude Include="Riddles.h" />
     <ClInclude Include="Rogue.h" />
     <ClInclude Include="RoomBase.h" />
     <ClInclude Include="Shop.h" />
