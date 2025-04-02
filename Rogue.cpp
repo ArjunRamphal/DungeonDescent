@@ -13,6 +13,8 @@ Rogue::Rogue() : Character("Rogue")
 	statValue[5] = 4;
 
 	Lastfpwrupused = 0;
+
+	pfpImageName = "Rogue.jpg";
 }
 
 void Rogue::Ability() {

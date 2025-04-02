@@ -12,6 +12,8 @@ Warrior::Warrior() : Character("Warrior")
 	statValue[5] = 2;
 
 	Lastfpwrupused = 0;
+
+	pfpImageName = "Warrior.jpg";
 }
 
 void Warrior::Ability() {
