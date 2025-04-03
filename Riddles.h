@@ -4,19 +4,20 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 using namespace std;
 
 class Riddles {
 private:
+	
+public:
 	vector<string> riddles;
 	vector<vector<string>> answers;
-	vector<int> index;
-public:
+	vector<string> answerCorrect;
 	int randomNum1;
     Riddles();
 	vector<string> getRiddles();
 	vector<vector<string>> getAnswers();
-	vector<int> getIndex();
 	void randomiseRiddles();
 	struct Riddle {
 		string answer1;
