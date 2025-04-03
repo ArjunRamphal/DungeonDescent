@@ -73,11 +73,20 @@ namespace DungeonDescent {
 		int randomNum2;
 		int randomNum3;
 		int i = 0;
+		int randomAnswer1;
+		int randomAnswer2;
+		int randomAnswer3;
 	private: System::Windows::Forms::Button^ btnContinue;
 	private: System::Windows::Forms::Button^ btnRight;
 	private: System::Windows::Forms::Button^ btnAnswer3;
 	private: System::Windows::Forms::Button^ btnAnswer2;
 	private: System::Windows::Forms::Button^ btnAnswer1;
+	private: System::Windows::Forms::ProgressBar^ progRiddle;
+	public: System::Windows::Forms::Timer^ tmrRiddle;
+	private:
+
+
+
 	private: System::Windows::Forms::Button^ btnLeft;
 	public:
 		
@@ -131,6 +140,7 @@ namespace DungeonDescent {
 	private: System::Windows::Forms::ListBox^ lbStats;
 	private: System::Windows::Forms::PictureBox^ pictureBox4;
 	private: System::Windows::Forms::PictureBox^ pictureBox5;
+	private: System::ComponentModel::IContainer^ components;
 
 
 
@@ -140,7 +150,7 @@ namespace DungeonDescent {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -149,11 +159,15 @@ namespace DungeonDescent {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(GameScreen::typeid));
 			this->redReader = (gcnew System::Windows::Forms::RichTextBox());
 			this->pbProfile = (gcnew System::Windows::Forms::PictureBox());
 			this->pbAbility = (gcnew System::Windows::Forms::PictureBox());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->btnAnswer3 = (gcnew System::Windows::Forms::Button());
+			this->btnAnswer2 = (gcnew System::Windows::Forms::Button());
+			this->btnAnswer1 = (gcnew System::Windows::Forms::Button());
 			this->btnRight = (gcnew System::Windows::Forms::Button());
 			this->btnLeft = (gcnew System::Windows::Forms::Button());
 			this->btnContinue = (gcnew System::Windows::Forms::Button());
@@ -169,9 +183,8 @@ namespace DungeonDescent {
 			this->pbThrowing_Knife = (gcnew System::Windows::Forms::PictureBox());
 			this->pbWand = (gcnew System::Windows::Forms::PictureBox());
 			this->pbLongbow = (gcnew System::Windows::Forms::PictureBox());
-			this->btnAnswer1 = (gcnew System::Windows::Forms::Button());
-			this->btnAnswer2 = (gcnew System::Windows::Forms::Button());
-			this->btnAnswer3 = (gcnew System::Windows::Forms::Button());
+			this->progRiddle = (gcnew System::Windows::Forms::ProgressBar());
+			this->tmrRiddle = (gcnew System::Windows::Forms::Timer(this->components));
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbProfile))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbAbility))->BeginInit();
 			this->groupBox1->SuspendLayout();
@@ -187,7 +200,7 @@ namespace DungeonDescent {
 			// redReader
 			// 
 			this->redReader->BackColor = System::Drawing::Color::LightYellow;
-			this->redReader->Font = (gcnew System::Drawing::Font(L"Old English Text MT", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->redReader->Font = (gcnew System::Drawing::Font(L"Book Antiqua", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->redReader->Location = System::Drawing::Point(178, 662);
 			this->redReader->Name = L"redReader";
@@ -233,6 +246,39 @@ namespace DungeonDescent {
 			this->groupBox1->TabIndex = 4;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Enter += gcnew System::EventHandler(this, &GameScreen::groupBox1_Enter);
+			// 
+			// btnAnswer3
+			// 
+			this->btnAnswer3->Location = System::Drawing::Point(440, 12);
+			this->btnAnswer3->Name = L"btnAnswer3";
+			this->btnAnswer3->Size = System::Drawing::Size(146, 74);
+			this->btnAnswer3->TabIndex = 9;
+			this->btnAnswer3->Text = L"button3";
+			this->btnAnswer3->UseVisualStyleBackColor = true;
+			this->btnAnswer3->Visible = false;
+			this->btnAnswer3->Click += gcnew System::EventHandler(this, &GameScreen::btnAnswer3_Click);
+			// 
+			// btnAnswer2
+			// 
+			this->btnAnswer2->Location = System::Drawing::Point(219, 12);
+			this->btnAnswer2->Name = L"btnAnswer2";
+			this->btnAnswer2->Size = System::Drawing::Size(146, 74);
+			this->btnAnswer2->TabIndex = 8;
+			this->btnAnswer2->Text = L"button2";
+			this->btnAnswer2->UseVisualStyleBackColor = true;
+			this->btnAnswer2->Visible = false;
+			this->btnAnswer2->Click += gcnew System::EventHandler(this, &GameScreen::btnAnswer2_Click);
+			// 
+			// btnAnswer1
+			// 
+			this->btnAnswer1->Location = System::Drawing::Point(7, 12);
+			this->btnAnswer1->Name = L"btnAnswer1";
+			this->btnAnswer1->Size = System::Drawing::Size(143, 74);
+			this->btnAnswer1->TabIndex = 7;
+			this->btnAnswer1->Text = L"button1";
+			this->btnAnswer1->UseVisualStyleBackColor = true;
+			this->btnAnswer1->Visible = false;
+			this->btnAnswer1->Click += gcnew System::EventHandler(this, &GameScreen::btnAnswer1_Click);
 			// 
 			// btnRight
 			// 
@@ -401,35 +447,19 @@ namespace DungeonDescent {
 			this->pbLongbow->TabStop = false;
 			this->pbLongbow->Click += gcnew System::EventHandler(this, &GameScreen::pbLongbow_Click);
 			// 
-			// btnAnswer1
+			// progRiddle
 			// 
-			this->btnAnswer1->Location = System::Drawing::Point(7, 12);
-			this->btnAnswer1->Name = L"btnAnswer1";
-			this->btnAnswer1->Size = System::Drawing::Size(143, 74);
-			this->btnAnswer1->TabIndex = 7;
-			this->btnAnswer1->Text = L"button1";
-			this->btnAnswer1->UseVisualStyleBackColor = true;
-			this->btnAnswer1->Visible = false;
+			this->progRiddle->BackColor = System::Drawing::Color::Black;
+			this->progRiddle->Location = System::Drawing::Point(182, 0);
+			this->progRiddle->Maximum = 20;
+			this->progRiddle->Name = L"progRiddle";
+			this->progRiddle->Size = System::Drawing::Size(914, 53);
+			this->progRiddle->TabIndex = 13;
 			// 
-			// btnAnswer2
+			// tmrRiddle
 			// 
-			this->btnAnswer2->Location = System::Drawing::Point(219, 12);
-			this->btnAnswer2->Name = L"btnAnswer2";
-			this->btnAnswer2->Size = System::Drawing::Size(146, 74);
-			this->btnAnswer2->TabIndex = 8;
-			this->btnAnswer2->Text = L"button2";
-			this->btnAnswer2->UseVisualStyleBackColor = true;
-			this->btnAnswer2->Visible = false;
-			// 
-			// btnAnswer3
-			// 
-			this->btnAnswer3->Location = System::Drawing::Point(440, 12);
-			this->btnAnswer3->Name = L"btnAnswer3";
-			this->btnAnswer3->Size = System::Drawing::Size(146, 74);
-			this->btnAnswer3->TabIndex = 9;
-			this->btnAnswer3->Text = L"button3";
-			this->btnAnswer3->UseVisualStyleBackColor = true;
-			this->btnAnswer3->Visible = false;
+			this->tmrRiddle->Interval = 1000;
+			this->tmrRiddle->Tick += gcnew System::EventHandler(this, &GameScreen::tmrRiddle_Tick);
 			// 
 			// GameScreen
 			// 
@@ -437,6 +467,7 @@ namespace DungeonDescent {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(1278, 945);
+			this->Controls->Add(this->progRiddle);
 			this->Controls->Add(this->pbLongbow);
 			this->Controls->Add(this->pbWand);
 			this->Controls->Add(this->pbThrowing_Knife);
@@ -990,9 +1021,6 @@ private: void gameStart()
 
 			// Generate a random number between 1 and 3
 			int randomNum;
-			//randomNum = (rand() % num) + 1;
-			//rooms[randomNum - 1] = "";
-			//num--;
 
 			if ((roomCounter % 10) == 1)
 			{
@@ -1084,7 +1112,6 @@ private: void gameStart()
 						}
 					}
 				}
-                //redReader->Text = gcnew String((rooms.at(0) + " " + rooms.at(1)).c_str());
 			} 
 			else if ((roomCounter % 10) == 2)
 			{
@@ -1178,7 +1205,6 @@ private: void gameStart()
 						}
 					}
 				}
-				//redReader->Text = gcnew String((rooms.at(0) + " ").c_str());
 			} 
 			else if ((roomCounter % 10) == 3)
 			{
@@ -1484,18 +1510,34 @@ private: void gameStart()
 private: System::Void btnContinue_Click(System::Object^ sender, System::EventArgs^ e) {
 
 	if (riddleState) {
-		i++;
 		riddleState = false;
 		btnChoiceInvisible();
 		btnAnswersVisible();
-		vector<string> randomRiddles = riddles->getRiddles();
-		vector<vector<string>> randomAnswers = riddles->getAnswers();
-		vector<int> index = riddles->getIndex();
-		string answer = randomAnswers.at(i).at(index.at(1));
-		redReader->Text = gcnew String(randomRiddles.at(0).c_str());
-		btnAnswer1->Text = gcnew String(randomAnswers.at(i).at(0).c_str());
-		btnAnswer2->Text = gcnew String(randomAnswers.at(i).at(1).c_str());
-		btnAnswer3->Text = gcnew String(randomAnswers.at(i).at(2).c_str());
+		//vector<string> randomRiddles = riddles->getRiddles();
+		//vector<vector<string>> randomAnswers = riddles->getAnswers();
+		//vector<int> index = riddles->getIndex();
+		//string answer = riddles->answerCorrect.at(i);
+		redReader->Text = gcnew String(riddles->riddles.at(i).c_str());
+
+		randomAnswer1 = rand() % 3;
+		randomAnswer2 = randomAnswer1;
+		randomAnswer3 = randomAnswer2;
+
+		while (randomAnswer2 == randomAnswer1) {
+			randomAnswer2 = rand() % 3;
+		}
+
+		while ((randomAnswer3 == randomAnswer1) || (randomAnswer3 == randomAnswer2)) {
+			randomAnswer3 = rand() % 3;
+		}
+
+		btnAnswer1->Text = gcnew String(riddles->answers.at(i).at(randomAnswer1).c_str());
+		btnAnswer2->Text = gcnew String(riddles->answers.at(i).at(randomAnswer2).c_str());
+		btnAnswer3->Text = gcnew String(riddles->answers.at(i).at(randomAnswer3).c_str());
+		
+		progRiddle->Value = 20;
+		tmrRiddle->Enabled = true;
+		tmrRiddle->Start();
 	}
 	else {
 		btnAnswersInvisible();
@@ -1608,6 +1650,43 @@ private: System::Void btnRight_Click(System::Object^ sender, System::EventArgs^ 
 		}
 		roomCreate();
 	}
+}
+private: System::Void tmrRiddle_Tick(System::Object^ sender, System::EventArgs^ e) {
+
+	progRiddle->Value -= 1;
+	if (progRiddle->Value == 0) {
+		tmrRiddle->Stop();
+		redReader->Text = "The riddle keeper shouts \"Time's up! You have failed the riddle!\" Stat points have been reduced.";
+		btnAnswersInvisible();
+	}
+}
+private: System::Void btnAnswer1_Click(System::Object^ sender, System::EventArgs^ e) {
+    if ((gcnew String(riddles->answerCorrect.at(i).c_str()))->Equals(gcnew String(btnAnswer2->Text))) {
+		redReader->Text = "Correct! You have answered the riddle! Your stat points have increased.";
+    } else {
+		redReader->Text = "Fucking idiot! You have failed the riddle! Your stat points have decreased.";
+    }
+	i++;
+}
+
+private: System::Void btnAnswer2_Click(System::Object^ sender, System::EventArgs^ e) {
+	if ((gcnew String(riddles->answerCorrect.at(i).c_str()))->Equals(gcnew String(btnAnswer2->Text))) {
+		redReader->Text = "Correct! You have answered the riddle! Your stat points have increased.";
+	}
+	else {
+		redReader->Text = "Fucking idiot! You have failed the riddle! Your stat points have decreased.";
+	}
+	i++;
+}
+
+private: System::Void btnAnswer3_Click(System::Object^ sender, System::EventArgs^ e) {
+	if ((gcnew String(riddles->answerCorrect.at(i).c_str()))->Equals(gcnew String(btnAnswer3->Text))) {
+		redReader->Text = "Correct! You have answered the riddle! Your stat points have increased.";
+	}
+	else {
+		redReader->Text = "Fucking idiot! You have failed the riddle! Your stat points have decreased.";
+	}
+	i++;
 }
 };
 }
