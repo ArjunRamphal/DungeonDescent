@@ -13,12 +13,11 @@ private:
     test* enemy;  // Declare a pointer to the test class (the enemy)
     int strikesRemaining;  // Number of strikes remaining for the player
     int extra;  // Extra strikes based on player agility
-
 public:
     //constructor
-    Battle(bool isBoss, Character* player);  // Constructor for Battle
+    Battle(bool isBoss, Character& player);  // Constructor for Battle
     //methods
-    void attack(Character* player);  // Method to handle player attack
+    void attack(Character &player);  // Method to handle player attack
     int Calculate_Extra_Strikes(int agility);  // Calculate extra strikes based on agility
     bool isCrit_Strike(int accuracy);  // Determine if it's a critical strike
     int Total_Strikes();  // Total number of strikes (including extra strikes)
