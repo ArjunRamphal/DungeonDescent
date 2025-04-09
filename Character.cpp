@@ -116,3 +116,4 @@ int Character::getStatValue(int index)
 	return statValue[index];
 }
 
+
