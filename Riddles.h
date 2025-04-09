@@ -9,13 +9,13 @@ using namespace std;
 
 class Riddles {
 private:
-	
-public:
 	vector<string> riddles;
+public:
+	
 	vector<vector<string>> answers;
 	vector<string> answerCorrect;
 	int randomNum1;
-    Riddles();
+    Riddles(int floor);
 	vector<string> getRiddles();
 	vector<vector<string>> getAnswers();
 	void randomiseRiddles();
