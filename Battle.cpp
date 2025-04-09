@@ -4,11 +4,11 @@
 #include <iostream>
 int extra;
 
-Battle::Battle(bool isBoss, Character* player) {
-    // Create the player and enemy object
 
-    enemy = new test(player->floor, isBoss);
-    extra = Calculate_Extra_Strikes(player->statValue[3]);
+Battle::Battle(bool isBoss, Character& player) {
+    // Create the player and enemy object
+    enemy = new test(player.floor, isBoss);
+    extra = Calculate_Extra_Strikes(player.statValue[3]);
     // Set the number of strikes (including extra strikes)
     strikesRemaining = Total_Strikes();  // Set the number of strikes
 
@@ -21,27 +21,27 @@ Battle::Battle(bool isBoss, Character* player) {
     // After battle, handle the outcome
     if (enemy->isDefeated()) {
         for (int i = 0; i < 6; i++) {
-            player->statValue[i] += 2;  // Gain +2 in all attributes for winning
+            player.statValue[i] += 2;  // Gain +2 in all attributes for winning
         }
 
         if (isBoss) {  // If the enemy is a boss, progress the player to the next floor
-            player->floor++;
+            player.floor++;
         }
     }
     else {
         for (int i = 0; i < 6; i++) {
-            player->statValue[i] -= 2;  // Lose -2 in all attributes for losing
+            player.statValue[i] -= 2;  // Lose -2 in all attributes for losing
         }
     }
 }
-void Battle::attack(Character* player) {
+void Battle::attack(Character &player) {
     if (strikesRemaining > 0 && !enemy->isDefeated()) {
         // Perform the attack
-        if (isCrit_Strike(player->statValue[5])) {
-            enemy->takeDamage(player->statValue[0] * 2);  // Critical strike
+        if (isCrit_Strike(player.statValue[5])) {
+            enemy->takeDamage(player.statValue[0] * 2);  // Critical strike
         }
         else {
-            enemy->takeDamage(player->statValue[0] * 1);  // Normal attack
+            enemy->takeDamage(player.statValue[0] * 1);  // Normal attack
         }
     }
 }
