@@ -52,10 +52,10 @@ string Library::getImageFileName(int biome)
 		return "junglelibrary.png";
 	}
 	else if (biome == 2) {
-		return "desertlibrary.png";
+		return "desertlibrary.jpeg";
 	}
 	else if (biome == 3) {
-		return "ghostlibrary.png";
+		return "ghostlibrary.jpeg";
 	}
 	else if (biome == 4) {
 		return "lavalibrary.png";
