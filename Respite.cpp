@@ -55,10 +55,10 @@ string Respite::getImageFileName(int biome)
 		return "junglerespite.png";
 	}
 	else if (biome == 2) {
-		return "desertrespite.png";
+		return "desertrespite.jpeg";
 	}
 	else if (biome == 3) {
-		return "ghostrespite.png";
+		return "ghostrespite.jpeg";
 	}
 	else if (biome == 4) {
 		return "lavarespite.png";

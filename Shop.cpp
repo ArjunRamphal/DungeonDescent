@@ -47,10 +47,10 @@ string Shop::getImageFileName(int biome)
 		return "jungleshop.png";
 	}
 	else if (biome == 2) {
-		return "desertshop.png";
+		return "desertshop.jpeg";
 	}
 	else if (biome == 3) {
-		return "ghostshop.png";
+		return "ghostshop.jpeg";
 	}
 	else if (biome == 4) {
 		return "lavashop.png";
@@ -59,5 +59,16 @@ string Shop::getImageFileName(int biome)
 
 string Shop::getTextFileName(int biome)
 {
-	return "shopkeeper.txt";
+	if ((biome == 0) || ((biome == 1))) {
+		return "shopkeeper.txt";
+	}
+	else if (biome == 2) {
+		return "desertshop.txt";
+	}
+	else if (biome == 3) {
+		return "ghostshop.txt";
+	}
+	else if (biome == 4) {
+		return "lavashop.png";
+	}
 }

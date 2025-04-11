@@ -257,25 +257,3 @@ vector<vector<string>> Riddles::getAnswers()
 {
 	return answers;
 }
-
-void Riddles::randomiseRiddles()
-{
-
-}
-
-void Riddles::randomiseAnswers()
-{
-	randomNum1 = rand() % 3;
-
-	int randomNum2 = randomNum1;
-	while (randomNum2 == randomNum1) {
-		randomNum2 = rand() % 3;
-	}
-
-	int randomNum3 = randomNum2;
-	while (randomNum3 == randomNum2) {
-		randomNum3 = rand() % 3;
-	}
-
-	//index.push_back(randomNum1);
-}
