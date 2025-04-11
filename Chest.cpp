@@ -45,10 +45,10 @@ string Chest::getImageFileName(int biome)
 		return "junglechest.png";
 	}
 	else if (biome == 2) {
-		return "desertchest.png";
+		return "desertchest.jpeg";
 	}
 	else if (biome == 3) {
-		return "ghostchest.png";
+		return "ghostchest.jpeg";
 	}
 	else if (biome == 4) {
 		return "lavachest.png";

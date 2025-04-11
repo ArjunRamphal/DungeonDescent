@@ -68,10 +68,10 @@ string Boss::getImageFileName(int biome)
 		return "jungleboss.jpg";
 	}
 	else if (biome == 2) {
-		return "desertboss.jpg";
+		return "desertboss.jpeg";
 	}
 	else if (biome == 3) {
-		return "ghostboss.jpg";
+		return "ghostboss.jpeg";
 	}
 	else if (biome == 4) {
 		return "lavaboss.jpg";

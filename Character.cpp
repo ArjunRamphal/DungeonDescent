@@ -116,4 +116,18 @@ int Character::getStatValue(int index)
 	return statValue[index];
 }
 
+template<typename T>
+void incStats(int index, T amount) {
+    statValue[index] += amount;
+}
 
+template<typename T>
+void decStats(int index, T amount) {
+    statValue[index] -= amount;
+}
+
+void operator += (Character& c, float amount) {
+	for (int i = 0; i < 6; i++) {
+		c.statValue[i] *= amount;
+	}
+}
